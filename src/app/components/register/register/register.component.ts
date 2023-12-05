@@ -6,7 +6,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 
 @Component({
