@@ -26,6 +26,7 @@
 
 h1 {
   font-weight: bold;
+  font-size: xx-large;
   margin: 0;
   font-family: "Montserrat", sans-serif;
 }
@@ -84,7 +85,7 @@ button {
   min-height: 100px;
 }
 
-.writter {
+.typing {
   background-image: linear-gradient(135deg, #4a519a, #4b54d7);
   -webkit-background-clip: text;
   background-clip: text;

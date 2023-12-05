@@ -3,12 +3,15 @@
 <div class="container">
   <div class="panel-left">
     <div class="text-container">
-      <ngx-typewriter
-        class="writter"
-        [words]="words"
-        [typeSpeed]="120"
-        [deleteSpeed]="100"
-      />
+      <ngx-typed-js
+        [strings]="words"
+        [shuffle]="true"
+        [typeSpeed]="60"
+        [backSpeed]="40"
+        [loop]="true"
+      >
+        <span class="typing"></span>
+      </ngx-typed-js>
     </div>
 
     <div class="image-container">
@@ -29,9 +32,10 @@
 
 <footer class="footer">
   <p>
-    Aplicacion Cuentas Claras | 2023 | TTPS Java UNLP |
+    Cuentas Claras | 2023 |
     <a target="_blank" href="https://github.com/santidossantos/angular.git"
       >Grupo 1</a
     >
+    | TTPS | UNLP
   </p>
 </footer>

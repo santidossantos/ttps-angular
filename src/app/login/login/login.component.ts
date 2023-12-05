@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Typewriter } from 'ngx-simple-typewriter';
+import { NgxTypedJsModule } from 'ngx-typed-js';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [Typewriter],
+  imports: [NgxTypedJsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   words = [
     'Cuentas Claras',
     'Divide gastos fácilmente',
-    'Pago colaborativo',
+    'Pagos colaborativos',
     'Salda cuentas sin conflictos',
     'Gestión conjunta de gastos',
   ];
