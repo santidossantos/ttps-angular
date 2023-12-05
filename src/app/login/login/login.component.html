@@ -1,6 +1,19 @@
+<img src="../../../assets/logo.png" width="80" height="80" class="logo-img" />
+
 <div class="container">
   <div class="panel-left">
-    <img src="../../../assets/banner.webp" width="700" height="391" />
+    <div class="text-container">
+      <ngx-typewriter
+        class="writter"
+        [words]="words"
+        [typeSpeed]="120"
+        [deleteSpeed]="100"
+      />
+    </div>
+
+    <div class="image-container">
+      <img src="../../../assets/banner.webp" width="500" height="291" />
+    </div>
   </div>
   <div class="panel-right">
     <h1>Bienvenido</h1>
@@ -9,5 +22,17 @@
       <button>Ingresar</button>
       <button>Registrarse</button>
     </div>
+
+    <img src="../../../assets/money.png" width="100" height="100" />
   </div>
 </div>
+
+<footer class="footer">
+  <p>
+    Aplicacion Cuentas Claras | 2023 |
+    <a target="_blank" href="git@github.com:santidossantos/angular.git"
+      >Grupo 1</a
+    >
+    | TTPS Java UNLP
+  </p>
+</footer>
