@@ -20,7 +20,7 @@ export const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'groups/:id', // :id es el parámetro de ruta para la identificación del grupo
+        path: 'groups/:id',
         component: GroupDetailComponent,
       },
     ],
