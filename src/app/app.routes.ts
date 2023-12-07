@@ -11,7 +11,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   {
-    path: 'dashboard',
+    path: '',
     component: DashboardComponent,
     children: [
       {
@@ -19,8 +19,12 @@ export const routes: Routes = [
         title: 'Home',
         component: HomeComponent,
       },
+      {
+        path: 'groups/new',
+        title: 'Create Group',
+        component: CreateGroupComponent,
+      },
     ],
   },
-  { path: 'groups/new', component: CreateGroupComponent },
   { path: '**', component: NotFoundComponent },
 ];
