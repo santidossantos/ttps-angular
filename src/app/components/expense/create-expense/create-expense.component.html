@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <form class="example-form">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Crear gasto</mat-card-title>
+            <mat-card-subtitle>Cree un gasto para repartir en el grupo</mat-card-subtitle>
+        </mat-card-header>
+        <br>
+        <mat-card-content>
+            <div class="form-container">
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Monto</mat-label>
+                                    <input matInput type="number">
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field>
+                                    <mat-label>Seleccione fecha</mat-label>
+                                    <input matInput [matDatepicker]="dp3" disabled>
+                                    <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+                                    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                                  </mat-form-field>
+
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <h4>Division del gasto:</h4>
+                                <mat-chip-listbox aria-label="Fish selection">
+                                    <mat-chip-option selected>Partes iguales</mat-chip-option>
+                                    <mat-chip-option>Partes iguales (porcentaje)</mat-chip-option>
+                                    <mat-chip-option>Cantidad fija</mat-chip-option>
+                                    <mat-chip-option>Cantidad fija (porcentaje)</mat-chip-option>
+                                  </mat-chip-listbox>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <input type="file" #fileInput style="display: none" accept="image/*">
+                                <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
+                                    <mat-icon>add_photo_alternate</mat-icon> Seleccionar icono
+                                </button>                                
+                            </td>
+                            <td>
+                                <mat-form-field>
+                                    <mat-label>Categoria</mat-label>
+                                    <mat-select>
+                                      <mat-option value="Familia">Familia</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </mat-card-content>
+            <!-- <div class="container-img">
+                <img src="../../../../assets/img/expenseImg.svg" alt="Descripción de la imagen">
+            </div> -->
+            <mat-card-footer class="footer-container">
+                <button mat-raised-button color="primary">Crear gasto</button>
+            </mat-card-footer>
+        </mat-card>
+    </form>
+</div>
