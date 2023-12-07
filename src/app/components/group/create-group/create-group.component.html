@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <form class="example-form">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Crear grupo</mat-card-title>
+            <mat-card-subtitle>Una vez creado podras comenzar a agregar gastos</mat-card-subtitle>
+        </mat-card-header>
+        <br>
+        <mat-card-content>
+            <div class="form-container">
+
+                        <tr>
+
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+
+                        </tr>
+
+
+                        <tr>
+
+                          <div class="form-field-group">
+                                <mat-form-field style="width:100%">
+                                    <mat-label>Categoria</mat-label>
+                                    <mat-select>
+                                      <mat-option value="Familia">Familia</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                              </div>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <input type="file" #fileInput style="display: none" accept="image/*">
+                            <button mat-raised-button color="primary" class="example-full-width" type="button" (click)="fileInput.click()">
+                                <mat-icon>add_photo_alternate</mat-icon> Seleccionar icono
+                            </button>
+
+                        </tr>
+
+                </div>
+            </mat-card-content>
+            <mat-card-footer class="footer-container">
+                <button mat-raised-button color="primary">Crear grupo</button>
+            </mat-card-footer>
+        </mat-card>
+    </form>
+</div>

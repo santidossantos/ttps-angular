@@ -4,6 +4,7 @@ import { NotFoundComponent } from './components/layout/pages/not-found/not-found
 import { LoginComponent } from './components/login/login/login.component';
 import { HomeComponent } from './components/dashboard/home/home/home.component';
 import { RegisterComponent } from './components/register/register/register.component';
+import { CreateGroupComponent } from './components/group/create-group/create-group.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -20,5 +21,6 @@ export const routes: Routes = [
       },
     ],
   },
+  { path: 'groups/new', component: CreateGroupComponent },
   { path: '**', component: NotFoundComponent },
 ];
