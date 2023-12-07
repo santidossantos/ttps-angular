@@ -4,6 +4,7 @@ import { NotFoundComponent } from './components/layout/pages/not-found/not-found
 import { LoginComponent } from './components/login/login/login.component';
 import { HomeComponent } from './components/dashboard/home/home/home.component';
 import { RegisterComponent } from './components/register/register/register.component';
+import { GroupDetailComponent } from './components/group/detail/group-detail.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,6 +18,10 @@ export const routes: Routes = [
         path: 'home',
         title: 'Home',
         component: HomeComponent,
+      },
+      {
+        path: 'groups/:id', // :id es el parámetro de ruta para la identificación del grupo
+        component: GroupDetailComponent,
       },
     ],
   },
