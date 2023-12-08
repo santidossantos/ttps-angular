@@ -4,7 +4,7 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title>Crear gasto</mat-card-title>
-            <mat-card-subtitle>Cree un gasto para añadir al grupo ??</mat-card-subtitle>
+            <mat-card-subtitle>Cree un gasto para añadir al grupo {{ groupId }}</mat-card-subtitle>
         </mat-card-header>
         <br>
         <mat-card-content>
@@ -39,11 +39,11 @@
                             <td>
                                 <h4>Division del gasto:</h4>
                                 <mat-chip-listbox aria-label="Fish selection" formControlName="expenseStrategy">
-                                    <mat-chip-option selected>Partes iguales</mat-chip-option>
+                                    <mat-chip-option>Partes iguales</mat-chip-option>
                                     <mat-chip-option>Partes iguales (porcentaje)</mat-chip-option>
                                     <mat-chip-option>Cantidad fija</mat-chip-option>
                                     <mat-chip-option>Cantidad fija (porcentaje)</mat-chip-option>
-                                  </mat-chip-listbox>
+                                </mat-chip-listbox>
                             </td>
                         </tr>
                     </table>
@@ -52,17 +52,17 @@
                         <tr>
                             <td>
                                 <input type="file" #fileInput style="display: none" accept="image/*" formControlName="img">
-                                <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
+                                <button mat-raised-button color="primary" type="button" (click)="fileInput.click()" class="example-full-width">
                                     <mat-icon>add_photo_alternate</mat-icon> Seleccionar icono
                                 </button>                                
                             </td>
                             <td>
-                                <mat-form-field>
+                                <mat-form-field style="width: 100%">
                                     <mat-label>Categoria</mat-label>
                                     <mat-select formControlName="category">
                                       <mat-option value="Familia">Familia</mat-option>
                                     </mat-select>
-                                  </mat-form-field>
+                                </mat-form-field>
                             </td>
                         </tr>
                     </table>

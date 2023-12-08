@@ -1,25 +1,32 @@
 td {
-    padding-right: 8px;
-  }
-  
-.container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  padding-right: 8px;
 }
 
-.footer-container{
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 500px;
+  margin: 30px auto 0;
+}
+
+
+.footer-container {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin: 20px;
 }
 
-/* .container-img{
+.form-container {
   display: flex;
   flex-direction: column;
-  justify-content: right;
-  align-items: right;
-  background-color: rgb(255, 255, 255)
-} */
+}
+
+.example-full-width,
+.mat-select,
+button.mat-raised-button {
+  width: 100%;
+}
