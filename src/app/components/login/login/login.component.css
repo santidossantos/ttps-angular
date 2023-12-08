@@ -3,6 +3,7 @@
   height: 100vh;
   display: flex;
   flex-direction: row;
+  z-index: 0;
 }
 
 .panel-right {
@@ -134,4 +135,17 @@ footer a {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.focus {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Color oscuro con opacidad 0.5 */
+  z-index: 1; /* Coloca la capa encima del resto de los elementos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

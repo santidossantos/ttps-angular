@@ -1,0 +1,28 @@
+<div class="body">
+  <div class="login">
+    @if (loading) {
+    <mat-spinner diameter="50" class="spinner"></mat-spinner>
+    } @else {
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <img src="../../../assets/img/user.png" width="50%" />
+      <h1>Login</h1>
+      <mat-form-field class="input">
+        <mat-label>Usuario</mat-label>
+        <input type="text" matInput formControlName="user" />
+      </mat-form-field>
+      <mat-form-field class="input">
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput formControlName="password" />
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-flat-button
+        color="primary"
+        [disabled]="form.invalid"
+      >
+        Entrar
+      </button>
+    </form>
+    }
+  </div>
+</div>
