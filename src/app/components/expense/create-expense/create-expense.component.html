@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <form class="example-form">
+    <form class="example-form" [formGroup]="form" (ngSubmit)="create()">
     <mat-card>
         <mat-card-header>
             <mat-card-title>Crear gasto</mat-card-title>
@@ -14,13 +14,13 @@
                             <td>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Nombre</mat-label>
-                                    <input matInput>
+                                    <input matInput formControlName="name">
                                 </mat-form-field>
                             </td>
                             <td>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Monto</mat-label>
-                                    <input matInput type="number">
+                                    <input matInput type="number" formControlName="amount">
                                 </mat-form-field>
                             </td>
                             <td>
@@ -38,7 +38,7 @@
                         <tr>
                             <td>
                                 <h4>Division del gasto:</h4>
-                                <mat-chip-listbox aria-label="Fish selection">
+                                <mat-chip-listbox aria-label="Fish selection" formControlName="expenseStrategy">
                                     <mat-chip-option selected>Partes iguales</mat-chip-option>
                                     <mat-chip-option>Partes iguales (porcentaje)</mat-chip-option>
                                     <mat-chip-option>Cantidad fija</mat-chip-option>
@@ -51,7 +51,7 @@
                     <table class="example-full-width" cellspacing="0">
                         <tr>
                             <td>
-                                <input type="file" #fileInput style="display: none" accept="image/*">
+                                <input type="file" #fileInput style="display: none" accept="image/*" formControlName="img">
                                 <button mat-raised-button color="primary" type="button" (click)="fileInput.click()">
                                     <mat-icon>add_photo_alternate</mat-icon> Seleccionar icono
                                 </button>                                
@@ -59,7 +59,7 @@
                             <td>
                                 <mat-form-field>
                                     <mat-label>Categoria</mat-label>
-                                    <mat-select>
+                                    <mat-select formControlName="category">
                                       <mat-option value="Familia">Familia</mat-option>
                                     </mat-select>
                                   </mat-form-field>
@@ -72,7 +72,7 @@
                 <img src="../../../../assets/img/expenseImg.svg" alt="Descripción de la imagen">
             </div> -->
             <mat-card-footer class="footer-container">
-                <button mat-raised-button color="primary">Crear gasto</button>
+                <button mat-raised-button color="primary" [disabled]="!form.valid">Crear gasto</button>
             </mat-card-footer>
         </mat-card>
     </form>
