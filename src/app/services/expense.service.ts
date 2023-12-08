@@ -4,13 +4,12 @@ import { Observable } from 'rxjs';
 import { Expense } from '../models/expense';
 import { apiURL } from '../../environment/environment';
 
-
 @Injectable({
     providedIn: 'root',
 })
 
 export class ExpenseService{
-    baseURL = apiURL+'expenses';
+    baseURL = apiURL+'expenses/';
     constructor(private http: HttpClient) {}
 
     create(expense: Expense): Observable<Expense> {

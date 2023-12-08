@@ -13,6 +13,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ExpenseService } from '../../../services/expense.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Group } from '../../../models/group'
+import { GroupService } from '../../../services/group.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-expense',
@@ -28,34 +31,44 @@ import { ActivatedRoute } from '@angular/router';
 export class CreateExpenseComponent implements OnInit{
 
   form: FormGroup;
-  groupId: number;
+  groupId: number = 0;
+  group: Group = {id:0,name:"",category: {}};
+  expenseCreated: boolean = false;
 
-  constructor(private fb: FormBuilder, private _expenseService: ExpenseService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private _expenseService: ExpenseService, private route: ActivatedRoute, private _groupService: GroupService) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       amount: ['', Validators.required],
-      // date: ['', Validators.required],
+      date: ['', Validators.required],
       img: ['', Validators.required],
       category: ['', Validators.required],
       group: [''],
-      payingUser: [''],
+      payingUser: ['', Validators.required],
       expenseStrategy: ['', Validators.required],
     });
-    this.groupId=0;
   }
 
   ngOnInit(){
     this.route.params.subscribe(params => {
       this.groupId = params['id'];
     });
+    this.getGroupInfo();
   }
 
   create(){
-    this.form.controls['group'].setValue(this.groupId);
+    const strategy = this.form.get('expenseStrategy');
+    const category = this.form.get('category');
+    const payingUser = this.form.get('payingUser');
+    if(strategy && category && payingUser){
+      this.form.controls['expenseStrategy'].setValue(JSON.parse(strategy.value));
+      this.form.controls['category'].setValue({"id":parseInt(category.value, 10)});
+      this.form.controls['payingUser'].setValue({"id":parseInt(payingUser.value, 10)});
+    }
+    this.form.controls['group'].setValue({"id": this.groupId});
     this._expenseService.create(this.form.value).subscribe(
       (res) => {
-        console.log('User created successfully');
-        console.log(res);
+        console.log('Expense created successfully');
+        this.expenseCreated = true;
       },
       (error) => {
         console.error(error);
@@ -63,5 +76,12 @@ export class CreateExpenseComponent implements OnInit{
     )
   }
 
-  
+  getGroupInfo(){
+    this._groupService.getById(this.groupId).subscribe(
+      (res) => {
+        this.group = res;
+      },
+      (error) => console.error(error)
+    )
+  }
 }

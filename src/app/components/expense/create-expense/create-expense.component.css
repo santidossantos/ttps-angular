@@ -30,3 +30,15 @@ td {
 button.mat-raised-button {
   width: 100%;
 }
+
+.chip-listbox{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
+} 
+
+.card-subtitle{
+  font-size: large;
+}

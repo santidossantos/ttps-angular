@@ -3,8 +3,8 @@
     <form class="example-form" [formGroup]="form" (ngSubmit)="create()">
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Crear gasto</mat-card-title>
-            <mat-card-subtitle>Cree un gasto para añadir al grupo {{ groupId }}</mat-card-subtitle>
+            <mat-card-title style="font-size: x-large;">Crear gasto</mat-card-title>
+            <mat-card-subtitle class="card-subtitle">Se añadirá al grupo {{ group.name }}</mat-card-subtitle>
         </mat-card-header>
         <br>
         <mat-card-content>
@@ -26,7 +26,7 @@
                             <td>
                                 <mat-form-field>
                                     <mat-label>Seleccione fecha</mat-label>
-                                    <input matInput [matDatepicker]="dp3" disabled>
+                                    <input matInput [matDatepicker]="dp3" formControlName="date">
                                     <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
                                     <mat-datepicker #dp3 disabled="false"></mat-datepicker>
                                   </mat-form-field>
@@ -38,12 +38,14 @@
                         <tr>
                             <td>
                                 <h4>Division del gasto:</h4>
+                                <div class="chip-listbox">
                                 <mat-chip-listbox aria-label="Fish selection" formControlName="expenseStrategy">
-                                    <mat-chip-option>Partes iguales</mat-chip-option>
-                                    <mat-chip-option>Partes iguales (porcentaje)</mat-chip-option>
-                                    <mat-chip-option>Cantidad fija</mat-chip-option>
-                                    <mat-chip-option>Cantidad fija (porcentaje)</mat-chip-option>
+                                    <mat-chip-option value='{"id":1, "expenseStrategy": "EqualAmounts"}'>Partes iguales</mat-chip-option>
+                                    <mat-chip-option value='{"id":2, "expenseStrategy": "EqualAmountsPercent"}'>Partes iguales (porcentaje)</mat-chip-option>
+                                    <mat-chip-option value='{"id":3, "expenseStrategy": "FixedAmounts"}'>Cantidad fija</mat-chip-option>
+                                    <mat-chip-option value='{"id":4, "expenseStrategy": "FixedAmountsPercent"}'>Cantidad fija (porcentaje)</mat-chip-option>
                                 </mat-chip-listbox>
+                            </div>
                             </td>
                         </tr>
                     </table>
@@ -60,7 +62,17 @@
                                 <mat-form-field style="width: 100%">
                                     <mat-label>Categoria</mat-label>
                                     <mat-select formControlName="category">
-                                      <mat-option value="Familia">Familia</mat-option>
+                                      <mat-option value="1">Familia</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field style="width: 100%">
+                                    <mat-label>Pagador</mat-label>
+                                    <mat-select formControlName="payingUser">
+                                        @for (user of group.users; track user.username) {
+                                            <mat-option [value]="user.id">{{user.username}}</mat-option>
+                                          }
                                     </mat-select>
                                 </mat-form-field>
                             </td>
