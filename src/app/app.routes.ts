@@ -19,8 +19,12 @@ export const routes: Routes = [
         title: 'Home',
         component: HomeComponent,
       },
+      { 
+        path: ':id/expense',
+        title: 'Gasto',
+        component: CreateExpenseComponent 
+      },
     ],
   },
-  { path: 'expense', component: CreateExpenseComponent },
   { path: '**', component: NotFoundComponent },
 ];
