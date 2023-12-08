@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NotFoundComponent } from './components/layout/pages/not-found/not-found.component';
-import { LoginComponent } from './components/login/login/login.component';
 import { HomeComponent } from './components/dashboard/home/home/home.component';
 import { RegisterComponent } from './components/register/register/register.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', component: WelcomeComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

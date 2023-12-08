@@ -3,16 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxTypedJsModule } from 'ngx-typed-js';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-welcome',
   standalone: true,
   imports: [NgxTypedJsModule, MatDialogModule],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class WelcomeComponent implements OnInit {
   form: FormGroup;
   loading: boolean = false;
   words = [
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
     'Gestión conjunta de gastos',
   ];
 
-  @Inject(DialogComponent)
-  private dialogContent = DialogComponent;
+  @Inject(LoginComponent)
+  private dialogContent = LoginComponent;
   public dialogRef: any;
 
   constructor(

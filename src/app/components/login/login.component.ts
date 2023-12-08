@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -10,45 +10,47 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AuthService } from '../../services/auth.service';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-dialog',
+  selector: 'app-login',
   standalone: true,
   imports: [
     MatDialogModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatInputModule,
   ],
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css'],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
-export class DialogComponent implements OnInit {
-  form: FormGroup;
+export class LoginComponent implements OnInit {
   loading: boolean = false;
+  reactiveForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+  });
 
   constructor(
-    private fb: FormBuilder,
     private _snackBar: MatSnackBar,
-    private router: Router
-  ) {
-    this.form = this.fb.group({
-      user: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-  }
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {}
 
   login() {
-    const usuario = this.form.value.user;
-    const password = this.form.value.password;
+    if (this.reactiveForm.valid) {
+      const credentials = {
+        username: this.reactiveForm.controls.username.value as string,
+        password: this.reactiveForm.controls.password.value as string,
+      };
 
-    if (usuario === 'juan' && password === '123456') {
+      console.log(credentials);
+      this.authService.login(credentials);
       this.fakeLoading();
-    } else {
-      this.onError();
-      this.form.reset();
     }
   }
 
