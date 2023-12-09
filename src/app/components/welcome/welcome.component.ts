@@ -41,12 +41,13 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
     this.dialogService.closeDialog$.subscribe(() => {
       this.dialogRef.close();
+      this.dialogRef = null;
     });
   }
 
   openDialog() {
     this.dialogRef = this.dialog.open(this.dialogContent, {
-      panelClass: 'custom-modalbox',
+      closeOnNavigation: true,
     });
 
     this.dialogRef.afterClosed().subscribe(() => {});
