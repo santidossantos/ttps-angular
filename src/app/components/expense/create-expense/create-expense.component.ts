@@ -34,6 +34,7 @@ export class CreateExpenseComponent implements OnInit{
   groupId: number = 0;
   group: Group = {id:0,name:"",category: {}};
   expenseCreated: boolean = false;
+  maxDate: Date;
 
   constructor(private fb: FormBuilder, private _expenseService: ExpenseService, private route: ActivatedRoute, private _groupService: GroupService, private _snackBar: MatSnackBar, private router: Router) {
     this.form = this.fb.group({
@@ -46,6 +47,9 @@ export class CreateExpenseComponent implements OnInit{
       payingUser: ['', Validators.required],
       expenseStrategy: ['', Validators.required],
     });
+
+    this.maxDate = new Date();
+
   }
 
   ngOnInit(){
