@@ -12,10 +12,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ExpenseService } from '../../../services/expense.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from '../../../models/group'
 import { GroupService } from '../../../services/group.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-expense',
@@ -35,7 +35,7 @@ export class CreateExpenseComponent implements OnInit{
   group: Group = {id:0,name:"",category: {}};
   expenseCreated: boolean = false;
 
-  constructor(private fb: FormBuilder, private _expenseService: ExpenseService, private route: ActivatedRoute, private _groupService: GroupService) {
+  constructor(private fb: FormBuilder, private _expenseService: ExpenseService, private route: ActivatedRoute, private _groupService: GroupService, private _snackBar: MatSnackBar, private router: Router) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       amount: ['', Validators.required],
@@ -67,11 +67,12 @@ export class CreateExpenseComponent implements OnInit{
     this.form.controls['group'].setValue({"id": this.groupId});
     this._expenseService.create(this.form.value).subscribe(
       (res) => {
-        console.log('Expense created successfully');
-        this.expenseCreated = true;
+        this.openSnackBar("Gasto creado con exito");
+        this.router.navigate(['dashboard'])
       },
       (error) => {
         console.error(error);
+        this.openSnackBar(error);
       }
     )
   }
@@ -83,5 +84,12 @@ export class CreateExpenseComponent implements OnInit{
       },
       (error) => console.error(error)
     )
+  }
+
+  openSnackBar(mensaje: string) {
+    this._snackBar.open(mensaje, 'Cerrar', {
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
   }
 }
