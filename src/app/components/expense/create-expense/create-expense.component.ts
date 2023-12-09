@@ -16,6 +16,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from '../../../models/group'
 import { GroupService } from '../../../services/group.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ExpenseCategoryService } from '../../../services/expense-category.service'
+import { ExpenseCategory } from '../../../models/expense-category'
 
 @Component({
   selector: 'app-create-expense',
@@ -35,8 +37,9 @@ export class CreateExpenseComponent implements OnInit{
   group: Group = {id:0,name:"",category: {}};
   expenseCreated: boolean = false;
   maxDate: Date;
+  categories: ExpenseCategory[] = [];
 
-  constructor(private fb: FormBuilder, private _expenseService: ExpenseService, private route: ActivatedRoute, private _groupService: GroupService, private _snackBar: MatSnackBar, private router: Router) {
+  constructor(private fb: FormBuilder, private _expenseService: ExpenseService, private route: ActivatedRoute, private _groupService: GroupService, private _snackBar: MatSnackBar, private router: Router, private _expenseCategoryService: ExpenseCategoryService) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       amount: ['', Validators.required],
@@ -57,6 +60,7 @@ export class CreateExpenseComponent implements OnInit{
       this.groupId = params['id'];
     });
     this.getGroupInfo();
+    this.getAllCategories();
   }
 
   create(){
@@ -95,5 +99,14 @@ export class CreateExpenseComponent implements OnInit{
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });
+  }
+
+  getAllCategories(){
+    this._expenseCategoryService.getAll().subscribe(
+      (res) => {
+        this.categories = res;
+      },
+      (error) => console.error(error)
+    )
   }
 }
