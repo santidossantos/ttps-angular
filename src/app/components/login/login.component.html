@@ -4,17 +4,24 @@
     <mat-spinner diameter="50" class="spinner"></mat-spinner>
     } @else {
     <form [formGroup]="reactiveForm" (ngSubmit)="login()">
-      <img src="../../../assets/img/user.png" width="50%" />
-      <h1>Login</h1>
+      <img src="../../../assets/img/login.png" width="30%" />
+      <h1>Ingresar</h1>
       <mat-form-field class="input">
         <mat-label>Usuario</mat-label>
         <input type="text" matInput formControlName="username" />
+        <mat-icon matSuffix
+          ><span class="material-symbols-outlined">
+            account_circle
+          </span></mat-icon
+        >
       </mat-form-field>
       <mat-form-field class="input">
         <mat-label>Contraseña</mat-label>
         <input type="password" matInput formControlName="password" />
+        <mat-icon matSuffix>lock</mat-icon>
       </mat-form-field>
       <button
+        mat-button
         type="submit"
         mat-flat-button
         color="primary"

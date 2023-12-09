@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxTypedJsModule } from 'ngx-typed-js';
-import { Router } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-welcome',
@@ -29,8 +29,8 @@ export class WelcomeComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogService: DialogService
   ) {
     this.form = this.fb.group({
       user: ['', Validators.required],
@@ -38,13 +38,17 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dialogService.closeDialog$.subscribe(() => {
+      this.dialogRef.close();
+    });
+  }
 
   openDialog() {
-    this.dialogRef = this.dialog.open(this.dialogContent);
-
-    this.dialogRef.afterClosed().subscribe((result: any) => {
-      console.log(`Dialog result: ${result}`);
+    this.dialogRef = this.dialog.open(this.dialogContent, {
+      panelClass: 'custom-modalbox',
     });
+
+    this.dialogRef.afterClosed().subscribe(() => {});
   }
 }

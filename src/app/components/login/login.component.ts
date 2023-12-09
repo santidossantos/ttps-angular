@@ -12,6 +12,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from '../../services/auth.service';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { DialogService } from './../../services/dialog.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +25,8 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
@@ -36,7 +41,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {}
@@ -48,9 +54,15 @@ export class LoginComponent implements OnInit {
         password: this.reactiveForm.controls.password.value as string,
       };
 
-      console.log(credentials);
-      this.authService.login(credentials);
-      this.fakeLoading();
+      this.authService.login(credentials).subscribe(
+        ({ token }) => {
+          localStorage.setItem('token', token);
+          this.fakeLoading();
+        },
+        (error) => {
+          console.error('Error durante el inicio de sesión:', error);
+        }
+      );
     }
   }
 
@@ -64,6 +76,7 @@ export class LoginComponent implements OnInit {
 
   fakeLoading() {
     this.loading = true;
+    this.dialogService.triggerCloseDialog();
     setTimeout(() => {
       this.router.navigate(['dashboard']);
       this.loading = false;
