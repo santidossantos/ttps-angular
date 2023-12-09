@@ -11,6 +11,7 @@
 <div class="container">
   <div class="panel-left">
     <div class="text-container">
+      @if (!dialogRef) {
       <ngx-typed-js
         [strings]="words"
         [shuffle]="true"
@@ -20,6 +21,9 @@
       >
         <span class="typing"></span>
       </ngx-typed-js>
+      } @else {
+      <span class="typing">Cuentas Claras</span>
+      }
     </div>
 
     <div class="image-container">
@@ -30,8 +34,8 @@
     <h1>Bienvenido</h1>
     <p></p>
     <div class="login-buttons">
-      <button (click)="openDialog()">Ingresar</button>
-      <button>Registrarse</button>
+      <button (click)="openLoginDialog()">Ingresar</button>
+      <button (click)="openRegisterDialog()">Registrarse</button>
     </div>
 
     <img src="../../../assets/img/money.png" width="100" height="100" />

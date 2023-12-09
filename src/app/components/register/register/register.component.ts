@@ -34,14 +34,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this._userService.getAll().subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => console.error(err)
-    );
-  }
+  ngOnInit() {}
 
   create() {
     this._userService.create(this.form.value).subscribe(

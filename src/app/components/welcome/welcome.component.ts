@@ -4,6 +4,7 @@ import { NgxTypedJsModule } from 'ngx-typed-js';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { DialogService } from '../../services/dialog.service';
+import { RegisterComponent } from '../register/register/register.component';
 
 @Component({
   selector: 'app-welcome',
@@ -23,9 +24,13 @@ export class WelcomeComponent implements OnInit {
     'Gestión conjunta de gastos',
   ];
 
-  @Inject(LoginComponent)
-  private dialogContent = LoginComponent;
   public dialogRef: any;
+
+  @Inject(LoginComponent)
+  private loginDialog = LoginComponent;
+
+  @Inject(RegisterComponent)
+  private registerDialog = RegisterComponent;
 
   constructor(
     private fb: FormBuilder,
@@ -45,11 +50,17 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
-  openDialog() {
-    this.dialogRef = this.dialog.open(this.dialogContent, {
+  openLoginDialog() {
+    this.dialogRef = this.dialog.open(this.loginDialog, {
       closeOnNavigation: true,
     });
+    this.dialogRef.afterClosed().subscribe(() => (this.dialogRef = null));
+  }
 
-    this.dialogRef.afterClosed().subscribe(() => {});
+  openRegisterDialog() {
+    this.dialogRef = this.dialog.open(this.registerDialog, {
+      closeOnNavigation: true,
+    });
+    this.dialogRef.afterClosed().subscribe(() => (this.dialogRef = null));
   }
 }
