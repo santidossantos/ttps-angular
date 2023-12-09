@@ -53,6 +53,7 @@ export class WelcomeComponent implements OnInit {
   openLoginDialog() {
     this.dialogRef = this.dialog.open(this.loginDialog, {
       closeOnNavigation: true,
+      panelClass: 'custom-modalbox',
     });
     this.dialogRef.afterClosed().subscribe(() => (this.dialogRef = null));
   }
@@ -60,6 +61,7 @@ export class WelcomeComponent implements OnInit {
   openRegisterDialog() {
     this.dialogRef = this.dialog.open(this.registerDialog, {
       closeOnNavigation: true,
+      panelClass: 'custom-modalbox',
     });
     this.dialogRef.afterClosed().subscribe(() => (this.dialogRef = null));
   }

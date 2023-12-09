@@ -1,51 +1,40 @@
-<div class="body">
-  <mat-card>
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="create()">
-        <mat-grid-list cols="4" rowHeight="70px">
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="input">
-              <mat-label>Usuario</mat-label>
-              <input matInput formControlName="username" />
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile [colspan]="3" [rowspan]="5">
-            <img
-              src="../../../../assets/img/user.png"
-              width="250"
-              height="250"
-            />
-          </mat-grid-tile>
-
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="input">
-              <mat-label>Nombre</mat-label>
-              <input matInput formControlName="name" />
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="input">
-              <mat-label>Email</mat-label>
-              <input matInput formControlName="email" type="email" />
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="input">
-              <mat-label>Contraseña</mat-label>
-              <input matInput formControlName="password" />
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <button mat-flat-button color="primary" [disabled]="!form.valid">
-              CREAR USUARIO
-            </button>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </form>
-    </mat-card-content>
-  </mat-card>
+<div class="grid-container">
+  <div class="div1">
+    <mat-form-field class="input">
+      <mat-label>Usuario</mat-label>
+      <input matInput formControlName="username" />
+    </mat-form-field>
+  </div>
+  <div class="div2">
+    <mat-form-field class="input">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+  </div>
+  <div class="div3">
+    <mat-form-field class="input">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+    </mat-form-field>
+  </div>
+  <div class="div4">
+    <mat-form-field class="input">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" />
+    </mat-form-field>
+  </div>
+  <div class="div5">
+    <mat-form-field class="input">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" />
+    </mat-form-field>
+  </div>
+  <div class="div6">
+    <img src="../../../../assets/img/register.png" width="350" height="350" />
+  </div>
+  <div class="div7">
+    <button mat-flat-button color="primary" [disabled]="!form.valid">
+      CREAR USUARIO
+    </button>
+  </div>
 </div>
