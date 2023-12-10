@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Expense } from '../models/expense';
-import { apiURL } from '../../environment/environment';
+import { apiURL } from '../constants/api-base-url';
 
 @Injectable({
     providedIn: 'root',
