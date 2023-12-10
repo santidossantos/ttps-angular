@@ -1,0 +1,92 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="container">
+    <form class="example-form" [formGroup]="form" (ngSubmit)="create()">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title style="font-size: x-large;">Crear gasto</mat-card-title>
+            <mat-card-subtitle class="card-subtitle">Se añadirá al grupo {{ group.name }}</mat-card-subtitle>
+        </mat-card-header>
+        <br>
+        <mat-card-content>
+            <div class="form-container">
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput formControlName="name">
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Monto</mat-label>
+                                    <input matInput type="number" formControlName="amount">
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Selecciona una fecha</mat-label>
+                                    <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="date">
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker disabled="false"></mat-datepicker>
+                                  </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <h4>Division del gasto:</h4>
+                                <div class="chip-listbox">
+                                <mat-chip-listbox aria-label="Fish selection" formControlName="expenseStrategy">
+                                    <mat-chip-option value='{"id":1, "expenseStrategy": "EqualAmounts"}'>Partes iguales</mat-chip-option>
+                                    <mat-chip-option value='{"id":2, "expenseStrategy": "EqualAmountsPercent"}'>Partes iguales (porcentaje)</mat-chip-option>
+                                    <mat-chip-option value='{"id":3, "expenseStrategy": "FixedAmounts"}'>Cantidad fija</mat-chip-option>
+                                    <mat-chip-option value='{"id":4, "expenseStrategy": "FixedAmountsPercent"}'>Cantidad fija (porcentaje)</mat-chip-option>
+                                </mat-chip-listbox>
+                            </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <input type="file" #fileInput style="display: none" accept="image/*" formControlName="img">
+                                <button mat-raised-button color="primary" type="button" (click)="fileInput.click()" class="example-full-width">
+                                    <mat-icon>add_photo_alternate</mat-icon> Seleccionar icono
+                                </button>                                
+                            </td>
+                            <td>
+                                <mat-form-field style="width: 100%">
+                                    <mat-label>Categoria</mat-label>
+                                    <mat-select formControlName="category">
+                                      @for (category of categories; track category.name){
+                                          <mat-option [value]="category.id">{{ category.name }}</mat-option>
+                                      }
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field style="width: 100%">
+                                    <mat-label>Pagador</mat-label>
+                                    <mat-select formControlName="payingUser">
+                                        @for (user of group.users; track user.username) {
+                                            <mat-option [value]="user.id">{{user.username}}</mat-option>
+                                          }
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </mat-card-content>
+            <!-- <div class="container-img">
+                <img src="../../../../assets/img/expenseImg.svg" alt="Descripción de la imagen">
+            </div> -->
+            <mat-card-footer class="footer-container">
+                <button mat-raised-button color="primary" [disabled]="!form.valid">Crear gasto</button>
+            </mat-card-footer>
+        </mat-card>
+    </form>
+</div>
