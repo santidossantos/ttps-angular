@@ -1,0 +1,91 @@
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <!-- <p> ver donde poner el icono</p> -->
+            <mat-card-title style="font-size: x-large;">Detalle de {{ expense.name }}</mat-card-title>
+            <mat-card-subtitle class="card-subtitle">Informacion útil del gasto</mat-card-subtitle>
+        </mat-card-header>
+        <br>
+        <mat-card-content>
+            <div class="form-container">
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <h4>Monto:</h4>
+                                <p>{{ expense?.amount }}</p>
+                            </td>
+                            <td>
+                                <h4>Fecha: </h4>
+                                <p>{{ expense?.date }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <h4>Categoria: </h4>
+                                <p>{{ expense?.category?.name }}</p>
+                            </td>
+                            <td>
+                                <h4>Usuario que pagó: </h4>
+                                <p>{{ expense?.payingUser?.username + ' (' + expense?.payingUser?.email + ')'}}</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <h4>Tipo de division del gasto:</h4>
+                                <p>{{ expense?.expenseStrategy?.id }}</p>
+                            </td>
+                            <td>
+                                <h4>Grupo: </h4>
+                                <p> {{ expense?.group?.name }}</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-accordion>
+                                    <mat-expansion-panel hideToggle>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title> Participantes </mat-panel-title>
+                                        <mat-panel-description> Usuarios que participan en el gasto </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                                            <!-- Username Column -->
+                                            <ng-container matColumnDef="username">
+                                            <th mat-header-cell *matHeaderCellDef> Nombre de usuario </th>
+                                            <td mat-cell *matCellDef="let debtorsUsers"> {{debtorsUsers.user.username}} </td>
+                                            </ng-container>
+                                        
+                                            <!-- Money Column -->
+                                            <ng-container matColumnDef="amountPayed">
+                                            <th mat-header-cell *matHeaderCellDef> Dinero </th>
+                                            <td mat-cell *matCellDef="let debtorsUsers"> {{debtorsUsers.amountPayed}} </td>
+                                            </ng-container>
+                                        
+                                            <!-- Boolean Column -->
+                                            <ng-container matColumnDef="isPayed">
+                                            <th mat-header-cell *matHeaderCellDef> Pago </th>
+                                            <td mat-cell *matCellDef="let debtorsUsers"> {{debtorsUsers.isPayed}} </td>
+                                            </ng-container>
+                                        
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                        </table>
+                                    </mat-expansion-panel>
+                                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"> </mat-expansion-panel>
+                                </mat-accordion>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </mat-card-content>
+            <mat-card-footer class="footer-container">
+                <button mat-raised-button color="primary" [routerLink]="['/']" routerLinkbuttonctive="router-link-active">Agregar deudor</button>
+            </mat-card-footer>
+        </mat-card>
+</div>

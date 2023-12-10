@@ -15,4 +15,8 @@ export class ExpenseService{
     create(expense: Expense): Observable<Expense> {
         return this.http.post<Expense>(this.baseURL, expense);
     }
+
+    getById(id: number): Observable<Expense>{
+        return this.http.get<Expense>(this.baseURL+id);
+    }
 }
