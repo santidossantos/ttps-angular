@@ -65,11 +65,10 @@ export class LoginComponent implements OnInit {
 
   fakeLoading() {
     this.loading = true;
-    this.dialogService.triggerCloseDialog();
-    setTimeout(() => {
-      this.router.navigate(['dashboard']);
-      this.loading = false;
-    }, 1500);
+    setTimeout(async () => {
+      this.dialogService.triggerCloseDialog();
+      await this.router.navigate(['dashboard']);
+    }, 3000);
   }
 
   displayErrors = (controlName: string, errorName: string) => {

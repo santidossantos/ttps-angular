@@ -1,7 +1,11 @@
 <div class="body">
   <div class="login">
     @if (loading) {
-    <mat-spinner diameter="50" class="spinner"></mat-spinner>
+
+    <div class="loading-overlay">
+      <mat-spinner diameter="80"></mat-spinner>
+    </div>
+
     } @else {
     <form [formGroup]="reactiveForm" (ngSubmit)="login()">
       <img src="../../../assets/img/login.png" width="30%" />
@@ -9,7 +13,7 @@
       <h1>Ingresar</h1>
       @if (loginErrorMsg) {
       <mat-error class="error"
-        >Nombre de usuario o contraseña incorrecta</mat-error
+        >Nombre de usuario o contraseña incorrectos</mat-error
       >
       }
       <div class="form">
