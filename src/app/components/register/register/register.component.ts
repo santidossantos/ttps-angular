@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { UserService } from '../../../services/user.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ import { UserService } from '../../../services/user.service';
     MatSelectModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
@@ -27,16 +29,17 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private _userService: UserService) {
     this.form = this.fb.group({
-      username: ['', Validators.required],
-      name: ['', Validators.required],
+      username: ['', Validators.required, Validators.minLength(3)],
+      name: ['', Validators.required, Validators.minLength(2)],
+      email: [null, [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      email: ['', Validators.required],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   ngOnInit() {}
 
-  create() {
+  submit() {
     this._userService.create(this.form.value).subscribe(
       (res) => {
         console.log('User created successfully');

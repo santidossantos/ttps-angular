@@ -1,40 +1,61 @@
-<div class="grid-container">
-  <div class="div1">
-    <mat-form-field class="input">
-      <mat-label>Usuario</mat-label>
-      <input matInput formControlName="username" />
-    </mat-form-field>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="grid-container">
+    <div class="div1">
+      <mat-form-field class="input">
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username" />
+        <mat-icon matPrefix
+          ><span class="material-symbols-outlined">
+            account_circle
+          </span></mat-icon
+        >
+      </mat-form-field>
+    </div>
+    <div class="div2">
+      <mat-form-field class="input">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" />
+        <mat-icon matPrefix
+          ><span class="material-symbols-outlined"> face </span></mat-icon
+        >
+      </mat-form-field>
+    </div>
+    <div class="div3">
+      <mat-form-field class="input">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+        <mat-icon matPrefix
+          ><span class="material-symbols-outlined"> mail </span></mat-icon
+        >
+      </mat-form-field>
+    </div>
+    <div class="div4">
+      <mat-form-field class="input">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" />
+        <mat-icon matPrefix
+          ><span class="material-symbols-outlined"> lock </span></mat-icon
+        >
+      </mat-form-field>
+    </div>
+    <div class="div5">
+      <mat-form-field class="input">
+        <mat-label>Repetir contraseña</mat-label>
+        <input matInput formControlName="confirmPassword" />
+        <mat-icon matPrefix
+          ><span class="material-symbols-outlined">
+            <span class="material-symbols-outlined"> shield_locked </span>
+          </span></mat-icon
+        >
+      </mat-form-field>
+    </div>
+    <div class="div6">
+      <h1>¿Listo para comenzar?</h1>
+
+      <img src="../../../../assets/img/register.png" width="350" height="350" />
+    </div>
+    <div class="div7">
+      <button mat-flat-button color="primary">CREAR USUARIO</button>
+    </div>
   </div>
-  <div class="div2">
-    <mat-form-field class="input">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="name" />
-    </mat-form-field>
-  </div>
-  <div class="div3">
-    <mat-form-field class="input">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" type="email" />
-    </mat-form-field>
-  </div>
-  <div class="div4">
-    <mat-form-field class="input">
-      <mat-label>Contraseña</mat-label>
-      <input matInput formControlName="password" />
-    </mat-form-field>
-  </div>
-  <div class="div5">
-    <mat-form-field class="input">
-      <mat-label>Contraseña</mat-label>
-      <input matInput formControlName="password" />
-    </mat-form-field>
-  </div>
-  <div class="div6">
-    <img src="../../../../assets/img/register.png" width="350" height="350" />
-  </div>
-  <div class="div7">
-    <button mat-flat-button color="primary" [disabled]="!form.valid">
-      CREAR USUARIO
-    </button>
-  </div>
-</div>
+</form>
