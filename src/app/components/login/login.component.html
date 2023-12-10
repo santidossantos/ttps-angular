@@ -1,12 +1,10 @@
+@if (loading) {
+<div class="loading-overlay">
+  <mat-spinner diameter="90"></mat-spinner>
+</div>
+} @else if (!loading) {
 <div class="body">
   <div class="login">
-    @if (loading) {
-
-    <div class="loading-overlay">
-      <mat-spinner diameter="80"></mat-spinner>
-    </div>
-
-    } @else {
     <form [formGroup]="reactiveForm" (ngSubmit)="login()">
       <img src="../../../assets/img/login.png" width="30%" />
 
@@ -48,6 +46,6 @@
         </button>
       </div>
     </form>
-    }
   </div>
 </div>
+}
