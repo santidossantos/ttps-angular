@@ -6,8 +6,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { UserService } from '../../../services/user.service';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -27,25 +27,43 @@ import { MatIconModule } from '@angular/material/icon';
 export class RegisterComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private _userService: UserService) {
-    this.form = this.fb.group({
-      username: ['', Validators.required, Validators.minLength(3)],
-      name: ['', Validators.required, Validators.minLength(2)],
-      email: [null, [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-    });
+  constructor(private fb: FormBuilder, private _authService: AuthService) {
+    this.form = this.fb.group(
+      {
+        username: ['', [Validators.required, Validators.minLength(3)]],
+        name: ['', [Validators.required, Validators.minLength(2)]],
+        email: [null, [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: [''],
+      },
+      { validator: this.passwordMatchValidator }
+    );
   }
 
   ngOnInit() {}
 
   submit() {
-    this._userService.create(this.form.value).subscribe(
+    this._authService.register(this.form.value).subscribe(
       (res) => {
-        console.log('User created successfully');
         console.log(res);
       },
       (err) => console.error(err)
     );
+  }
+
+  myError = (controlName: string, errorName: string) => {
+    const control = this.form.get(controlName);
+    return control && control.hasError(errorName);
+  };
+
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+
+    if (password !== confirmPassword) {
+      form.get('confirmPassword')?.setErrors({ passwordMismatch: true });
+    } else {
+      form.get('confirmPassword')?.setErrors(null);
+    }
   }
 }
