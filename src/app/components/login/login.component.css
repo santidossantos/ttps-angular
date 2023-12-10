@@ -1,7 +1,7 @@
 .body {
   display: flex;
   justify-content: center;
-  height: 100%; /* ocupa el 100% del elemento que lo contiene */
+  height: 100%;
   align-items: center;
   background-color: #f5f5f5;
   padding: 10px;
@@ -13,9 +13,15 @@
   text-align: center;
 }
 
-h1 {
-  margin-top: 5%;
-  margin-bottom: 15%;
+.form {
+  margin-top: 18%;
+}
+
+.error {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 .input {
@@ -31,7 +37,7 @@ h1 {
 }
 
 .spinner {
-  margin: 0 auto; /* Otra forma de centrar */
+  margin: 0 auto;
 }
 
 img {

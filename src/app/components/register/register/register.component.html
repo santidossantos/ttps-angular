@@ -2,14 +2,16 @@
   <div class="grid-container">
     <div class="div1">
       <mat-form-field class="input">
+        @if(true) {
         <mat-label>Usuario</mat-label>
+        }
         <input matInput formControlName="username" />
         <mat-icon matPrefix
           ><span class="material-symbols-outlined">
             account_circle
           </span></mat-icon
         >
-        @if(myError('username', 'required')) {
+        @if(displayErrors('username', 'required')) {
         <mat-error>Nombre de usuario no válido</mat-error>
         }
       </mat-form-field>
@@ -21,7 +23,7 @@
         <mat-icon matPrefix
           ><span class="material-symbols-outlined"> face </span></mat-icon
         >
-        @if(myError('name', 'required')) {
+        @if(displayErrors('name', 'required')) {
         <mat-error>El nombre no puede estar vacío</mat-error>
         }
       </mat-form-field>
@@ -33,7 +35,8 @@
         <mat-icon matPrefix
           ><span class="material-symbols-outlined"> mail </span></mat-icon
         >
-        @if(myError('email', 'required') || myError('email', 'email')) {
+        @if(displayErrors('email', 'required') || displayErrors('email',
+        'email')) {
         <mat-error>Email no válido</mat-error>
         }
       </mat-form-field>
@@ -45,9 +48,9 @@
         <mat-icon matPrefix
           ><span class="material-symbols-outlined"> lock </span></mat-icon
         >
-        @if(myError('password', 'required')) {
+        @if(displayErrors('password', 'required')) {
         <mat-error>La contraseña no puede estar vacía</mat-error>
-        } @else if (myError('password', 'minlength')) {
+        } @else if (displayErrors('password', 'minlength')) {
         <mat-error>La contraseña debe tener seis caracteres o más</mat-error>
         }
       </mat-form-field>
@@ -61,7 +64,7 @@
             <span class="material-symbols-outlined"> shield_locked </span>
           </span></mat-icon
         >
-        @if(myError('confirmPassword', 'passwordMismatch')) {
+        @if(displayErrors('confirmPassword', 'passwordMismatch')) {
         <mat-error>Las contraseñas no coinciden</mat-error>
         }
       </mat-form-field>

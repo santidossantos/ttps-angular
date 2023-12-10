@@ -1,3 +1,4 @@
+import { routes } from './../../../app.routes';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -8,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +29,11 @@ import { AuthService } from '../../../services/auth.service';
 export class RegisterComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private _authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private _authService: AuthService,
+    private router: Router
+  ) {
     this.form = this.fb.group(
       {
         username: ['', [Validators.required, Validators.minLength(3)]],
@@ -43,15 +49,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   submit() {
-    this._authService.register(this.form.value).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => console.error(err)
-    );
+    this._authService.register(this.form.value).subscribe();
+    this.router.navigate(['dashboard']);
   }
 
-  myError = (controlName: string, errorName: string) => {
+  displayErrors = (controlName: string, errorName: string) => {
     const control = this.form.get(controlName);
     return control && control.hasError(errorName);
   };

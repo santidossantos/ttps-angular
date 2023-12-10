@@ -6,7 +6,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -33,13 +32,13 @@ import { DialogService } from './../../services/dialog.service';
 })
 export class LoginComponent implements OnInit {
   loading: boolean = false;
+  loginErrorMsg = null;
   reactiveForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
   constructor(
-    private _snackBar: MatSnackBar,
     private router: Router,
     private authService: AuthService,
     private dialogService: DialogService
@@ -59,19 +58,9 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', token);
           this.fakeLoading();
         },
-        (error) => {
-          console.error('Error durante el inicio de sesión:', error);
-        }
+        (error) => (this.loginErrorMsg = error.error.message)
       );
     }
-  }
-
-  onError() {
-    this._snackBar.open('Usuario o contraseña inválidos', '', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
-    });
   }
 
   fakeLoading() {
@@ -82,4 +71,9 @@ export class LoginComponent implements OnInit {
       this.loading = false;
     }, 1500);
   }
+
+  displayErrors = (controlName: string, errorName: string) => {
+    const control = this.reactiveForm.get(controlName);
+    return control && control.hasError(errorName);
+  };
 }
