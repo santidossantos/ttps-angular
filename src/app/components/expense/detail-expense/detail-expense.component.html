@@ -41,7 +41,7 @@
                             </td>
                             <td>
                                 <h4>Grupo: </h4>
-                                <p> {{ expense?.group?.name }}</p>
+                                <p> {{ group.name }}</p>
                             </td>
                         </tr>
                     </table>
@@ -85,7 +85,7 @@
                 </div>
             </mat-card-content>
             <mat-card-footer class="footer-container">
-                <button mat-raised-button color="primary" [routerLink]="['/']" routerLinkbuttonctive="router-link-active">Agregar deudor</button>
+                <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense/'+expenseId+'/debtor-user']" routerLinkbuttonctive="router-link-active">Agregar deudor</button>
             </mat-card-footer>
         </mat-card>
 </div>

@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Expense } from '../../../models/expense'
 import { ExpenseUsersPays } from '../../../models/expense-users-pays'
 import { dateFormatter } from '../../../utils/dateFormatter'
+import { Group } from '../../../models/group';
 
 @Component({
   selector: 'app-detail-expense',
@@ -24,6 +25,7 @@ export class DetailExpenseComponent implements OnInit {
   expenseId: number = 0;
   panelOpenState = false;
   expense: Expense;
+  group: Group = {id:0, name:"",category: {}};
   displayedColumns: string[] = ['username', 'amountPayed', 'isPayed'];
   dataSource: ExpenseUsersPays[] = [];
 
@@ -37,6 +39,7 @@ export class DetailExpenseComponent implements OnInit {
       this.expenseId = params['id'];
     });
     this.getExpenseById();
+    this.getGroup();
   }
 
   getExpenseById(){
@@ -45,6 +48,16 @@ export class DetailExpenseComponent implements OnInit {
         res.date = dateFormatter(res.date||"");
         this.expense = res;
         this.dataSource = this.expense?.debtorsUsers  || [];
+      },
+      (error) => console.error(error)
+    )
+  }
+
+  getGroup(){
+    this._expenseService.getGroup(this.expenseId).subscribe(
+      (res) => {
+        this.group = res;
+        console.log(res);
       },
       (error) => console.error(error)
     )

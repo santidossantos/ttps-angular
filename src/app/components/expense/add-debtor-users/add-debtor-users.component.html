@@ -1,0 +1,56 @@
+<div class="container">
+    <form class="example-form" [formGroup]="form" (ngSubmit)="addDebtorUser()">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title style="font-size: x-large;">Añadir un deudor</mat-card-title>
+            <mat-card-subtitle class="card-subtitle">ASDas</mat-card-subtitle>
+        </mat-card-header>
+        <br>
+        <mat-card-content>
+            <div class="form-container">
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Monto</mat-label>
+                                    <input matInput type="number" formControlName="amoutPayed">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <h4>Situacion:</h4>
+                                <div class="chip-listbox">
+                                    <mat-chip-listbox aria-label="Fish selection" formControlName="isPayed">
+                                        <mat-chip-option value=true>Ya se pago la deuda</mat-chip-option>
+                                        <mat-chip-option value=false>Todavia debe el dinero</mat-chip-option>
+                                    </mat-chip-listbox>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <!-- <table class="example-full-width" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field style="width: 100%">
+                                    <mat-label>Pagador</mat-label>
+                                    <mat-select formControlName="payingUser">
+                                        @for (user of group.users; track user.username) {
+                                            <mat-option [value]="user.id">{{user.username}}</mat-option>
+                                          }
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table> -->
+            </div>
+        </mat-card-content>
+        <mat-card-footer class="footer-container">
+            <button mat-raised-button color="primary" [disabled]="!form.valid">Añadir</button>
+        </mat-card-footer>
+    </mat-card>
+    </form>
+</div>
