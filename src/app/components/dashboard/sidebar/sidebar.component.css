@@ -1,17 +1,48 @@
 .toolbar-item-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .app-container {
-    height: 90%;
-    margin: 0;
-}  
-.app-sidenav {
-    width: 230px;
+  height: 90%;
+  margin: 0;
 }
+
+.app-sidenav {
+  width: 230px;
+}
+
 .app-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-} 
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.sidenav-span {
+  margin-left: 10px;
+  margin-top: 1px;
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 0 10px;
+  /* background-color: #fff; */
+  border-bottom: 1px solid #e0e0e0;
+  /* color: black; */
+}
+
+.sub-list {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
