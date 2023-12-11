@@ -3,12 +3,15 @@
 }
 
 .app-container {
-  height: 90%;
+  height: 100%;
   margin: 0;
 }
 
 .app-sidenav {
   width: 230px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  border-right: 1px solid #e0e0e0;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .app-sidenav-content {
@@ -37,9 +40,7 @@
   align-items: center;
   height: 50px;
   padding: 0 10px;
-  /* background-color: #fff; */
   border-bottom: 1px solid #e0e0e0;
-  /* color: black; */
 }
 
 .sub-list {

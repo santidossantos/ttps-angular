@@ -5,7 +5,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -28,4 +28,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class SidebarComponent {
   toogle: boolean = true;
+
+  constructor(private router: Router) {}
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['']);
+  }
 }

@@ -11,12 +11,12 @@
 
   <span class="toolbar-item-spacer"></span>
 
-  <button mat-icon-button matTooltip="Notifications">
+  <button mat-icon-button matTooltip="Notificaciones">
     <mat-icon>notifications</mat-icon>
   </button>
   <button
     mat-icon-button
-    matTooltip="My Account"
+    matTooltip="Mi cuenta"
     [matMenuTriggerFor]="userAccountMenu"
   >
     <mat-icon>account_circle</mat-icon>
@@ -29,8 +29,8 @@
       <mat-icon>settings</mat-icon><span>Configuración</span>
     </button>
     <mat-divider></mat-divider>
-    <button mat-menu-item routerLink="#">
-      <mat-icon>exit_to_app</mat-icon>Logout
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>Salir
     </button>
   </mat-menu>
 </mat-toolbar>
