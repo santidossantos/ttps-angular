@@ -46,3 +46,19 @@
   margin-top: 10%;
   margin-bottom: 10%;
 }
+
+.branding {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.branding-span {
+  color: #f5bf36ff;
+}
+
+.branding img {
+  margin-top: 3px;
+}
