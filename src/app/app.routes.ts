@@ -5,6 +5,9 @@ import { LoginComponent } from './components/login/login/login.component';
 import { HomeComponent } from './components/dashboard/home/home/home.component';
 import { RegisterComponent } from './components/register/register/register.component';
 import { CreateExpenseComponent } from './components/expense/create-expense/create-expense.component';
+import { DetailExpenseComponent } from './components/expense/detail-expense/detail-expense.component'
+import { AddDebtorUsersComponent } from './components/expense/add-debtor-users/add-debtor-users.component'
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,6 +26,16 @@ export const routes: Routes = [
         path: ':id/expense',
         title: 'Gasto',
         component: CreateExpenseComponent 
+      },
+      {
+        path: 'expense/:id',
+        title: 'Detalle Gasto',
+        component: DetailExpenseComponent
+      },
+      {
+        path: 'expense/:id/debtor-user',
+        title: 'Añadir deudor',
+        component: AddDebtorUsersComponent
       },
     ],
   },
