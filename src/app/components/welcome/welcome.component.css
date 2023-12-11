@@ -97,19 +97,6 @@ button {
   font-family: "Montserrat", sans-serif;
 }
 
-footer p {
-  margin: 10px 0;
-}
-
-footer i {
-  color: red;
-}
-
-footer a {
-  color: #3c97bf;
-  text-decoration: none;
-}
-
 .panel-left {
   width: 70%;
   height: 100%;
@@ -119,16 +106,6 @@ footer a {
   flex-direction: column;
   text-align: center;
   position: relative;
-}
-
-.footer {
-  background-color: #222;
-  color: #fff;
-  font-size: 14px;
-  text-align: center;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
 }
 
 .logo-img {

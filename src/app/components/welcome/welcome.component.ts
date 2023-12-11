@@ -5,11 +5,12 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { DialogService } from '../../services/dialog.service';
 import { RegisterComponent } from '../register/register/register.component';
+import { FooterComponent } from '../layout/footer/footer.component';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [NgxTypedJsModule, MatDialogModule],
+  imports: [NgxTypedJsModule, MatDialogModule, FooterComponent],
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css'],
 })
