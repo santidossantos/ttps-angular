@@ -12,11 +12,11 @@
                         <tr>
                             <td>
                                 <h4>Monto:</h4>
-                                <p>{{ expense?.amount }}</p>
+                                <p>{{ expense.amount }}</p>
                             </td>
                             <td>
                                 <h4>Fecha: </h4>
-                                <p>{{ expense?.date }}</p>
+                                <p>{{ expense.date }}</p>
                             </td>
                         </tr>
                     </table>
@@ -24,11 +24,11 @@
                         <tr>
                             <td>
                                 <h4>Categoria: </h4>
-                                <p>{{ expense?.category?.name }}</p>
+                                <p>{{ expense.category?.name }}</p>
                             </td>
                             <td>
                                 <h4>Usuario que pagó: </h4>
-                                <p>{{ expense?.payingUser?.username + ' (' + expense?.payingUser?.email + ')'}}</p>
+                                <p>{{ expense.payingUser?.username + ' (' + expense?.payingUser?.email + ')'}}</p>
                             </td>
                         </tr>
                     </table>
@@ -37,7 +37,7 @@
                         <tr>
                             <td>
                                 <h4>Tipo de division del gasto:</h4>
-                                <p>{{ expense?.expenseStrategy?.id }}</p>
+                                <p>{{ expense.expenseStrategy?.id }}</p>
                             </td>
                             <td>
                                 <h4>Grupo: </h4>
