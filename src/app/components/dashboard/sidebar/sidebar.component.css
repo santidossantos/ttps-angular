@@ -63,3 +63,16 @@
 .branding img {
   margin-top: 3px;
 }
+
+mat-list-item:hover {
+  background-color: rgba(250, 201, 77, 0.5);
+  transition: background-color 0.3s ease;
+}
+
+.mat-list-item:hover .nav-item {
+  color: #3f51b5;
+}
+
+.mat-list-item:hover mat-icon {
+  color: #3f51b5;
+}
