@@ -8,15 +8,11 @@ import { apiURL } from '../constants/api-base-url';
   providedIn: 'root',
 })
 export class UserService {
-  baseURL = apiURL;
+  baseURL = apiURL + 'users/';
 
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseURL + 'users');
-  }
-
-  create(user: User): Observable<User> {
-    return this.http.post<User>(this.baseURL, user);
+    return this.http.get<User[]>(this.baseURL);
   }
 }

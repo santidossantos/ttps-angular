@@ -1,0 +1,51 @@
+@if (loading) {
+<div class="loading-overlay">
+  <mat-spinner diameter="90"></mat-spinner>
+</div>
+} @else if (!loading) {
+<div class="body">
+  <div class="login">
+    <form [formGroup]="reactiveForm" (ngSubmit)="login()">
+      <img src="../../../assets/img/login.png" width="30%" />
+
+      <h1>Ingresar</h1>
+      @if (loginErrorMsg) {
+      <mat-error class="error"
+        >Nombre de usuario o contraseña incorrectos</mat-error
+      >
+      }
+      <div class="form">
+        <mat-form-field class="input">
+          <mat-label>Usuario</mat-label>
+          <input type="text" matInput formControlName="username" />
+          <mat-icon matSuffix
+            ><span class="material-symbols-outlined">
+              account_circle
+            </span></mat-icon
+          >
+          @if(displayErrors('username', 'required')) {
+          <mat-error>El nombre de usuario no puede estar vacío</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="input">
+          <mat-label>Contraseña</mat-label>
+          <input type="password" matInput formControlName="password" />
+          <mat-icon matSuffix>lock</mat-icon>
+          @if(displayErrors('password', 'required')) {
+          <mat-error>La contraseña no puede estar vacía</mat-error>
+          }
+        </mat-form-field>
+        <button
+          mat-button
+          type="submit"
+          mat-flat-button
+          color="primary"
+          [disabled]="reactiveForm.invalid"
+        >
+          Entrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+}

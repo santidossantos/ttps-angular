@@ -1,0 +1,78 @@
+.toolbar-item-spacer {
+  flex: 1 1 auto;
+}
+
+.app-container {
+  height: 100%;
+  margin: 0;
+}
+
+.app-sidenav {
+  width: 230px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  border-right: 1px solid #e0e0e0;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.app-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.sidenav-span {
+  margin-left: 10px;
+  margin-top: 1px;
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 0 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.sub-list {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.branding {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.branding-span {
+  color: #f5bf36ff;
+}
+
+.branding img {
+  margin-top: 3px;
+}
+
+mat-list-item:hover {
+  background-color: rgba(250, 201, 77, 0.5);
+  transition: background-color 0.3s ease;
+}
+
+.mat-list-item:hover .nav-item {
+  color: #3f51b5;
+}
+
+.mat-list-item:hover mat-icon {
+  color: #3f51b5;
+}

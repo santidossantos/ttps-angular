@@ -1,0 +1,27 @@
+footer p {
+  margin: 10px 0;
+}
+
+footer i {
+  color: red;
+}
+
+footer a {
+  color: #3c97bf;
+  text-decoration: none;
+}
+
+.footer {
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  height: 35px;
+}
+
+p {
+  color: rgb(246, 240, 240);
+}
