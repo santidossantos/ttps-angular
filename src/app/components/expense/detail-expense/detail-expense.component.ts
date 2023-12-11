@@ -57,7 +57,6 @@ export class DetailExpenseComponent implements OnInit {
     this._expenseService.getGroup(this.expenseId).subscribe(
       (res) => {
         this.group = res;
-        console.log(res);
       },
       (error) => console.error(error)
     )

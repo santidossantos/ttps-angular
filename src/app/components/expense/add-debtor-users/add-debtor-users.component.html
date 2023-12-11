@@ -13,7 +13,7 @@
                             <td>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Monto</mat-label>
-                                    <input matInput type="number" formControlName="amoutPayed">
+                                    <input matInput type="number" formControlName="amountPayed">
                                 </mat-form-field>
                             </td>
                         </tr>
@@ -32,12 +32,12 @@
                         </tr>
                     </table>
                     <br>
-                    <!-- <table class="example-full-width" cellspacing="0">
+                    <table class="example-full-width" cellspacing="0">
                         <tr>
                             <td>
                                 <mat-form-field style="width: 100%">
                                     <mat-label>Pagador</mat-label>
-                                    <mat-select formControlName="payingUser">
+                                    <mat-select formControlName="user">
                                         @for (user of group.users; track user.username) {
                                             <mat-option [value]="user.id">{{user.username}}</mat-option>
                                           }
@@ -45,10 +45,11 @@
                                 </mat-form-field>
                             </td>
                         </tr>
-                    </table> -->
+                    </table>
             </div>
         </mat-card-content>
         <mat-card-footer class="footer-container">
+            <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense/'+expenseId]" routerLinkbuttonctive="router-link-active">Atras</button>
             <button mat-raised-button color="primary" [disabled]="!form.valid">Añadir</button>
         </mat-card-footer>
     </mat-card>
