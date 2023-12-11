@@ -19,8 +19,9 @@ footer a {
   width: 100%;
   position: absolute;
   bottom: 0;
+  height: 35px;
 }
 
 p {
-  color: rgb(246, 240, 240)
+  color: rgb(246, 240, 240);
 }
