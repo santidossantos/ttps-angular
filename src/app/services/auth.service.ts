@@ -12,6 +12,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  // Preguntarle a Jorge como deberia chequear de manera segura si el usuario esta autenticado
   login(params: {
     username: string;
     password: string;
@@ -22,5 +23,12 @@ export class AuthService {
 
   register(user: User): Observable<User> {
     return this.http.post<User>(this.baseURL + 'register', user);
+  }
+
+  isAuthenticated() {
+    // Preguntarle a Jorge como deberia chequear de manera segura si el usuario esta autenticado
+    return localStorage.getItem('token') !== null; // Esto esta mal, inseguro??
+    // Osea de todas maneras no va a poder hacer peticiones a la api porque el token es invalido
+    // en caso de que ponga cualquier cosa en el localstorage
   }
 }

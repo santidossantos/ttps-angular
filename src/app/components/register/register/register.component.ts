@@ -1,4 +1,3 @@
-import { routes } from './../../../app.routes';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -8,8 +7,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { DialogService } from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +33,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _authService: AuthService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar,
+    private dialogService: DialogService
   ) {
     this.form = this.fb.group(
       {
@@ -49,8 +52,23 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   submit() {
-    this._authService.register(this.form.value).subscribe();
-    this.router.navigate(['dashboard']);
+    this._authService.register(this.form.value).subscribe(
+      (res) => {
+        this._snackBar.open('Registrado correctamente', '', {
+          duration: 4000,
+        });
+        this.dialogService.triggerCloseDialog();
+        this.router.navigate(['/login']);
+      },
+      (err) => {
+        if (err.error.message.includes('usuario')) {
+          this.form.get('username')?.setErrors({ usernameExists: true });
+        }
+        if (err.error.message.includes('email')) {
+          this.form.get('email')?.setErrors({ emailExists: true });
+        }
+      }
+    );
   }
 
   displayErrors = (controlName: string, errorName: string) => {
