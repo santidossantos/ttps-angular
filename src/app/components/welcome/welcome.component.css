@@ -3,12 +3,13 @@
   height: 100vh;
   display: flex;
   flex-direction: row;
+  z-index: 0;
 }
 
 .panel-right {
   background: #282d5f;
-  background: -webkit-linear-gradient(to right, #4a519a, #282d5f);
-  background: linear-gradient(to right, #4a519a, #4b54d7);
+  background: -webkit-linear-gradient(to right, #4a519a, #070c55);
+  background: linear-gradient(to right, #424dbe, #1d259f);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
@@ -76,6 +77,11 @@ button {
   max-width: 140px;
 }
 
+button:hover {
+  border: solid 2px #000000;
+  cursor: pointer;
+}
+
 .login-buttons {
   display: flex;
   justify-content: space-between;
@@ -96,19 +102,6 @@ button {
   font-family: "Montserrat", sans-serif;
 }
 
-footer p {
-  margin: 10px 0;
-}
-
-footer i {
-  color: red;
-}
-
-footer a {
-  color: #3c97bf;
-  text-decoration: none;
-}
-
 .panel-left {
   width: 70%;
   height: 100%;
@@ -118,16 +111,8 @@ footer a {
   flex-direction: column;
   text-align: center;
   position: relative;
-}
-
-.footer {
-  background-color: #222;
-  color: #fff;
-  font-size: 14px;
-  text-align: center;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  border-right: 1px solid #e0e0e0;
 }
 
 .logo-img {

@@ -1,3 +1,6 @@
+@if (dialogRef) {
+<ng-template class="focus"></ng-template>
+}
 <img
   src="../../../assets/img/logo.png"
   width="80"
@@ -8,6 +11,7 @@
 <div class="container">
   <div class="panel-left">
     <div class="text-container">
+      @if (!dialogRef) {
       <ngx-typed-js
         [strings]="words"
         [shuffle]="true"
@@ -17,6 +21,9 @@
       >
         <span class="typing"></span>
       </ngx-typed-js>
+      } @else {
+      <span class="typing">Cuentas Claras</span>
+      }
     </div>
 
     <div class="image-container">
@@ -27,20 +34,12 @@
     <h1>Bienvenido</h1>
     <p></p>
     <div class="login-buttons">
-      <button>Ingresar</button>
-      <button>Registrarse</button>
+      <button (click)="openLoginDialog()">Ingresar</button>
+      <button (click)="openRegisterDialog()">Registrarse</button>
     </div>
 
     <img src="../../../assets/img/money.png" width="100" height="100" />
   </div>
 </div>
 
-<footer class="footer">
-  <p>
-    Cuentas Claras | 2023 |
-    <a target="_blank" href="https://github.com/santidossantos/angular.git"
-      >Grupo 1</a
-    >
-    | TTPS | UNLP
-  </p>
-</footer>
+<app-footer></app-footer>

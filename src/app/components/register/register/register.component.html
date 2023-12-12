@@ -1,51 +1,85 @@
-<div class="container">
-  <mat-card>
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="create()">
-        <mat-grid-list cols="4" rowHeight="70px">
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="input">
-              <mat-label>Usuario</mat-label>
-              <input matInput formControlName="username" />
-            </mat-form-field>
-          </mat-grid-tile>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="grid-container">
+    <div class="div1">
+      <mat-form-field class="input">
+        @if(true) {
+        <mat-label>Usuario</mat-label>
+        }
+        <input matInput formControlName="username" />
+        <mat-icon matPrefix
+          ><span class="material-symbols-outlined">
+            account_circle
+          </span></mat-icon
+        >
+        @if(displayErrors('username', 'required')) {
+        <mat-error>Nombre de usuario no válido</mat-error>
+        } @else if(displayErrors('username', 'usernameExists')) {
+        <mat-error>El nombre de usuario esta en uso</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="div2">
+      <mat-form-field class="input">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" />
+        <mat-icon matPrefix
+          ><span class="material-symbols-outlined"> badge </span></mat-icon
+        >
+        @if(displayErrors('name', 'required')) {
+        <mat-error>El nombre no puede estar vacío</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="div3">
+      <mat-form-field class="input">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+        <mat-icon matPrefix
+          ><span class="material-symbols-outlined"> mail </span></mat-icon
+        >
+        @if(displayErrors('email', 'required') || displayErrors('email',
+        'email')) {
+        <mat-error>Email no válido</mat-error>
+        } @else if(displayErrors('email', 'emailExists')) {
+        <mat-error>El email ingresado está en uso</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="div4">
+      <mat-form-field class="input">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" />
+        <mat-icon matPrefix
+          ><span class="material-symbols-outlined"> lock </span></mat-icon
+        >
+        @if(displayErrors('password', 'required')) {
+        <mat-error>La contraseña no puede estar vacía</mat-error>
+        } @else if (displayErrors('password', 'minlength')) {
+        <mat-error>La contraseña debe tener seis caracteres o más</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="div5">
+      <mat-form-field class="input">
+        <mat-label>Repetir contraseña</mat-label>
+        <input matInput formControlName="confirmPassword" type="password" />
+        <mat-icon matPrefix
+          ><span class="material-symbols-outlined">
+            <span class="material-symbols-outlined"> shield_locked </span>
+          </span></mat-icon
+        >
+        @if(displayErrors('confirmPassword', 'passwordMismatch')) {
+        <mat-error>Las contraseñas no coinciden</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="div6">
+      <h1>Comenzar</h1>
 
-          <mat-grid-tile [colspan]="3" [rowspan]="5">
-            <img
-              src="../../../../assets/img/user.png"
-              width="250"
-              height="250"
-            />
-          </mat-grid-tile>
-
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="input">
-              <mat-label>Nombre</mat-label>
-              <input matInput formControlName="name" />
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="input">
-              <mat-label>Email</mat-label>
-              <input matInput formControlName="email" type="email" />
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="input">
-              <mat-label>Contraseña</mat-label>
-              <input matInput formControlName="password" />
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <button mat-flat-button color="primary" [disabled]="!form.valid">
-              CREAR USUARIO
-            </button>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
+      <img src="../../../../assets/img/register.png" width="350" height="350" />
+    </div>
+    <div class="div7">
+      <button mat-flat-button color="primary">CREAR USUARIO</button>
+    </div>
+  </div>
+</form>

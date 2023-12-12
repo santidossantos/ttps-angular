@@ -12,11 +12,7 @@ export class GroupService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Group[]> {
-    return this.http.get<Group[]>(this.baseURL + 'groups');
-  }
-
-  create(group: Group): Observable<Group> {
-    return this.http.post<Group>(this.baseURL, group);
+  getById(id: number): Observable<Group> {
+    return this.http.get<Group>(this.baseURL +'groups/'+id);
   }
 }
