@@ -8,6 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CreateExpenseComponent } from '../../expense/create-expense/create-expense.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,6 +23,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     RouterModule,
     MatExpansionModule,
     MatTooltipModule,
+    CreateExpenseComponent,
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
