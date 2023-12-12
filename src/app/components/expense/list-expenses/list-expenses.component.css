@@ -1,0 +1,60 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 80%;
+    height: 90%;
+    margin: 0;
+  }
+  
+  .mat-elevation-z8 {    
+    overflow-x: auto;  /* Super importante para el responsive de la tabla */
+  }
+  
+  table {
+    background-color: rgb(248, 245, 245);
+  }
+  
+  th {
+    width: 20%;
+  }
+  
+  .th-actions {
+    text-align: center;
+  }
+  
+  .actions-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .action-edit {
+    color: darkblue;
+  }
+  
+  .action-delete {
+    color: brown;
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }
+  
+  .paginator {
+    background-color: rgb(248, 245, 245);
+    margin-bottom: 2%;
+  }
+  
+  .empty-table-message {
+    text-align: center;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+  
+  button {
+    min-width: 220px;
+  }
