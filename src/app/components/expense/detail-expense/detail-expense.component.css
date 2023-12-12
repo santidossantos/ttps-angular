@@ -5,6 +5,9 @@ td {
 .mat-mdc-card {
   width: 90%;
   height: 100%;
+  min-height: 400px;
+  min-width: 700px;
+  border-radius: 25px;
 }
 
 .footer-container {
