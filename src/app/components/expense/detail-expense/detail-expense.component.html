@@ -47,7 +47,20 @@
         <tr>
           <td>
             <h4>Tipo de division del gasto:</h4>
-            <p>{{ expense.expenseStrategy?.id }}</p>
+            @switch (expense.expenseStrategy?.id) {
+              @case (1) {
+                  <p>Partes iguales</p>
+              }
+              @case (2) {
+                  <p>Partes iguales (porcentaje)</p>
+              }
+              @case (3) {
+                <p>Cantidad fija</p>
+              }
+              @case (4) {
+                <p>Cantidad fija (porcentaje)</p>
+              }
+          }
           </td>
           <td>
             <h4>Grupo:</h4>
