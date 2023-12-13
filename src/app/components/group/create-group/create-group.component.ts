@@ -62,8 +62,10 @@ export class CreateGroupComponent implements OnInit {
 
     this._groupService.create(groupPayload).subscribe(
       (res) => {
-        this.openSnackBar('Gasto creado con exito');
-        this.router.navigate(['dashboard']);
+        this.openSnackBar('Grupo creado con exito');
+        this.form.get('name')?.setValue('');
+        this.form.get('category')?.setValue('');
+        //this.router.navigate(['dashboard']);
       },
       (error) => {
         console.error(error);
