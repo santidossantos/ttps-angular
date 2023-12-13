@@ -10,6 +10,7 @@ import { AddDebtorUsersComponent } from './components/expense/add-debtor-users/a
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AuthGuard } from './guards/auth-guard';
 import { LoginComponent } from './components/login/login.component';
+import { MyGroupsComponent } from './components/group/my-groups/my-groups.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -33,6 +34,11 @@ export const routes: Routes = [
         path: ':id/expense',
         title: 'Gasto',
         component: CreateExpenseComponent 
+      },
+      {
+        path: 'me/groups',
+        title: 'Mis Grupos',
+        component: MyGroupsComponent
       },
       {
         path: 'expense/:id',
