@@ -22,7 +22,7 @@
           <a class="pointer" [routerLink]="['/dashboard/expense/' + expense.id ]">
             <mat-icon matTooltip="View expense detail">assignment</mat-icon>
           </a>
-          <a class="pointer">
+          <a class="pointer"  [routerLink]="['/dashboard/expense/' + expense.id + '/editar']">
             <mat-icon matTooltip="Edit expense" class="action-edit">edit</mat-icon>
           </a>
         </div>

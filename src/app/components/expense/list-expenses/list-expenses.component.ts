@@ -34,7 +34,6 @@ export class ListExpensesComponent implements OnInit{
       let token: string | null = localStorage.getItem("token");
       if(token){
         let tokenData = jwtDecode(token);
-        console.log(tokenData.sub);
         this._userService.getExpensesWithUsername(tokenData.sub).subscribe(
           (res) => {
             this.dataSource.data = res || [];
