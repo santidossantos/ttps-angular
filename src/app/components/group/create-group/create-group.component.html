@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="example-form">
+  <form class="example-form" [formGroup]="form" (ngSubmit)="createGroup()">
     <mat-card>
       <mat-card-header style="margin-bottom: 20px">
         <mat-card-title>Crear grupo</mat-card-title>

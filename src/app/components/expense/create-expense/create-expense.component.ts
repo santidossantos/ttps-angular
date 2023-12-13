@@ -85,7 +85,7 @@ export class CreateExpenseComponent implements OnInit {
       );
       this.form.controls['category'].setValue({
         id: parseInt(category.value, 10),
-      });
+      }); 
       this.form.controls['payingUser'].setValue({
         id: parseInt(payingUser.value, 10),
       });
