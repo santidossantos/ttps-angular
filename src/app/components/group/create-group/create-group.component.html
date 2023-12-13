@@ -12,7 +12,7 @@
           <tr>
             <mat-form-field class="example-full-width">
               <mat-label>Nombre</mat-label>
-              <input matInput />
+              <input matInput formControlName="name" />
             </mat-form-field>
           </tr>
 
@@ -20,8 +20,8 @@
             <div class="form-field-group">
               <mat-form-field style="width: 100%">
                 <mat-label>Categoria</mat-label>
-                <mat-select>
-                  <mat-option value="Familia">Familia</mat-option>
+                <mat-select formControlName="category">
+                  <mat-option value='{"id": 1}'>Familia</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>

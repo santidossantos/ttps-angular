@@ -15,4 +15,8 @@ export class GroupService {
   getById(id: number): Observable<Group> {
     return this.http.get<Group>(this.baseURL +'groups/'+id);
   }
+
+  create(groupPayload: any): Observable<Group> {
+    return this.http.post<Group>(this.baseURL +'groups', groupPayload);
+  }
 }

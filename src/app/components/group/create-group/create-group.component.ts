@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GroupService } from '../../../services/group.service';
 
 
 
@@ -35,6 +36,7 @@ export class CreateGroupComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private _snackBar: MatSnackBar,
+    private _groupService: GroupService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -46,8 +48,28 @@ export class CreateGroupComponent implements OnInit {
   }
 
   createGroup(){
-    console.log("entro")
+    const group_name = this.form.get('name')?.value;
+    const group_category = this.form.get('category')?.value;
+    const id_logged_user = {"id":1};
+    this.form.value['creador'] = id_logged_user;
     console.log(this.form.value);
+
+    const groupPayload = {
+      name: group_name,
+      creator: id_logged_user,
+      category: JSON.parse(group_category),
+    };
+
+    this._groupService.create(groupPayload).subscribe(
+      (res) => {
+        this.openSnackBar('Gasto creado con exito');
+        this.router.navigate(['dashboard']);
+      },
+      (error) => {
+        console.error(error);
+        this.openSnackBar(error);
+      }
+    );
   }
 
   openSnackBar(mensaje: string) {
