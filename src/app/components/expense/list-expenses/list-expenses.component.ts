@@ -31,15 +31,15 @@ export class ListExpensesComponent implements OnInit{
   }
 
   ngOnInit(){
-      let token: string | null = localStorage.getItem("token");
-      if(token){
-        let tokenData = jwtDecode(token);
-        this._userService.getExpensesWithUsername(tokenData.sub).subscribe(
-          (res) => {
-            this.dataSource.data = res || [];
-          },
-          (error) => console.error(error)
-        )
-      }
+    let token: string | null = localStorage.getItem("token");
+    if(token){
+      let tokenData = jwtDecode(token);
+      this._userService.getExpensesWithUsername(tokenData.sub).subscribe(
+        (res) => {
+          this.dataSource.data = res || [];
+        },
+        (error) => console.error(error)
+      )
     }
   }
+}
