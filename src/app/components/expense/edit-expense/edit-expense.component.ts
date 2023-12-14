@@ -20,6 +20,7 @@ import { Expense } from '../../../models/expense';
 import { RouterModule } from '@angular/router';
 import { expenseStrategyService } from '../../../services/expense-strategy.service';
 import { ExpenseStrategy } from '../../../models/expense-strategy';
+import { PutInSpanish } from '../../../utils/putInSpanish';
 
 @Component({
   selector: 'app-edit-expense',
@@ -143,5 +144,9 @@ export class EditExpenseComponent implements OnInit{
         this.openSnackBar(error);
       }
     )
+  }
+
+  changeToSpanish(strategyName: string): string{
+    return PutInSpanish(strategyName);
   }
 }

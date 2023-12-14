@@ -51,7 +51,7 @@
                     aria-label="Fish selection"
                     formControlName="expenseStrategy">
                     @for(strategy of strategies; track strategy.id){
-                      <mat-chip-option [value]='{"id":strategy.id, "expenseStrategy":strategy.name}'>{{ strategy.name }}</mat-chip-option>
+                      <mat-chip-option [value]='{"id":strategy.id, "expenseStrategy":strategy.name}'>{{ changeToSpanish(strategy.name) }}</mat-chip-option>
                     }
                   </mat-chip-listbox>
                 </div>

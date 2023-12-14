@@ -7,6 +7,7 @@ import { UserService } from '../../../services/user.service';
 import { Expense } from '../../../models/expense';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { dateFormatter } from '../../../utils/dateFormatter';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ import { RouterModule } from '@angular/router';
 })
 
 export class ListExpensesComponent implements OnInit{
-  displayedColumns: string[] = ['name', 'amount', 'actions'];
+  displayedColumns: string[] = ['name', 'amount', 'date' ,'actions'];
   dataSource = new MatTableDataSource<Expense>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -41,5 +42,9 @@ export class ListExpensesComponent implements OnInit{
         (error) => console.error(error)
       )
     }
+  }
+
+  formatDate(date: string):string{
+    return dateFormatter(date);
   }
 }
