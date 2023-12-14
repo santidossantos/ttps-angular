@@ -89,7 +89,6 @@ export class EditExpenseComponent implements OnInit{
       this.expense = res;
       const strategy: Object = {"id": res.expenseStrategy?.id, "expenseStrategy": res.expenseStrategy?.name}
       const category: Object = {"id": res.category?.id}
-      console.log("THIS GROUP ID", this.group);
       const payingUser: Object = {"id": res.payingUser?.id}
       this.defaultValues = {"name": res.name, "amount": res.amount, "date":res.date,
       "category": category, "payingUser": payingUser,
@@ -134,7 +133,6 @@ export class EditExpenseComponent implements OnInit{
   }
   
   edit(){
-    console.log(this.form.value)
     this._expenseService.editExpense(this.expenseId,this.form.value).subscribe(
       (res) => {
         this.openSnackBar('Gasto editado con exito');
