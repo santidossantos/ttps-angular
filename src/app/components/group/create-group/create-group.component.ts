@@ -14,29 +14,38 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GroupService } from '../../../services/group.service';
-
-
-
-
-
+import { UserService } from '../../../services/user.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-create-group',
   standalone: true,
-  imports: [SidebarComponent, MatInputModule, MatCardModule, MatNativeDateModule,
-    MatDatepickerModule, MatFormFieldModule, MatIconModule, MatButtonModule,
-    MatChipsModule, MatSelectModule, ReactiveFormsModule],
+  imports: [
+    SidebarComponent,
+    MatInputModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './create-group.component.html',
-  styleUrl: './create-group.component.css'
+  styleUrl: './create-group.component.css',
 })
 export class CreateGroupComponent implements OnInit {
   form: FormGroup;
+  user_id: number = -1;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private _snackBar: MatSnackBar,
-    private _groupService: GroupService
+    private _groupService: GroupService,
+    private _userService: UserService
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -44,13 +53,26 @@ export class CreateGroupComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    const token: string | null = localStorage.getItem('token');
+    if (token) {
+      const tokenData = jwtDecode(token);
+      const username = tokenData.sub as string;
+      this._userService.getByUserName(username).subscribe(
+        (res) => {
+          this.user_id = res.id;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
-  createGroup(){
+  createGroup() {
     const group_name = this.form.get('name')?.value;
     const group_category = this.form.get('category')?.value;
-    const id_logged_user = {"id":1};
+    const id_logged_user = { id: this.user_id };
     this.form.value['creador'] = id_logged_user;
     console.log(this.form.value);
 
@@ -80,5 +102,4 @@ export class CreateGroupComponent implements OnInit {
       verticalPosition: 'bottom',
     });
   }
-
 }

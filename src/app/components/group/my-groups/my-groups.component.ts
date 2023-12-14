@@ -22,6 +22,7 @@ import { jwtDecode } from 'jwt-decode';
 import { UserService } from '../../../services/user.service';
 import { switchMap } from 'rxjs/operators';
 import { Group } from '../../../models/group';
+import { CommonModule } from '@angular/common';
 
 export interface Section {
   name: string;
@@ -50,6 +51,7 @@ export interface Section {
     DatePipe,
     MatMenuModule,
     MatButtonModule,
+    CommonModule,
   ],
   templateUrl: './my-groups.component.html',
   styleUrl: './my-groups.component.css',
@@ -94,54 +96,6 @@ export class MyGroupsComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });
-  }
-
-  grupos: Section[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    },
-  ];
-  notes: Section[] = [
-    {
-      name: 'Vacation Itinerary',
-      updated: new Date('2/20/16'),
-    },
-    {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
-    },
-  ];
-
-  // Método para editar un grupo
-  editarGrupo(grupo: Section) {
-    // Implementa la lógica para editar el grupo
-    this.openSnackBar(`Editando ${grupo.name}`);
-  }
-
-  // Método para eliminar un grupo
-  eliminarGrupo(grupo: Section) {
-    // Implementa la lógica para eliminar el grupo
-    this.openSnackBar(`Eliminando ${grupo.name}`);
-  }
-
-  // Método para agregar un nuevo grupo (puedes implementar según tus necesidades)
-  agregarGrupo() {
-    // Implementa la lógica para agregar un nuevo grupo
-    const nuevoGrupo: Section = {
-      name: 'Nuevo Grupo',
-      updated: new Date(),
-    };
-    this.grupos.push(nuevoGrupo);
-    this.openSnackBar('Nuevo grupo agregado');
   }
 
   navigateToMyGroups(): void {
