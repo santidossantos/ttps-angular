@@ -94,8 +94,7 @@ export class EditExpenseComponent implements OnInit{
       const category: Object = {"id": res.category?.id}
       const payingUser: Object = {"id": res.payingUser?.id}
       this.defaultValues = {"name": res.name, "amount": res.amount, "date":res.date,
-      "category": category, "payingUser": payingUser,
-      "expenseStrategy": strategy}
+      "category": category, "payingUser": payingUser, "expenseStrategy": strategy, "img": res.img}
       this.form.patchValue({
         name: res.name,
         amount: res.amount,
@@ -103,6 +102,7 @@ export class EditExpenseComponent implements OnInit{
         category: category,
         payingUser: payingUser,
         expenseStrategy: strategy,
+        img: res.img
       });
     },
     (error) => console.error(error)
