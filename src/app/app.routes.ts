@@ -41,7 +41,7 @@ export const routes: Routes = [
       },
       {
         path: 'expense',
-        title: 'Lista Gastos',
+        title: 'Mis Gastos',
         component: ListExpensesComponent
       },
       {
