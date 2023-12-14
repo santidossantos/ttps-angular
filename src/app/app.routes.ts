@@ -5,8 +5,8 @@ import { HomeComponent } from './components/dashboard/home/home/home.component';
 import { RegisterComponent } from './components/register/register/register.component';
 import { CreateGroupComponent } from './components/group/create-group/create-group.component';
 import { CreateExpenseComponent } from './components/expense/create-expense/create-expense.component';
-import { DetailExpenseComponent } from './components/expense/detail-expense/detail-expense.component'
-import { AddDebtorUsersComponent } from './components/expense/add-debtor-users/add-debtor-users.component'
+import { DetailExpenseComponent } from './components/expense/detail-expense/detail-expense.component';
+import { AddDebtorUsersComponent } from './components/expense/add-debtor-users/add-debtor-users.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AuthGuard } from './guards/auth-guard';
 import { LoginComponent } from './components/login/login.component';
@@ -17,7 +17,7 @@ export const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'login', component: LoginComponent },
   {
-    path: '',
+    path: 'dashboard',
     component: DashboardComponent,
     children: [
       {
@@ -30,25 +30,25 @@ export const routes: Routes = [
         title: 'Create Group',
         component: CreateGroupComponent,
       },
-      { 
+      {
         path: ':id/expense',
         title: 'Gasto',
-        component: CreateExpenseComponent 
+        component: CreateExpenseComponent,
       },
       {
         path: 'me/groups',
         title: 'Mis Grupos',
-        component: MyGroupsComponent
+        component: MyGroupsComponent,
       },
       {
         path: 'expense/:id',
         title: 'Detalle Gasto',
-        component: DetailExpenseComponent
+        component: DetailExpenseComponent,
       },
       {
         path: 'expense/:id/debtor-user',
         title: 'Añadir deudor',
-        component: AddDebtorUsersComponent
+        component: AddDebtorUsersComponent,
       },
     ],
     canActivate: [AuthGuard],

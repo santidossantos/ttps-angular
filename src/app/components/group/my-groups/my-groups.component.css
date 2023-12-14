@@ -1,0 +1,20 @@
+.mat-elevation-z8 {
+  overflow-x: auto; /* Super importante para el responsive de la tabla */
+}
+
+.mat-list-item {
+  position: relative;
+}
+
+.mat-menu-trigger {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}

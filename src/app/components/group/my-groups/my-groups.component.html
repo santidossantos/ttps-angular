@@ -1,2 +1,41 @@
-mis grupitos
-aaaaaaaaaaaaaaaaaaaaaa
+<div class="container">
+  <mat-list>
+    <div mat-subheader>Grupos</div>
+    @for (grupo of grupos; track grupo) {
+    <mat-list-item>
+      <mat-icon matListItemIcon>group</mat-icon>
+      <div matListItemTitle>{{ grupo.name }}</div>
+      <div matListItemLine>{{ grupo.updated | date }}</div>
+      <!-- <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+        class="mat-menu-trigger"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button> -->
+    </mat-list-item>
+    }
+  </mat-list>
+</div>
+<mat-divider></mat-divider>
+
+<div class="button-container">
+  <div class="mat-button">
+    <button mat-raised-button color="primary" (click)="navigateToMyGroups()">
+      <mat-icon>add</mat-icon>
+      <span>Crear grupo</span>
+    </button>
+  </div>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>edit</mat-icon>
+    <span>Editar</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>delete</mat-icon>
+    <span>Eliminar</span>
+  </button>
+</mat-menu>

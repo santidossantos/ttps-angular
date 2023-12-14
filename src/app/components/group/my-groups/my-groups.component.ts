@@ -10,38 +10,56 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { SidebarComponent } from '../../dashboard/sidebar/sidebar.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GroupService } from '../../../services/group.service';
+import { MatDividerModule } from '@angular/material/divider';
+import { DatePipe } from '@angular/common';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 
-
-
-
-
+export interface Section {
+  name: string;
+  updated: Date;
+}
 
 @Component({
   selector: 'app-my-groups',
   standalone: true,
-  imports: [SidebarComponent, MatInputModule, MatCardModule, MatNativeDateModule,
-    MatDatepickerModule, MatFormFieldModule, MatIconModule, MatButtonModule,
-    MatChipsModule, MatSelectModule, ReactiveFormsModule],
+  imports: [
+    RouterModule,
+    SidebarComponent,
+    MatInputModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatListModule,
+    MatIconModule,
+    MatDividerModule,
+    DatePipe,
+    MatMenuModule,
+    MatButtonModule,
+  ],
   templateUrl: './my-groups.component.html',
-  styleUrl: './my-groups.component.css'
+  styleUrl: './my-groups.component.css',
 })
 export class MyGroupsComponent implements OnInit {
-
   constructor(
     private _snackBar: MatSnackBar,
-    private _groupService: GroupService
-  ) {
-
-  }
+    private _groupService: GroupService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    
   }
-
- 
 
   openSnackBar(mensaje: string) {
     this._snackBar.open(mensaje, 'Cerrar', {
@@ -50,4 +68,55 @@ export class MyGroupsComponent implements OnInit {
     });
   }
 
+  grupos: Section[] = [
+    {
+      name: 'Photos',
+      updated: new Date('1/1/16'),
+    },
+    {
+      name: 'Recipes',
+      updated: new Date('1/17/16'),
+    },
+    {
+      name: 'Work',
+      updated: new Date('1/28/16'),
+    },
+  ];
+  notes: Section[] = [
+    {
+      name: 'Vacation Itinerary',
+      updated: new Date('2/20/16'),
+    },
+    {
+      name: 'Kitchen Remodel',
+      updated: new Date('1/18/16'),
+    },
+  ];
+
+  // Método para editar un grupo
+  editarGrupo(grupo: Section) {
+    // Implementa la lógica para editar el grupo
+    this.openSnackBar(`Editando ${grupo.name}`);
+  }
+
+  // Método para eliminar un grupo
+  eliminarGrupo(grupo: Section) {
+    // Implementa la lógica para eliminar el grupo
+    this.openSnackBar(`Eliminando ${grupo.name}`);
+  }
+
+  // Método para agregar un nuevo grupo (puedes implementar según tus necesidades)
+  agregarGrupo() {
+    // Implementa la lógica para agregar un nuevo grupo
+    const nuevoGrupo: Section = {
+      name: 'Nuevo Grupo',
+      updated: new Date(),
+    };
+    this.grupos.push(nuevoGrupo);
+    this.openSnackBar('Nuevo grupo agregado');
+  }
+
+  navigateToMyGroups(): void {
+    this.router.navigate(['/dashboard/groups/new']);
+  }
 }
