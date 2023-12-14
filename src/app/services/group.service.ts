@@ -13,10 +13,11 @@ export class GroupService {
   constructor(private http: HttpClient) {}
 
   getById(id: number): Observable<Group> {
-    return this.http.get<Group>(this.baseURL +'groups/'+id);
+    return this.http.get<Group>(this.baseURL + 'groups/' + id);
   }
 
   create(groupPayload: any): Observable<Group> {
-    return this.http.post<Group>(this.baseURL +'groups', groupPayload);
+    return this.http.post<Group>(this.baseURL + 'groups', groupPayload);
   }
+
 }

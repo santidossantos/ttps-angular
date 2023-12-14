@@ -18,3 +18,12 @@
   justify-content: flex-end;
   margin-top: 15px;
 }
+
+.group-name {
+  margin-right: 120px;
+  padding: 15px;
+}
+
+.arrow-icon {
+  color: #3f51b5;
+}

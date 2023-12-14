@@ -18,6 +18,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { DatePipe } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { jwtDecode } from 'jwt-decode';
+import { UserService } from '../../../services/user.service';
+import { switchMap } from 'rxjs/operators';
+import { Group } from '../../../models/group';
 
 export interface Section {
   name: string;
@@ -51,14 +55,38 @@ export interface Section {
   styleUrl: './my-groups.component.css',
 })
 export class MyGroupsComponent implements OnInit {
+  user_id: number = -1;
+  myGroups: Group[] = [];
+
   constructor(
     private _snackBar: MatSnackBar,
     private _groupService: GroupService,
-    private router: Router
+    private router: Router,
+    private _userService: UserService
   ) {}
 
-  ngOnInit(): void {
-    
+  ngOnInit() {
+    const token: string | null = localStorage.getItem('token');
+    if (token) {
+      const tokenData = jwtDecode(token);
+      const username = tokenData.sub as string;
+
+      this._userService
+        .getByUserName(username)
+        .pipe(
+          switchMap((user) => {
+            this.user_id = user.id;
+            return this._userService.getGroupsByUserId(this.user_id);
+          })
+        )
+        .subscribe(
+          (groups) => {
+            this.myGroups = groups;
+            console.log(this.myGroups);
+          },
+          (error) => console.log(error)
+        );
+    }
   }
 
   openSnackBar(mensaje: string) {

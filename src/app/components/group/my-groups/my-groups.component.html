@@ -1,11 +1,17 @@
 <div class="container">
   <mat-list>
     <div mat-subheader>Grupos</div>
-    @for (grupo of grupos; track grupo) {
+    @for (grupo of myGroups; track grupo) {
     <mat-list-item>
       <mat-icon matListItemIcon>group</mat-icon>
-      <div matListItemTitle>{{ grupo.name }}</div>
-      <div matListItemLine>{{ grupo.updated | date }}</div>
+      <div matListItemTitle>
+        <span class="group-name">{{ grupo.name }}</span>
+        <a [routerLink]="['/groups/' + grupo.id]" class="secondary-content"
+          ><i class="material-icons arrow-icon">send</i></a
+        >
+      </div>
+      <div matListItemLine>Integrantes: 5</div>
+
       <!-- <button
         mat-icon-button
         [matMenuTriggerFor]="menu"
