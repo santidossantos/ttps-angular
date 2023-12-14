@@ -53,3 +53,8 @@
   margin-top: 5px;
   margin-bottom: 25px;
 }
+
+.no-groups {
+  color: #999; /* Color gris */
+  font-weight: 300; /* Grosor de la letra más ligero */
+}
