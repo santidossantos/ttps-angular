@@ -87,7 +87,7 @@ export class CreateGroupComponent implements OnInit {
         this.openSnackBar('Grupo creado con exito');
         this.form.get('name')?.setValue('');
         this.form.get('category')?.setValue('');
-        //this.router.navigate(['dashboard']);
+        this.router.navigate(['dashboard/me/groups']);
       },
       (error) => {
         console.error(error);
