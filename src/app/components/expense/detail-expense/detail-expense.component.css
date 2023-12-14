@@ -46,3 +46,14 @@ button.mat-raised-button {
 h4{
   font-size: 18px;
 }
+
+.icon{
+  transform: scale(3);
+  color: #444cb3;
+}
+
+.icon-container {
+  position: absolute; 
+  top: 50px;
+  right: 50px;
+}

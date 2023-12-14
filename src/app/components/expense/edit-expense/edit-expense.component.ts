@@ -21,6 +21,7 @@ import { RouterModule } from '@angular/router';
 import { expenseStrategyService } from '../../../services/expense-strategy.service';
 import { ExpenseStrategy } from '../../../models/expense-strategy';
 import { PutInSpanish } from '../../../utils/putInSpanish';
+import IconExpense from '../icons-expense';
 
 @Component({
   selector: 'app-edit-expense',
@@ -40,6 +41,7 @@ export class EditExpenseComponent implements OnInit{
   expense: Expense = {};
   defaultValues: any = {};
   group: Group = { id: 0, name: '', category: {} }
+  icons = IconExpense.icons;
 
   constructor(
     private fb: FormBuilder,

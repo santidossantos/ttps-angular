@@ -20,7 +20,7 @@ import { ExpenseCategory } from '../../../models/expense-category';
 import { expenseStrategyService } from '../../../services/expense-strategy.service';
 import { ExpenseStrategy } from '../../../models/expense-strategy';
 import { PutInSpanish } from '../../../utils/putInSpanish';
-
+import IconExpense from '../icons-expense';
 @Component({
   selector: 'app-create-expense',
   standalone: true,
@@ -47,6 +47,7 @@ export class CreateExpenseComponent implements OnInit {
   maxDate: Date;
   categories: ExpenseCategory[] = [];
   strategies: ExpenseStrategy[] = [];
+  icons = IconExpense.icons;
 
   constructor(
     private fb: FormBuilder,

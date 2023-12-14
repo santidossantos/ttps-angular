@@ -1,10 +1,10 @@
 <mat-card>
   <mat-card-header>
-    <!-- <p> ver donde poner el icono</p> -->
-    <mat-card-title style="font-size: x-large"
-      >Detalle de {{ expense.name }}</mat-card-title
-    >
-    <mat-card-subtitle class="card-subtitle">Informacion útil del gasto</mat-card-subtitle>
+    <mat-card-title style="font-size: x-large">Detalle de {{ expense.name }}</mat-card-title>
+    <div class="icon-container">
+      <mat-icon class="icon">{{ expense.img }}</mat-icon>
+    </div>
+      <mat-card-subtitle class="card-subtitle">Informacion útil del gasto</mat-card-subtitle>
   </mat-card-header>
   <br/>
   <mat-card-content>
