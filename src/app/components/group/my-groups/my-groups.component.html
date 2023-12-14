@@ -12,7 +12,9 @@
         <mat-icon matListItemIcon>group</mat-icon>
         <div matListItemTitle>
           <span class="group-name">{{ grupo.name }}</span>
-          <a [routerLink]="['/groups/' + grupo.id]" class="secondary-content"
+          <a
+            [routerLink]="'/dashboard/groups/' + grupo.id"
+            class="secondary-content"
             ><i class="material-icons arrow-icon">send</i></a
           >
         </div>

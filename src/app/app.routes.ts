@@ -11,6 +11,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AuthGuard } from './guards/auth-guard';
 import { LoginComponent } from './components/login/login.component';
 import { MyGroupsComponent } from './components/group/my-groups/my-groups.component';
+import { DetailGroupComponent } from './components/group/detail-group/detail-group.component';
+import { EditGroupComponent } from './components/group/edit-group/edit-group.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -49,6 +51,16 @@ export const routes: Routes = [
         path: 'expense/:id/debtor-user',
         title: 'Añadir deudor',
         component: AddDebtorUsersComponent,
+      },
+      {
+        path: 'groups/:group_id',
+        title: 'Grupo',
+        component: DetailGroupComponent,
+      },
+      {
+        path: 'groups/edit/:group_id',
+        title: 'Editar Grupo',
+        component: EditGroupComponent,
       },
     ],
     canActivate: [AuthGuard],

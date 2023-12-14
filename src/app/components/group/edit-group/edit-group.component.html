@@ -1,0 +1,96 @@
+<div class="container">
+  <form class="example-form" [formGroup]="form" (ngSubmit)="saveGroup()">
+    <mat-card>
+      <mat-card-header style="margin-bottom: 20px">
+        <mat-card-title>Editar grupo</mat-card-title>
+        <mat-card-subtitle
+          >Edita los campos que veas conveniente, agrega o quita integrantes al
+          grupo aaaaaaaaaaaaaaaaaaaaaaaaaaa</mat-card-subtitle
+        >
+      </mat-card-header>
+      <mat-grid-list cols="2" rowHeight="1:1">
+        <mat-grid-tile>
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Detalle</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="form-container">
+                <div>
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input
+                      matInput
+                      formControlName="name"
+                      [value]="group?.name || ''"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="form-field-group">
+                  <mat-form-field style="width: 100%">
+                    <mat-label>{{
+                      group?.category?.name
+                        ? group?.category?.name
+                        : "Categoria"
+                    }}</mat-label>
+                    <mat-select
+                      formControlName="category"
+                      [value]="group?.category?.id || ''"
+                    >
+                      <mat-option value='{"id": 1}'>Familia</mat-option>
+                      <mat-option value='{"id": 2}'>Viaje</mat-option>
+                      <mat-option value='{"id": 3}'>Salida</mat-option>
+                      <mat-option value='{"id": 4}'>Otro</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <input
+                    type="file"
+                    #fileInput
+                    style="display: none"
+                    accept="image/*"
+                  />
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    class="example-full-width"
+                    type="button"
+                    (click)="fileInput.click()"
+                  >
+                    <mat-icon>add_photo_alternate</mat-icon> Seleccionar icono
+                  </button>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Integrantes</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              ¡¡ componente de integrantes !!!
+              <button mat-raised-button color="primary">
+                <mat-icon>person_add</mat-icon>
+                <span>Agregar integrante</span>
+              </button>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <mat-card-content>
+        <!-- Contenido adicional del mat-card-content si es necesario -->
+      </mat-card-content>
+      <mat-card-footer class="footer-container">
+        <button mat-raised-button color="primary">Guardar cambios</button>
+      </mat-card-footer>
+    </mat-card>
+  </form>
+  <div class="legend-container">
+    <p class="legend">Los campos con (*) son obligatorios.</p>
+  </div>
+</div>
