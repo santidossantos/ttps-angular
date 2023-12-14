@@ -38,7 +38,7 @@ export class EditExpenseComponent implements OnInit{
   expenseId: number = 0;
   expense: Expense = {};
   defaultValues: any = {};
-  group: Group = { id: 0, name: '', category: {} };
+  group: Group = { id: 0, name: '', category: {} }
 
   constructor(
     private fb: FormBuilder,
@@ -71,73 +71,43 @@ export class EditExpenseComponent implements OnInit{
     this.getAllExpenseStrategies();
   }
 
-  edit(){
-    const category = this.form.get('category');
-    const payingUser = this.form.get('payingUser');
-    const expenseStrategy = this.form.get('expenseStrategy');
-
-    if(!category?.value){
-      this.form.controls['category'].setValue(this.defaultValues.category)
-    }else{
-      this.form.controls['category'].setValue({
-        id: parseInt(category.value, 10),
-      });
-    }
-    if(!payingUser?.value){
-      this.form.controls['payingUser'].setValue(this.defaultValues.payingUser)
-    }else{
-      this.form.controls['payingUser'].setValue({
-        id: parseInt(payingUser.value, 10),
-      });
-    }
-    if(!expenseStrategy?.value){
-      this.form.controls['expenseStrategy'].setValue(this.defaultValues.expenseStrategy);
-    }
-    this.form.controls['group'].setValue(this.defaultValues.group);
-    console.log(this.form.value)
-    this._expenseService.editExpense(this.expenseId,this.form.value).subscribe(
-      (res) => {
-        this.openSnackBar('Gasto editado con exito');
-        this.router.navigate(['dashboard/expense']);
-      },
-      (error) => {
-        console.error(error);
-        this.openSnackBar(error);
-      }
-    )
-  }
-
-  getExpenseInfo(){
-    this._expenseService.getById(this.expenseId).subscribe(
-      (res) =>{
-        //Para setear los valores por defecto
-        this.expense = res;
-        const strategy: Object = {"id": res.expenseStrategy?.id, "expenseStrategy": res.expenseStrategy?.name}
-        const category: Object = {"id": res.category?.id}
-        const sendGroup: Object = {"id": this.group.id}
-        const payingUser: Object = {"id": res.payingUser?.id}
-        this.defaultValues = {"name": res.name, "amount": res.amount, "date":res.date,
-                              "category": category, "group": sendGroup, "payingUser": payingUser,
-                              "expenseStrategy": strategy}
-        this.form.patchValue({
-          name: res.name,
-          amount: res.amount,
-          date: res.date,
-        });
-      },
-      (error) => console.error(error)
-    )
-  }
-
+  
   getGroup(){
     this._expenseService.getGroup(this.expenseId).subscribe(
       (res) => {
         this.group = res;
+        this.form.controls['group'].setValue({"id": res.id});
       },
       (error) => console.error(error)
+      )
+    }
+    
+  getExpenseInfo(){
+    this._expenseService.getById(this.expenseId).subscribe(
+      (res) =>{
+      //Para setear los valores por defecto
+      this.expense = res;
+      const strategy: Object = {"id": res.expenseStrategy?.id, "expenseStrategy": res.expenseStrategy?.name}
+      const category: Object = {"id": res.category?.id}
+      console.log("THIS GROUP ID", this.group);
+      const payingUser: Object = {"id": res.payingUser?.id}
+      this.defaultValues = {"name": res.name, "amount": res.amount, "date":res.date,
+      "category": category, "payingUser": payingUser,
+      "expenseStrategy": strategy}
+      this.form.patchValue({
+        name: res.name,
+        amount: res.amount,
+        date: res.date,
+        category: category,
+        payingUser: payingUser,
+        expenseStrategy: strategy,
+      });
+    },
+    (error) => console.error(error)
     )
   }
 
+    
   openSnackBar(mensaje: string) {
     this._snackBar.open(mensaje, 'Cerrar', {
       horizontalPosition: 'center',
@@ -151,15 +121,29 @@ export class EditExpenseComponent implements OnInit{
         this.categories = res;
       },
       (error) => console.error(error)
-    );
+      );
   }
-
+    
   getAllExpenseStrategies(){
     this._expenseStrategyService.getAll().subscribe(
       (res) => {
         this.strategies = res;
       },
       (error) => console.error(error)
-    );
+      );
+  }
+  
+  edit(){
+    console.log(this.form.value)
+    this._expenseService.editExpense(this.expenseId,this.form.value).subscribe(
+      (res) => {
+        this.openSnackBar('Gasto editado con exito');
+        this.router.navigate(['dashboard/expense']);
+      },
+      (error) => {
+        console.error(error);
+        this.openSnackBar(error);
+      }
+    )
   }
 }

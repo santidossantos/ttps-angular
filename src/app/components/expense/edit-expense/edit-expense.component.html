@@ -84,7 +84,7 @@
                   <mat-label>Categoria</mat-label>
                   <mat-select formControlName="category">
                     @for (category of categories; track category.name){
-                    <mat-option [value]="category.id">{{
+                    <mat-option [value]='{"id":category.id}'>{{
                       category.name
                     }}</mat-option>
                     }
@@ -96,7 +96,7 @@
                   <mat-label>Pagador</mat-label>
                   <mat-select formControlName="payingUser">
                     @for (user of group.users; track user.username) {
-                    <mat-option [value]="user.id">{{ user.username }}</mat-option>
+                    <mat-option [value]='{"id":user.id}'>{{ user.username }}</mat-option>
                     }
                   </mat-select>
                 </mat-form-field>
