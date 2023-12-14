@@ -17,6 +17,9 @@ import { GroupService } from '../../../services/group.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExpenseCategoryService } from '../../../services/expense-category.service';
 import { ExpenseCategory } from '../../../models/expense-category';
+import { expenseStrategyService } from '../../../services/expense-strategy.service';
+import { ExpenseStrategy } from '../../../models/expense-strategy';
+import { PutInSpanish } from '../../../utils/putInSpanish';
 
 @Component({
   selector: 'app-create-expense',
@@ -43,6 +46,7 @@ export class CreateExpenseComponent implements OnInit {
   expenseCreated: boolean = false;
   maxDate: Date;
   categories: ExpenseCategory[] = [];
+  strategies: ExpenseStrategy[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -51,7 +55,8 @@ export class CreateExpenseComponent implements OnInit {
     private _groupService: GroupService,
     private _snackBar: MatSnackBar,
     private router: Router,
-    private _expenseCategoryService: ExpenseCategoryService
+    private _expenseCategoryService: ExpenseCategoryService,
+    private _expenseStrategyService: expenseStrategyService,
   ) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -73,23 +78,10 @@ export class CreateExpenseComponent implements OnInit {
     });
     this.getGroupInfo();
     this.getAllCategories();
+    this.getAllExpenseStrategies();
   }
 
   create() {
-    const strategy = this.form.get('expenseStrategy');
-    const category = this.form.get('category');
-    const payingUser = this.form.get('payingUser');
-    if (strategy && category && payingUser) {
-      this.form.controls['expenseStrategy'].setValue(
-        JSON.parse(strategy.value)
-      );
-      this.form.controls['category'].setValue({
-        id: parseInt(category.value, 10),
-      });
-      this.form.controls['payingUser'].setValue({
-        id: parseInt(payingUser.value, 10),
-      });
-    }
     this.form.controls['group'].setValue({ id: this.groupId });
     this._expenseService.create(this.form.value).subscribe(
       (res) => {
@@ -127,4 +119,18 @@ export class CreateExpenseComponent implements OnInit {
       (error) => console.error(error)
     );
   }
+
+  getAllExpenseStrategies(){
+    this._expenseStrategyService.getAll().subscribe(
+      (res) => {
+        this.strategies = res;
+      },
+      (error) => console.error(error)
+      );
+  }
+
+  changeToSpanish(strategyName: string): string{
+    return PutInSpanish(strategyName);
+  }
+
 }

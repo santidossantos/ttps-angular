@@ -47,26 +47,12 @@
               <h4>Division del gasto:</h4>
               <div class="chip-listbox">
                 <mat-chip-listbox
-                  aria-label="Fish selection"
-                  formControlName="expenseStrategy"
-                >
-                  <mat-chip-option
-                    value='{"id":1, "expenseStrategy": "EqualAmounts"}'
-                    >Partes iguales</mat-chip-option
-                  >
-                  <mat-chip-option
-                    value='{"id":2, "expenseStrategy": "EqualAmountsPercent"}'
-                    >Partes iguales (porcentaje)</mat-chip-option
-                  >
-                  <mat-chip-option
-                    value='{"id":3, "expenseStrategy": "FixedAmounts"}'
-                    >Cantidad fija</mat-chip-option
-                  >
-                  <mat-chip-option
-                    value='{"id":4, "expenseStrategy": "FixedAmountsPercent"}'
-                    >Cantidad fija (porcentaje)</mat-chip-option
-                  >
-                </mat-chip-listbox>
+                aria-label="Fish selection"
+                formControlName="expenseStrategy">
+                @for(strategy of strategies; track strategy.id){
+                  <mat-chip-option [value]='{"id":strategy.id, "expenseStrategy":strategy.name}'>{{ changeToSpanish(strategy.name) }}</mat-chip-option>
+                }
+              </mat-chip-listbox>
               </div>
             </td>
           </tr>
@@ -97,7 +83,7 @@
                 <mat-label>Categoria</mat-label>
                 <mat-select formControlName="category">
                   @for (category of categories; track category.name){
-                  <mat-option [value]="category.id">{{
+                  <mat-option [value]='{"id":category.id}'>{{
                     category.name
                   }}</mat-option>
                   }
@@ -109,7 +95,7 @@
                 <mat-label>Pagador</mat-label>
                 <mat-select formControlName="payingUser">
                   @for (user of group.users; track user.username) {
-                  <mat-option [value]="user.id">{{ user.username }}</mat-option>
+                  <mat-option [value]='{"id":user.id}'>{{ user.username }}</mat-option>
                   }
                 </mat-select>
               </mat-form-field>
@@ -118,9 +104,6 @@
         </table>
       </div>
     </mat-card-content>
-    <!-- <div class="container-img">
-                <img src="../../../../assets/img/expenseImg.svg" alt="Descripción de la imagen">
-            </div> -->
     <mat-card-footer class="footer-container">
       <button mat-raised-button color="primary" [disabled]="!form.valid">
         Crear gasto
