@@ -48,8 +48,10 @@
         </div>
     </mat-card-content>
     <mat-card-footer class="footer-container">
-        <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense/'+expenseId]" routerLinkbuttonctive="router-link-active">Atras</button>
-        <button mat-raised-button color="primary" [disabled]="!form.valid">Añadir</button>
+        <div class="button-container">
+            <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense/'+expenseId]" routerLinkbuttonctive="router-link-active">Atras</button>
+            <button mat-raised-button color="primary" [disabled]="!form.valid">Añadir</button>
+        </div>
     </mat-card-footer>
 </mat-card>
 </form>

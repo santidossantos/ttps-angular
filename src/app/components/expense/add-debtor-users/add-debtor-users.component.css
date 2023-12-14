@@ -43,3 +43,8 @@ td {
     font-size: large;
   }
 
+  .button-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }

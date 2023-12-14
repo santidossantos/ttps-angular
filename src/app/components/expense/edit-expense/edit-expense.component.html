@@ -109,10 +109,12 @@
                   <img src="../../../../assets/img/expenseImg.svg" alt="Descripción de la imagen">
               </div> -->
       <mat-card-footer class="footer-container">
-        <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense']">Atras</button>
-        <button mat-raised-button color="primary" [disabled]="!form.valid">
-          Editar gasto
-        </button>
+        <div class="button-container">
+          <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense']">Atras</button>
+          <button mat-raised-button color="primary" [disabled]="!form.valid">
+            Editar gasto
+          </button>
+        </div>
       </mat-card-footer>
     </form>
   </mat-card>
