@@ -21,11 +21,11 @@
   }
   
   .action-edit {
-    color: darkblue;
+    color: #444cb3;
   }
   
-  .action-delete {
-    color: brown;
+  .action-detail {
+    color: #e7b754;
   }
   
   .pointer {
