@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+mat-card {
+  text-align: center;
+}
+
+.button-container{
+  align-items: center;
+  margin: 20px;
+}
+
+p{
+  color: grey;
+}
