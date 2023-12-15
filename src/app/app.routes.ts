@@ -31,7 +31,7 @@ export const routes: Routes = [
       },
       {
         path: 'groups/new',
-        title: 'Create Group',
+        title: 'Crear grupo',
         component: CreateGroupComponent,
       },
       {
