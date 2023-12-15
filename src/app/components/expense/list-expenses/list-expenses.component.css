@@ -1,0 +1,52 @@
+  .mat-elevation-z8 {    
+    overflow-x: auto;  /* Super importante para el responsive de la tabla */
+  }
+  
+  table {
+    background-color: rgb(248, 245, 245);
+    min-width: 600px;
+  }
+  
+  th {
+    width: 20%;
+  }
+  
+  .th-actions {
+    text-align: center;
+  }
+  
+  .actions-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .action-edit {
+    color: #444cb3;
+  }
+  
+  .action-detail {
+    color: #e7b754;
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }
+  
+  .paginator {
+    background-color: rgb(248, 245, 245);
+    margin-bottom: 2%;
+  }
+  
+  .empty-table-message {
+    text-align: center;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+  
+  button {
+    min-width: 220px;
+  }
