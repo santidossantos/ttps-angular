@@ -1,11 +1,9 @@
 <mat-card>
     <form class="example-form" [formGroup]="form" (ngSubmit)="edit()">
       <mat-card-header>
-        <mat-card-title style="font-size: x-large">Editar gasto</mat-card-title>
+        <mat-card-title style="font-size: x-large">Editar el gasto: "{{ expense.name }}"</mat-card-title>
         <mat-card-subtitle class="card-subtitle"
-          >Se edita el gasto {{ expense.name }} </mat-card-subtitle
-        >
-      </mat-card-header>
+          >Los campos "division del gasto", "categoria" y "pagador" quedaran con el mismo valor al menos que seleccione otro.</mat-card-subtitle>         </mat-card-header>
       <br />
       <mat-card-content>
         <div class="form-container">
@@ -62,7 +60,7 @@
           <table class="example-full-width" cellspacing="0">
             <tr>
               <td>
-                <mat-form-field>
+                <mat-form-field style="width: 100%">
                   <mat-label>Icono</mat-label>
                   <mat-select formControlName="img">
                     @for (icon of icons; track icon) {
