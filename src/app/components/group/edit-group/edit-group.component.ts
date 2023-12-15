@@ -23,6 +23,7 @@ import { of } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { User } from '../../../models/user';
 import { CommonModule } from '@angular/common';
+import { map } from 'rxjs/operators';
 
 export interface users {
   name: string;
@@ -57,6 +58,7 @@ export class EditGroupComponent implements OnInit {
   group: Group | null = null;
   new_member_name: string = '';
   userFriends: User[] = [];
+  excludedUserIds: number[] = [];
 
   displayedColumns: string[] = ['name'];
   dataSource: users[] = [] as users[];
@@ -79,25 +81,35 @@ export class EditGroupComponent implements OnInit {
 
   ngOnInit() {
     this.initGroup();
+    const username = this.obtenerUsername();
+    if (username != null) this.obtenerAmigos(username);
+  }
 
+  obtenerUsername() {
     const token: string | null = localStorage.getItem('token');
     if (token) {
       const tokenData = jwtDecode(token);
       const username = tokenData.sub as string;
-
-      this._userService.getByUserName(username).subscribe(
-        (res) => {
-          this.user_id = res.id;
-          this._userService.getFriendsByUserId(this.user_id).subscribe(
-            (res) => {
-              this.userFriends = res;
-            },
-            (err) => console.log(err)
-          );
-        },
-        (err) => console.log(err)
-      );
+      return username;
     }
+    return null;
+  }
+
+  obtenerAmigos(username: string) {
+    this._userService.getByUserName(username).subscribe(
+      (res) => {
+        this.user_id = res.id;
+        this._userService.getFriendsByUserId(this.user_id).subscribe(
+          (res) => {
+            this.userFriends = res;
+            this.excludedUserIds =
+              this.group?.users?.map((user) => user.id) || [];
+          },
+          (err) => console.log(err)
+        );
+      },
+      (err) => console.log(err)
+    );
   }
 
   initGroup() {
@@ -172,6 +184,8 @@ export class EditGroupComponent implements OnInit {
       (res) => {
         this.openSnackBar('Integrante agregado');
         this.initGroup();
+        const username = this.obtenerUsername();
+        if (username != null) this.obtenerAmigos(username);
       },
       (error) => {
         if (error.error.message) {
@@ -180,6 +194,12 @@ export class EditGroupComponent implements OnInit {
           this.openSnackBar('Error inesperado al agregar integrante');
         }
       }
+    );
+  }
+
+  getAvailableFriends(): any[] {
+    return this.userFriends.filter(
+      (friend) => !this.excludedUserIds.includes(friend.id)
     );
   }
 }

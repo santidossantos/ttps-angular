@@ -103,17 +103,17 @@
           <mat-form-field style="width: 100%">
             <mat-label>Amigos para añadir</mat-label>
             <mat-select formControlName="member">
-              @for (friend of userFriends; track friend.name){
-              <mat-option [value]="{ id: friend.id }">{{
-                friend.name
-              }}</mat-option>
-              }
+              <ng-container *ngFor="let friend of userFriends">
+                <mat-option
+                  *ngIf="!excludedUserIds.includes(friend.id)"
+                  [value]="{ id: friend.id }"
+                >
+                  {{ friend.name }}
+                </mat-option>
+              </ng-container>
             </mat-select>
           </mat-form-field>
           <!-- lista de amigos vacia -->
-          <div class="lista_vacia" *ngIf="userFriends.length == 0">
-            <p>No tienes amigos para añadir</p>
-          </div>
 
           <button
             class="button-add-member"
@@ -121,11 +121,21 @@
             color="primary"
             type="button"
             (click)="addMember()"
-            [disabled]="userFriends.length == 0"
+            [disabled]="
+              userFriends.length === 0 || getAvailableFriends().length === 0
+            "
           >
             <mat-icon>person_add</mat-icon>
             Agregar integrante
           </button>
+          <div
+            class="lista_vacia"
+            *ngIf="
+              userFriends.length === 0 || getAvailableFriends().length === 0
+            "
+          >
+            <p style="text-align: center">No tienes amigos para añadir</p>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>
