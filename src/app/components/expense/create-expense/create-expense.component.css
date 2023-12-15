@@ -5,7 +5,6 @@ td {
 .mat-mdc-card {
   display: flex;
   flex-direction: column;
-  background-color: brown;
   justify-content: center;
   align-items: center;
   width: 100%;

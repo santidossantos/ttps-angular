@@ -26,7 +26,11 @@
       </button>
     </div>
     <div class="mat-button">
-      <button mat-raised-button color="primary">
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="group ? '/dashboard/' + group.id + '/expense' : null"
+      >
         <mat-icon>add</mat-icon>
         <span>Agregar gasto</span>
       </button>
