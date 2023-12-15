@@ -13,98 +13,103 @@ import { ExpenseService } from '../../../services/expense.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from '../../../models/group';
-import { GroupService } from '../../../services/group.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExpenseCategoryService } from '../../../services/expense-category.service';
 import { ExpenseCategory } from '../../../models/expense-category';
+import { Expense } from '../../../models/expense';
+import { RouterModule } from '@angular/router';
 import { expenseStrategyService } from '../../../services/expense-strategy.service';
 import { ExpenseStrategy } from '../../../models/expense-strategy';
 import { PutInSpanish } from '../../../utils/putInSpanish';
 import IconExpense from '../icons-expense';
+
 @Component({
-  selector: 'app-create-expense',
+  selector: 'app-edit-expense',
   standalone: true,
-  imports: [
-    MatInputModule,
-    MatCardModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-  ],
-  templateUrl: './create-expense.component.html',
-  styleUrl: './create-expense.component.css',
+  imports: [ MatInputModule, MatCardModule, MatNativeDateModule, MatDatepickerModule,
+             MatFormFieldModule, MatIconModule, MatButtonModule, MatChipsModule,
+             MatSelectModule, ReactiveFormsModule, RouterModule],
+  templateUrl: './edit-expense.component.html',
+  styleUrl: './edit-expense.component.css',
 })
-export class CreateExpenseComponent implements OnInit {
+export class EditExpenseComponent implements OnInit{
   form: FormGroup;
-  groupId: number = 0;
-  group: Group = { id: 0, name: '', category: {} };
-  expenseCreated: boolean = false;
   maxDate: Date;
   categories: ExpenseCategory[] = [];
   strategies: ExpenseStrategy[] = [];
+  expenseId: number = 0;
+  expense: Expense = {};
+  defaultValues: any = {};
+  group: Group = { id: 0, name: '', category: {} }
   icons = IconExpense.icons;
 
   constructor(
     private fb: FormBuilder,
     private _expenseService: ExpenseService,
     private route: ActivatedRoute,
-    private _groupService: GroupService,
     private _snackBar: MatSnackBar,
     private router: Router,
     private _expenseCategoryService: ExpenseCategoryService,
-    private _expenseStrategyService: expenseStrategyService,
-  ) {
-    this.form = this.fb.group({
-      name: ['', Validators.required],
-      amount: ['', Validators.required],
-      date: ['', Validators.required],
-      img: ['', Validators.required],
-      category: ['', Validators.required],
-      group: [''],
-      payingUser: ['', Validators.required],
-      expenseStrategy: ['', Validators.required],
-    });
-
-    this.maxDate = new Date();
-  }
+    private _expenseStrategyService: expenseStrategyService){
+      this.form = this.fb.group({
+        name: [],
+        amount: [],
+        date: [],
+        img: [],
+        category: [],
+        group: [],
+        payingUser: [],
+        expenseStrategy: [],
+      });
+      this.maxDate = new Date();
+    }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.groupId = params['id'];
+      this.expenseId = params['id'];
     });
-    this.getGroupInfo();
+    this.getGroup();
+    this.getExpenseInfo();
     this.getAllCategories();
     this.getAllExpenseStrategies();
   }
 
-  create() {
-    this.form.controls['group'].setValue({ id: this.groupId });
-    this._expenseService.create(this.form.value).subscribe(
-      (res) => {
-        this.openSnackBar('Gasto creado con exito');
-        this.router.navigate(['dashboard']);
-      },
-      (error) => {
-        console.error(error);
-        this.openSnackBar(error);
-      }
-    );
-  }
-
-  getGroupInfo() {
-    this._groupService.getById(this.groupId).subscribe(
+  
+  getGroup(){
+    this._expenseService.getGroup(this.expenseId).subscribe(
       (res) => {
         this.group = res;
+        this.form.controls['group'].setValue({"id": res.id});
       },
       (error) => console.error(error)
-    );
+      )
+    }
+    
+  getExpenseInfo(){
+    this._expenseService.getById(this.expenseId).subscribe(
+      (res) =>{
+      //Para setear los valores por defecto
+      this.expense = res;
+      const strategy: Object = {"id": res.expenseStrategy?.id, "expenseStrategy": res.expenseStrategy?.name}
+      const category: Object = {"id": res.category?.id}
+      const payingUser: Object = {"id": res.payingUser?.id}
+      this.defaultValues = {"name": res.name, "amount": res.amount, "date":res.date,
+      "category": category, "payingUser": payingUser, "expenseStrategy": strategy, "img": res.img}
+      this.form.patchValue({
+        name: res.name,
+        amount: res.amount,
+        date: res.date,
+        category: category,
+        payingUser: payingUser,
+        expenseStrategy: strategy,
+        img: res.img
+      });
+    },
+    (error) => console.error(error)
+    )
   }
 
+    
   openSnackBar(mensaje: string) {
     this._snackBar.open(mensaje, 'Cerrar', {
       horizontalPosition: 'center',
@@ -118,9 +123,9 @@ export class CreateExpenseComponent implements OnInit {
         this.categories = res;
       },
       (error) => console.error(error)
-    );
+      );
   }
-
+    
   getAllExpenseStrategies(){
     this._expenseStrategyService.getAll().subscribe(
       (res) => {
@@ -129,9 +134,21 @@ export class CreateExpenseComponent implements OnInit {
       (error) => console.error(error)
       );
   }
+  
+  edit(){
+    this._expenseService.editExpense(this.expenseId,this.form.value).subscribe(
+      (res) => {
+        this.openSnackBar('Gasto editado con exito');
+        this.router.navigate(['dashboard/expense']);
+      },
+      (error) => {
+        console.error(error);
+        this.openSnackBar(error);
+      }
+    )
+  }
 
   changeToSpanish(strategyName: string): string{
     return PutInSpanish(strategyName);
   }
-
 }

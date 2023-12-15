@@ -54,7 +54,7 @@
           ><span class="sidenav-span"> Grupos </span>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="/dashboard/1/expense" class="sub-list">
+      <mat-list-item routerLink="/dashboard/expense" class="sub-list">
         <div class="nav-item">
           <mat-icon>payments</mat-icon
           ><span class="sidenav-span"> Gastos </span>
@@ -65,14 +65,14 @@
           <mat-icon>group</mat-icon><span class="sidenav-span"> Amigos </span>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="/dashboard/expense/1" class="sub-list">
+      <mat-list-item routerLink="#" class="sub-list">
         <div class="nav-item">
           <mat-icon>help</mat-icon><span class="sidenav-span"> Ayuda </span>
         </div>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="app-sidenav-content">
+  <mat-sidenav-content class="sidebar-content">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

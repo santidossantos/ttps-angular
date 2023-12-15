@@ -8,6 +8,8 @@ import { AddDebtorUsersComponent } from './components/expense/add-debtor-users/a
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AuthGuard } from './guards/auth-guard';
 import { LoginComponent } from './components/login/login.component';
+import { ListExpensesComponent } from './components/expense/list-expenses/list-expenses.component';
+import { EditExpenseComponent } from './components/expense/edit-expense/edit-expense.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -37,6 +39,16 @@ export const routes: Routes = [
         title: 'Añadir deudor',
         component: AddDebtorUsersComponent
       },
+      {
+        path: 'expense',
+        title: 'Mis Gastos',
+        component: ListExpensesComponent
+      },
+      {
+        path: 'expense/:id/editar',
+        title: 'Editar Gasto',
+        component: EditExpenseComponent
+      }
     ],
     canActivate: [AuthGuard],
   },

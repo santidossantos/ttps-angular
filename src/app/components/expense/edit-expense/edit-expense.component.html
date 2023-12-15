@@ -1,0 +1,115 @@
+<mat-card>
+    <form class="example-form" [formGroup]="form" (ngSubmit)="edit()">
+      <mat-card-header>
+        <mat-card-title style="font-size: x-large">Editar gasto</mat-card-title>
+        <mat-card-subtitle class="card-subtitle"
+          >Se edita el gasto {{ expense.name }} </mat-card-subtitle
+        >
+      </mat-card-header>
+      <br />
+      <mat-card-content>
+        <div class="form-container">
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput formControlName="name" [value]="expense.name"/>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Monto</mat-label>
+                  <input matInput type="number" min="0" formControlName="amount" [value]="expense.amount"/>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Selecciona una fecha</mat-label>
+                  <input
+                    matInput
+                    [max]="maxDate"
+                    [matDatepicker]="picker"
+                    formControlName="date"
+                    [value]="expense.date"
+                  />
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker disabled="false"></mat-datepicker>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <h4>Division del gasto:</h4>
+                <div class="chip-listbox">
+                  <mat-chip-listbox
+                    aria-label="Fish selection"
+                    formControlName="expenseStrategy">
+                    @for(strategy of strategies; track strategy.id){
+                      <mat-chip-option [value]='{"id":strategy.id, "expenseStrategy":strategy.name}'>{{ changeToSpanish(strategy.name) }}</mat-chip-option>
+                    }
+                  </mat-chip-listbox>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <br />
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field>
+                  <mat-label>Icono</mat-label>
+                  <mat-select formControlName="img">
+                    @for (icon of icons; track icon) {
+                        <mat-option [value]="icon.value">
+                            <mat-icon>{{icon.value}}</mat-icon> {{ icon.name }}
+                        </mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field style="width: 100%">
+                  <mat-label>Categoria</mat-label>
+                  <mat-select formControlName="category">
+                    @for (category of categories; track category.name){
+                    <mat-option [value]='{"id":category.id}'>{{
+                      category.name
+                    }}</mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field style="width: 100%">
+                  <mat-label>Pagador</mat-label>
+                  <mat-select formControlName="payingUser">
+                    @for (user of group.users; track user.username) {
+                    <mat-option [value]='{"id":user.id}'>{{ user.username }}</mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </mat-card-content>
+      <!-- <div class="container-img">
+                  <img src="../../../../assets/img/expenseImg.svg" alt="Descripción de la imagen">
+              </div> -->
+      <mat-card-footer class="footer-container">
+        <div class="button-container">
+          <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense']">Atras</button>
+          <button mat-raised-button color="primary" [disabled]="!form.valid">
+            Editar gasto
+          </button>
+        </div>
+      </mat-card-footer>
+    </form>
+  </mat-card>
+  
