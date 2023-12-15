@@ -76,6 +76,29 @@ export class EditGroupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initGroup();
+
+    const token: string | null = localStorage.getItem('token');
+    if (token) {
+      const tokenData = jwtDecode(token);
+      const username = tokenData.sub as string;
+
+      this._userService.getByUserName(username).subscribe(
+        (res) => {
+          this.user_id = res.id;
+          this._userService.getFriendsByUserId(this.user_id).subscribe(
+            (res) => {
+              this.userFriends = res;
+            },
+            (err) => console.log(err)
+          );
+        },
+        (err) => console.log(err)
+      );
+    }
+  }
+
+  initGroup() {
     this.route.paramMap
       .pipe(
         switchMap((params) => {
@@ -102,25 +125,6 @@ export class EditGroupComponent implements OnInit {
         },
         (err) => console.log(err)
       );
-
-    const token: string | null = localStorage.getItem('token');
-    if (token) {
-      const tokenData = jwtDecode(token);
-      const username = tokenData.sub as string;
-
-      this._userService.getByUserName(username).subscribe(
-        (res) => {
-          this.user_id = res.id;
-          this._userService.getFriendsByUserId(this.user_id).subscribe(
-            (res) => {
-              this.userFriends = res;
-            },
-            (err) => console.log(err)
-          );
-        },
-        (err) => console.log(err)
-      );
-    }
   }
 
   saveGroup() {
@@ -165,6 +169,7 @@ export class EditGroupComponent implements OnInit {
     this._groupService.addMember(group_id, memberId).subscribe(
       (res) => {
         this.openSnackBar('Integrante agregado');
+        this.initGroup();
       },
       (error) => {
         this.openSnackBar(error.error.message);
