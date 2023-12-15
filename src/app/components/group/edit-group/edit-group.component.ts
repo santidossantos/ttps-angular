@@ -21,6 +21,7 @@ import { Group } from '../../../models/group';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
+import { User } from '../../../models/user';
 
 export interface users {
   name: string;
@@ -53,6 +54,7 @@ export class EditGroupComponent implements OnInit {
   user_id: number = -1;
   group: Group | null = null;
   new_member_name: string = '';
+  userFriends: User[] = [];
 
   displayedColumns: string[] = ['name'];
   dataSource: users[] = [] as users[];
@@ -69,6 +71,7 @@ export class EditGroupComponent implements OnInit {
       name: [''],
       category: [''],
       new_member_name: [''],
+      member: [''],
     });
   }
 
@@ -81,7 +84,6 @@ export class EditGroupComponent implements OnInit {
             const groupIdAsNumber = +group_id;
             return this._groupService.getById(groupIdAsNumber);
           } else {
-            console.log('No se encontró ningún grupo');
             return of(null);
           }
         })
@@ -100,6 +102,25 @@ export class EditGroupComponent implements OnInit {
         },
         (err) => console.log(err)
       );
+
+    const token: string | null = localStorage.getItem('token');
+    if (token) {
+      const tokenData = jwtDecode(token);
+      const username = tokenData.sub as string;
+
+      this._userService.getByUserName(username).subscribe(
+        (res) => {
+          this.user_id = res.id;
+          this._userService.getFriendsByUserId(this.user_id).subscribe(
+            (res) => {
+              this.userFriends = res;
+            },
+            (err) => console.log(err)
+          );
+        },
+        (err) => console.log(err)
+      );
+    }
   }
 
   saveGroup() {
@@ -139,9 +160,9 @@ export class EditGroupComponent implements OnInit {
 
   addMember() {
     const group_id = this.route.snapshot.paramMap.get('group_id');
-    const member_name = this.form.get('new_member_name')?.value;
-    console.log('aca ', member_name);
-    this._groupService.addMember(group_id, member_name).subscribe(
+    const memberId = this.form.get('member')?.value.id;
+
+    this._groupService.addMember(group_id, memberId).subscribe(
       (res) => {
         this.openSnackBar('Integrante agregado');
       },

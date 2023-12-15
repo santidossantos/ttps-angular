@@ -100,22 +100,26 @@
             </table>
           </div>
 
-          <mat-form-field class="example-full-width">
-            <input
-              matInput
-              formControlName="new_member_name"
-              [value]="new_member_name"
-            />
+          <mat-form-field style="width: 100%">
+            <mat-label>Amigos para añadir</mat-label>
+            <mat-select formControlName="member">
+              @for (friend of userFriends; track friend.name){
+              <mat-option [value]="{ id: friend.id }">{{
+                friend.name
+              }}</mat-option>
+              }
+            </mat-select>
           </mat-form-field>
 
           <button
+            class="button-add-member"
             mat-raised-button
             color="primary"
             type="button"
             (click)="addMember()"
           >
             <mat-icon>person_add</mat-icon>
-            <span>Agregar integrante</span>
+            Agregar integrante
           </button>
         </mat-card-content>
       </mat-card>

@@ -22,6 +22,10 @@ export class UserService {
     return this.http.get<User>(this.baseURL + 'username/' + userName);
   }
 
+  getFriendsByUserId(id: number): Observable<User[]> {
+    return this.http.get<User[]>(this.baseURL + id + '/friends');
+  }
+
   getGroupsByUserId(id: number): Observable<Group[]> {
     return this.http.get<Group[]>(this.baseURL + id + '/groups');
   }
