@@ -87,7 +87,7 @@ export class CreateExpenseComponent implements OnInit {
     this._expenseService.create(this.form.value).subscribe(
       (res) => {
         this.openSnackBar('Gasto creado con exito');
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['dashboard/groups/' + this.groupId]);
       },
       (error) => {
         console.error(error);
