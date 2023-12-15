@@ -21,6 +21,8 @@ import { expenseStrategyService } from '../../../services/expense-strategy.servi
 import { ExpenseStrategy } from '../../../models/expense-strategy';
 import { PutInSpanish } from '../../../utils/putInSpanish';
 import IconExpense from '../icons-expense';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-create-expense',
   standalone: true,
@@ -35,6 +37,7 @@ import IconExpense from '../icons-expense';
     MatChipsModule,
     MatSelectModule,
     ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './create-expense.component.html',
   styleUrl: './create-expense.component.css',
