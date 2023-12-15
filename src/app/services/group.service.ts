@@ -20,4 +20,11 @@ export class GroupService {
     return this.http.post<Group>(this.baseURL + 'groups', groupPayload);
   }
 
+  edit(groupPayload: any, group_id: any): Observable<Group> {
+    return this.http.put<Group>(this.baseURL + 'groups/' + group_id,   groupPayload);
+  }
+
+  addMember(groupId: any, userId: any): Observable<Group> {
+    return this.http.post<Group>(this.baseURL + 'groups/members',{ groupId, userId});
+  }
 }
