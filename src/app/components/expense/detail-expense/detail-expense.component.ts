@@ -10,11 +10,13 @@ import { Expense } from '../../../models/expense'
 import { ExpenseUsersPays } from '../../../models/expense-users-pays'
 import { dateFormatter } from '../../../utils/dateFormatter'
 import { Group } from '../../../models/group';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-detail-expense',
   standalone: true,
-  imports: [ MatCardModule, MatTableModule, MatExpansionModule, RouterModule, MatButtonModule],
+  imports: [ MatCardModule, MatTableModule, MatExpansionModule,
+             RouterModule, MatButtonModule, MatIconModule],
   templateUrl: './detail-expense.component.html',
   styleUrl: './detail-expense.component.css'
 })

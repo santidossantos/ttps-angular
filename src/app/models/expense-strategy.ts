@@ -1,3 +1,4 @@
 export interface ExpenseStrategy {
-    id?: number;
+    id: number;
+    name: string;
 }

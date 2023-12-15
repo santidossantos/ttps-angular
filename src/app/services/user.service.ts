@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { apiURL } from '../constants/api-base-url';
 import { Group } from '../models/group';
+import { Expense } from '../models/expense';
 
 @Injectable({
   providedIn: 'root',
@@ -25,4 +26,7 @@ export class UserService {
     return this.http.get<Group[]>(this.baseURL + id + '/groups');
   }
 
+  getExpensesWithUsername(username: String | undefined): Observable<Expense[]>{
+    return this.http.get<Expense[]>(this.baseURL+username+"/expense")
+  }
 }

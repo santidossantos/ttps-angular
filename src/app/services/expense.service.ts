@@ -18,8 +18,8 @@ export class ExpenseService{
         return this.http.post<Expense>(this.baseURL, expense);
     }
 
-    getById(id: number): Observable<Expense>{
-        return this.http.get<Expense>(this.baseURL+id);
+    getById(idExpense: number): Observable<Expense>{
+        return this.http.get<Expense>(this.baseURL+idExpense);
     }
 
     getGroup(idExpense: number): Observable<Group>{
@@ -28,5 +28,9 @@ export class ExpenseService{
 
     addDebtorUser(idExpense: number, eup: ExpenseUsersPays): Observable<ExpenseUsersPays>{
         return this.http.post<ExpenseUsersPays>(this.baseURL+idExpense+'/debtorUser', eup);
+    }
+
+    editExpense(idExpense: number, expense: Expense): Observable<Expense>{
+        return this.http.put<Expense>(this.baseURL+idExpense, expense)
     }
 }
