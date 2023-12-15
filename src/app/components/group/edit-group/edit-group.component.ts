@@ -174,7 +174,11 @@ export class EditGroupComponent implements OnInit {
         this.initGroup();
       },
       (error) => {
-        this.openSnackBar(error.error.message);
+        if (error.error.message) {
+          this.openSnackBar(error.error.message);
+        } else {
+          this.openSnackBar('Error inesperado al agregar integrante');
+        }
       }
     );
   }

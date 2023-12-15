@@ -74,7 +74,6 @@ export class CreateGroupComponent implements OnInit {
     const group_category = this.form.get('category')?.value;
     const id_logged_user = { id: this.user_id };
     this.form.value['creador'] = id_logged_user;
-    console.log(this.form.value);
 
     const groupPayload = {
       name: group_name,
@@ -91,7 +90,11 @@ export class CreateGroupComponent implements OnInit {
       },
       (error) => {
         console.error(error);
-        this.openSnackBar(error.error.message);
+        if (error.error.message) {
+          this.openSnackBar(error.error.message);
+        } else {
+          this.openSnackBar('Error inesperado al crear el grupo');
+        }
       }
     );
   }
