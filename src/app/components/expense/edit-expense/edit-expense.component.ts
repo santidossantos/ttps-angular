@@ -40,7 +40,7 @@ export class EditExpenseComponent implements OnInit{
   expenseId: number = 0;
   expense: Expense = {};
   defaultValues: any = {};
-  group: Group = { id: 0, name: '', category: {} }
+  group: Group = { id: 0, name: '', category: {}, expenses: [] }
   icons = IconExpense.icons;
 
   constructor(
@@ -74,7 +74,7 @@ export class EditExpenseComponent implements OnInit{
     this.getAllExpenseStrategies();
   }
 
-  
+
   getGroup(){
     this._expenseService.getGroup(this.expenseId).subscribe(
       (res) => {
@@ -84,7 +84,7 @@ export class EditExpenseComponent implements OnInit{
       (error) => console.error(error)
       )
     }
-    
+
   getExpenseInfo(){
     this._expenseService.getById(this.expenseId).subscribe(
       (res) =>{
@@ -109,7 +109,7 @@ export class EditExpenseComponent implements OnInit{
     )
   }
 
-    
+
   openSnackBar(mensaje: string) {
     this._snackBar.open(mensaje, 'Cerrar', {
       horizontalPosition: 'center',
@@ -125,7 +125,7 @@ export class EditExpenseComponent implements OnInit{
       (error) => console.error(error)
       );
   }
-    
+
   getAllExpenseStrategies(){
     this._expenseStrategyService.getAll().subscribe(
       (res) => {
@@ -134,7 +134,7 @@ export class EditExpenseComponent implements OnInit{
       (error) => console.error(error)
       );
   }
-  
+
   edit(){
     this._expenseService.editExpense(this.expenseId,this.form.value).subscribe(
       (res) => {

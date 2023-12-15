@@ -24,7 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AddDebtorUsersComponent implements OnInit{
   form: FormGroup;
   expenseId: number = 0;
-  group: Group = {id:0, name:"",category: {}};
+  group: Group = {id:0, name:"",category: {}, expenses: []};
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private _expenseService: ExpenseService, private _snackBar: MatSnackBar){
     this.form = this.fb.group({

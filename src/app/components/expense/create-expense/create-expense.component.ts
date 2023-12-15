@@ -42,7 +42,7 @@ import IconExpense from '../icons-expense';
 export class CreateExpenseComponent implements OnInit {
   form: FormGroup;
   groupId: number = 0;
-  group: Group = { id: 0, name: '', category: {} };
+  group: Group = { id: 0, name: '', category: {}, expenses: [] };
   expenseCreated: boolean = false;
   maxDate: Date;
   categories: ExpenseCategory[] = [];

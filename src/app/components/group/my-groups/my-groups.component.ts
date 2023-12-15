@@ -58,7 +58,7 @@ export interface Section {
 })
 export class MyGroupsComponent implements OnInit {
   user_id: number = -1;
-  myGroups: Group[] = [{ id: -1, name: '', category: {}}];
+  myGroups: Group[] = [{ id: -1, name: '', category: {}, expenses: []}];
 
   constructor(
     private _snackBar: MatSnackBar,

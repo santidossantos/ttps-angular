@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -25,6 +25,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Group } from '../../../models/group';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Expense } from '../../../models/expense';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { dateFormatter } from '../../../utils/dateFormatter';
 
 @Component({
   selector: 'app-detail-group',
@@ -50,17 +54,29 @@ import { of } from 'rxjs';
     CommonModule,
     MatTooltipModule,
     RouterModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   templateUrl: './detail-group.component.html',
   styleUrl: './detail-group.component.css',
 })
 export class DetailGroupComponent implements OnInit {
+  displayedColumns: string[] = ['name', 'amount', 'date', 'actions'];
+  dataSource = new MatTableDataSource<Expense>([]);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  group: Group | null = null;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private _groupService: GroupService
+    private _groupService: GroupService,
+    private _userService: UserService,
   ) {}
-  group: Group | null = null;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   ngOnInit() {
     this.route.paramMap
@@ -80,10 +96,14 @@ export class DetailGroupComponent implements OnInit {
         (res: Group | null) => {
           if (res) {
             this.group = res;
-            console.log(this.group);
+            this.dataSource.data = this.group.expenses || [];
           }
         },
         (err) => console.log(err)
       );
+  }
+
+  formatDate(date: string): string {
+    return dateFormatter(date);
   }
 }
