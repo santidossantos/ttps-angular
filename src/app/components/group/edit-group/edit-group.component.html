@@ -110,6 +110,10 @@
               }
             </mat-select>
           </mat-form-field>
+          <!-- lista de amigos vacia -->
+          <div class="lista_vacia" *ngIf="userFriends.length == 0">
+            <p>No tienes amigos para añadir</p>
+          </div>
 
           <button
             class="button-add-member"
@@ -117,6 +121,7 @@
             color="primary"
             type="button"
             (click)="addMember()"
+            [disabled]="userFriends.length == 0"
           >
             <mat-icon>person_add</mat-icon>
             Agregar integrante

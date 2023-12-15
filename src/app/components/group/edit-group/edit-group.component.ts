@@ -22,6 +22,7 @@ import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { User } from '../../../models/user';
+import { CommonModule } from '@angular/common';
 
 export interface users {
   name: string;
@@ -45,6 +46,7 @@ export interface users {
     MatGridListModule,
     RouterModule,
     MatTableModule,
+    CommonModule,
   ],
   templateUrl: './edit-group.component.html',
   styleUrl: './edit-group.component.css',
