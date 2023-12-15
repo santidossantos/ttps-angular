@@ -1,0 +1,45 @@
+<div class="container">
+  <form class="example-form" [formGroup]="form" (ngSubmit)="createGroup()">
+    <mat-card>
+      <mat-card-header style="margin-bottom: 20px">
+        <mat-card-title>Crear grupo</mat-card-title>
+        <mat-card-subtitle>Una vez creado podrás comenzar a agregar gastos</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="form-container">
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="name" />
+            </mat-form-field>
+          </div>
+
+          <div class="form-field-group">
+            <mat-form-field style="width: 100%">
+              <mat-label>Categoría</mat-label>
+              <mat-select formControlName="category">
+                <mat-option value='{"id": 1}'>Familia</mat-option>
+                <mat-option value='{"id": 2}'>Viaje</mat-option>
+                <mat-option value='{"id": 3}'>Salida</mat-option>
+                <mat-option value='{"id": 4}'>Otro</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <input type="file" #fileInput style="display: none" accept="image/*" />
+            <button mat-raised-button color="primary" class="example-full-width" type="button" (click)="fileInput.click()">
+              <mat-icon>add_photo_alternate</mat-icon> Seleccionar icono
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-footer class="footer-container">
+        <button mat-raised-button color="primary" [disabled]="!form.valid">Crear grupo</button>
+      </mat-card-footer>
+    </mat-card>
+  </form>
+  <div class="legend-container">
+    <p class="legend">Los campos con (*) son obligatorios.</p>
+  </div>
+</div>

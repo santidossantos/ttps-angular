@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title style="font-size: x-large">Mis grupos</mat-card-title>
+    <mat-card-subtitle class="card-subtitle" *ngIf="myGroups.length != 0"
+      >Grupos a los cuales perteneces
+    </mat-card-subtitle>
+  </mat-card-header>
+  <div class="container">
+    <mat-list>
+      @for (grupo of myGroups; track grupo) {
+      <mat-list-item>
+        <mat-icon matListItemIcon>group</mat-icon>
+        <div matListItemTitle>
+          <span class="group-name">{{ grupo.name }}</span>
+          <a [routerLink]="['/groups/' + grupo.id]" class="secondary-content"
+            ><i class="material-icons arrow-icon">send</i></a
+          >
+        </div>
+        <div matListItemLine>Integrantes: {{ grupo.users?.length || 0 }}</div>
+      </mat-list-item>
+      }
+    </mat-list>
+
+    <div class="no-groups" *ngIf="myGroups.length == 0">
+      <img src="../../../assets/img/no-groups.png" width="100" height="100" />
+      <p>No perteneces a ningún grupo aún</p>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="button-container">
+    <div class="mat-button">
+      <button mat-raised-button color="primary" (click)="navigateToMyGroups()">
+        <mat-icon>add</mat-icon>
+        <span>Crear grupo</span>
+      </button>
+    </div>
+  </div>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>edit</mat-icon>
+      <span>Editar</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>delete</mat-icon>
+      <span>Eliminar</span>
+    </button>
+  </mat-menu>
+</mat-card>
