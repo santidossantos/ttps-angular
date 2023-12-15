@@ -58,7 +58,7 @@ export interface Section {
 })
 export class MyGroupsComponent implements OnInit {
   user_id: number = -1;
-  myGroups: Group[] = [];
+  myGroups: Group[] = [{ id: -1, name: '', category: {}}];
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -83,8 +83,8 @@ export class MyGroupsComponent implements OnInit {
         )
         .subscribe(
           (groups) => {
+            this.myGroups.pop();
             this.myGroups = groups;
-            console.log(this.myGroups);
           },
           (error) => console.log(error)
         );
