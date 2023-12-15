@@ -20,6 +20,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { Group } from '../../../models/group';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MatTableModule } from '@angular/material/table';
+
+export interface users {
+  name: string;
+}
 
 @Component({
   selector: 'app-edit-group',
@@ -38,6 +43,7 @@ import { of } from 'rxjs';
     ReactiveFormsModule,
     MatGridListModule,
     RouterModule,
+    MatTableModule,
   ],
   templateUrl: './edit-group.component.html',
   styleUrl: './edit-group.component.css',
@@ -46,6 +52,10 @@ export class EditGroupComponent implements OnInit {
   form: FormGroup;
   user_id: number = -1;
   group: Group | null = null;
+  new_member_name: string = '';
+
+  displayedColumns: string[] = ['name'];
+  dataSource: users[] = [] as users[];
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +68,7 @@ export class EditGroupComponent implements OnInit {
     this.form = this.fb.group({
       name: [''],
       category: [''],
+      new_member_name: [''],
     });
   }
 
@@ -81,6 +92,10 @@ export class EditGroupComponent implements OnInit {
             this.group = res;
             this.group.category = this.group.category || {};
             console.log(this.group);
+            this.dataSource =
+              this.group.users?.map((user) => {
+                return { name: user.name };
+              }) || [];
           }
         },
         (err) => console.log(err)
@@ -120,5 +135,19 @@ export class EditGroupComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });
+  }
+
+  addMember() {
+    const group_id = this.route.snapshot.paramMap.get('group_id');
+    const member_name = this.form.get('new_member_name')?.value;
+    console.log('aca ', member_name);
+    this._groupService.addMember(group_id, member_name).subscribe(
+      (res) => {
+        this.openSnackBar('Integrante agregado');
+      },
+      (error) => {
+        this.openSnackBar(error.error.message);
+      }
+    );
   }
 }

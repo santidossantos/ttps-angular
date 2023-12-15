@@ -42,5 +42,15 @@ button.mat-raised-button {
 
 .my-success-snackbar {
   color: white;
-  background-color: #4CAF50;
+  background-color: #4caf50;
+}
+
+/* styles.css o tu archivo de estilos */
+.custom-table-wrapper {
+  max-height: 150px; /* ajusta la altura máxima según tus necesidades */
+  overflow-y: auto;
+}
+
+.custom-table {
+  width: 100%;
 }
