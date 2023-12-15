@@ -91,7 +91,7 @@ export class CreateGroupComponent implements OnInit {
       },
       (error) => {
         console.error(error);
-        this.openSnackBar(error);
+        this.openSnackBar(error.error.message);
       }
     );
   }
