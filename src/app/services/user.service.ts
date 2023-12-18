@@ -33,4 +33,9 @@ export class UserService {
   getExpensesWithUsername(username: String | undefined): Observable<Expense[]>{
     return this.http.get<Expense[]>(this.baseURL+username+"/expense")
   }
+
+  getFriendsWithFilter(filter: object){
+    return this.http.post<User[]>(apiURL+'users', filter);
+
+  }
 }

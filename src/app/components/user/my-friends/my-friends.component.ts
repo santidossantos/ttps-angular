@@ -1,5 +1,5 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { jwtDecode } from "jwt-decode";
 import { UserService } from '../../../services/user.service';
@@ -9,19 +9,17 @@ import { User } from '../../../models/user';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import { MatTabsModule } from '@angular/material/tabs';
-
 
 @Component({
-  selector: 'app-friends',
+  selector: 'app-my-friends',
   standalone: true,
   imports: [ MatTableModule, MatPaginatorModule, MatIconModule,
-             RouterModule, MatFormFieldModule, MatInputModule,
-             MatCardModule, MatTabsModule],
-  templateUrl: './friends.component.html',
-  styleUrl: './friends.component.css'
+    RouterModule, MatFormFieldModule, MatInputModule,
+    MatCardModule],
+  templateUrl: './my-friends.component.html',
+  styleUrl: './my-friends.component.css'
 })
-export class FriendsComponent implements OnInit{
+export class MyFriendsComponent implements OnInit{
   displayedColumns: string[] = ['img', 'username', 'name', 'email'];
   dataSource = new MatTableDataSource<User>([]);
   userId: number = 0;
@@ -39,7 +37,6 @@ export class FriendsComponent implements OnInit{
       this._userService.getByUserName(tokenData.sub).subscribe(
         (res) => {
           this.userId = res.id
-          console.log(this.userId)
           this.getFriends();
         },
         (error) => console.error(error)
@@ -53,11 +50,4 @@ export class FriendsComponent implements OnInit{
       (error) => console.error(error)
     )
   }
-
-  findFriend(event: Event){
-
-  }
-
-
-
 }

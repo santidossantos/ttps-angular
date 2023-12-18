@@ -1,0 +1,47 @@
+<mat-card>
+    <mat-card-content>
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Nombre de usuario para agregar de amigo</mat-label>
+      <input matInput (keyup)="findFriend($event)" #input>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  
+      <section class="example-container mat-elevation-z8" tabindex="0">
+        <table mat-table [dataSource]="dataSource">
+  
+          <!-- Img Column -->
+          <ng-container matColumnDef="img">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let friend"> </td>
+          </ng-container>
+  
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let friend"> {{ friend.name }} </td>
+          </ng-container>
+  
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Correo </th>
+            <td mat-cell *matCellDef="let friend"> {{ friend.email }} </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="th-actions">Acciones</th>
+            <td mat-cell *matCellDef="let friend">
+              <div class="actions-container">
+                <a class="pointer" [routerLink]="">
+                  <mat-icon matTooltip="View expense detail" class="action-detail">assignment</mat-icon>
+                </a>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </section>
+    </mat-card-content>
+  </mat-card>

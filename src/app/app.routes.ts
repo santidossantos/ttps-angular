@@ -15,7 +15,7 @@ import { DetailGroupComponent } from './components/group/detail-group/detail-gro
 import { EditGroupComponent } from './components/group/edit-group/edit-group.component';
 import { ListExpensesComponent } from './components/expense/list-expenses/list-expenses.component';
 import { EditExpenseComponent } from './components/expense/edit-expense/edit-expense.component';
-import { FriendsComponent } from './components/user/friends/friends.component';
+import { ViewInfoFriendsComponent } from './components/user/view-info-friends/view-info-friends.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -78,7 +78,7 @@ export const routes: Routes = [
       {
         path: 'me/friends',
         title: 'Amigos',
-        component: FriendsComponent
+        component: ViewInfoFriendsComponent
       },
     ],
     canActivate: [AuthGuard],
