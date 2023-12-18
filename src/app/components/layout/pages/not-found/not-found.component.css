@@ -7,13 +7,20 @@
 
 mat-card {
   text-align: center;
+  background: none;
+  box-shadow: none;
+  border: none;
 }
 
-.button-container{
+.button-container {
   align-items: center;
   margin: 20px;
 }
 
-p{
+p {
   color: grey;
+}
+
+button {
+  border-radius: 20px;
 }
