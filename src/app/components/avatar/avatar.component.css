@@ -3,6 +3,9 @@
   width: fit-content;
   height: fit-content;
   cursor: pointer;
+  border: solid rgb(60, 58, 58);
+  border-radius: 50%;
+  border-width: 2px;
 }
 
 .image-container {
