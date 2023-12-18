@@ -9,7 +9,7 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateExpenseComponent } from '../../expense/create-expense/create-expense.component';
-import { AvatarModule } from 'ngx-avatars';
+import { AvatarComponent } from '../../avatar/avatar.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,7 +25,7 @@ import { AvatarModule } from 'ngx-avatars';
     MatExpansionModule,
     MatTooltipModule,
     CreateExpenseComponent,
-    AvatarModule,
+    AvatarComponent,
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',

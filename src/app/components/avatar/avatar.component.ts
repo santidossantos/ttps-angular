@@ -1,5 +1,5 @@
 import { UserService } from './../../services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { decodeJwt } from '../../utils/decode-jwt';
 
@@ -12,6 +12,7 @@ import { decodeJwt } from '../../utils/decode-jwt';
 })
 export class AvatarComponent implements OnInit {
   file: string = '';
+  @Input() isEditable: boolean = true;
 
   constructor(private _userService: UserService) {}
 
