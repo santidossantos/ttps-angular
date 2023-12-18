@@ -75,11 +75,6 @@ export const routes: Routes = [
         title: 'Editar Gasto',
         component: EditExpenseComponent,
       },
-      {
-        path: 'me/profile',
-        title: 'Mi Perfil',
-        component: ProfileComponent,
-      },
     ],
     canActivate: [AuthGuard],
   },
