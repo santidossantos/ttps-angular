@@ -14,6 +14,14 @@
   <button mat-icon-button matTooltip="Notificaciones">
     <mat-icon>notifications</mat-icon>
   </button>
+  <!-- 
+   <ngx-avatars
+        src="assets/img/logo.png"
+        value="28%"
+        size="50  "
+        [round]="true"
+      >
+      </ngx-avatars> -->
   <button
     mat-icon-button
     matTooltip="Mi cuenta"
@@ -23,7 +31,7 @@
   </button>
   <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
     <button mat-menu-item routerLink="#">
-      <mat-icon>person</mat-icon><span>Mi Perfil</span>
+      <mat-icon>account_circle</mat-icon><span>Mi Perfil</span>
     </button>
     <button mat-menu-item routerLink="#">
       <mat-icon>settings</mat-icon><span>Configuración</span>
