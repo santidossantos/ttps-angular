@@ -1,0 +1,52 @@
+<mat-tab-group>
+  <mat-tab label="Mis amigos">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title style="font-size: x-large">Amigos</mat-card-title>
+        <div class="icon-container">
+          <mat-card-subtitle class="card-subtitle">Información de tus amigos</mat-card-subtitle>
+          <img src="../../../../assets/img/decision-making.png" width="70" height="70"/>
+        </div>
+      </mat-card-header>
+      <br/>
+      <mat-card-content>
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Nombre de usuario para agregar de amigo</mat-label>
+        <input matInput (keyup)="findFriend($event)" #input>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    
+        <section class="example-container mat-elevation-z8" tabindex="0">
+          <table mat-table [dataSource]="dataSource">
+    
+            <!-- Img Column -->
+            <ng-container matColumnDef="img">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let friend"> </td>
+            </ng-container>
+    
+            <!-- Username Column -->
+            <ng-container matColumnDef="username">
+              <th mat-header-cell *matHeaderCellDef> Nombre de Usuario </th>
+              <td mat-cell *matCellDef="let friend"> {{ friend.username }} </td>
+            </ng-container>
+    
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let friend"> {{ friend.name }} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> Correo </th>
+              <td mat-cell *matCellDef="let friend"> {{ friend.email }} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </section>
+      </mat-card-content>
+  </mat-tab>
+  <mat-tab label="Buscar amigos"> Buscar amigos </mat-tab>
+</mat-tab-group>
+
