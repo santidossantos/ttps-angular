@@ -21,7 +21,7 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class MyFriendsComponent implements OnInit{
   displayedColumns: string[] = ['img', 'username', 'name', 'email'];
-  dataSource = new MatTableDataSource<User>([]);
+  dataSource: User[] =  [{id:-1, username:"", password:'', name:'', email:''}];
   userId: number = 0;
 
   constructor(private _userService: UserService){}
@@ -46,7 +46,7 @@ export class MyFriendsComponent implements OnInit{
 
   getFriends(){
     this._userService.getFriendsByUserId(this.userId).subscribe(
-      (res) => this.dataSource.data = res || [],
+      (res) => this.dataSource = res || [],
       (error) => console.error(error)
     )
   }
