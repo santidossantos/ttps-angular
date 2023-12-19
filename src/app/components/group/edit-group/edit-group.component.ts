@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { User } from '../../../models/user';
 import { CommonModule } from '@angular/common';
 import { map } from 'rxjs/operators';
+import IconGroup from '../icons-group';
 
 export interface users {
   name: string;
@@ -59,6 +60,7 @@ export class EditGroupComponent implements OnInit {
   new_member_name: string = '';
   userFriends: User[] = [];
   excludedUserIds: number[] = [];
+  icons = IconGroup.icons;
 
   displayedColumns: string[] = ['name'];
   dataSource: users[] = [] as users[];
@@ -76,6 +78,7 @@ export class EditGroupComponent implements OnInit {
       category: [''],
       new_member_name: [''],
       member: [''],
+      img: ['', Validators.required],
     });
   }
 
@@ -145,12 +148,14 @@ export class EditGroupComponent implements OnInit {
     const group_id = this.route.snapshot.paramMap.get('group_id');
     const group_name = this.form.get('name')?.value;
     const group_category = this.form.get('category')?.value;
+    const icon = this.form.get('img')?.value;
     const id_logged_user = { id: this.user_id };
     this.form.value['creador'] = id_logged_user;
 
     const groupPayload = {
       name: group_name,
       category: JSON.parse(group_category),
+      img: icon,
     };
 
     this._groupService.edit(groupPayload, group_id).subscribe(
