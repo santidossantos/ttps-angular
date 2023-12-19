@@ -40,7 +40,7 @@ export class EditExpenseComponent implements OnInit{
   expenseId: number = 0;
   expense: Expense = {};
   defaultValues: any = {};
-  group: Group = { id: 0, name: '', category: {}, expenses: [] }
+  group: Group = { id: 0, name: '', category: {}, expenses: [], img: '' }
   icons = IconExpense.icons;
 
   constructor(

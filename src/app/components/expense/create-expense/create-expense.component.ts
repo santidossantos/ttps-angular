@@ -45,7 +45,7 @@ import { RouterModule } from '@angular/router';
 export class CreateExpenseComponent implements OnInit {
   form: FormGroup;
   groupId: number = 0;
-  group: Group = { id: 0, name: '', category: {}, expenses: [] };
+  group: Group = { id: 0, name: '', category: {}, expenses: [], img: '' };
   expenseCreated: boolean = false;
   maxDate: Date;
   categories: ExpenseCategory[] = [];

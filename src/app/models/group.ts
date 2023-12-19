@@ -9,4 +9,5 @@ export interface Group {
   users?: User[];
   category: GroupCategory;
   expenses: Expense[];
+  img: string;
 }

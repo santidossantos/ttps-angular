@@ -9,7 +9,7 @@
     <mat-list>
       @for (grupo of myGroups; track grupo) {
       <mat-list-item>
-        <mat-icon matListItemIcon>group</mat-icon>
+        <mat-icon matListItemIcon>{{ grupo.img }}</mat-icon>
         <div matListItemTitle>
           <span class="group-name">{{ grupo.name }}</span>
           <a

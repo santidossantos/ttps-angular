@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,50 +15,65 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-add-debtor-users',
   standalone: true,
-  imports: [MatCardModule, MatFormFieldModule, MatChipsModule, MatSelectModule,
-            ReactiveFormsModule, MatButtonModule, MatInputModule, RouterModule],
+  imports: [
+    MatCardModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
+    RouterModule,
+  ],
   templateUrl: './add-debtor-users.component.html',
-  styleUrl: './add-debtor-users.component.css'
+  styleUrl: './add-debtor-users.component.css',
 })
-
-export class AddDebtorUsersComponent implements OnInit{
+export class AddDebtorUsersComponent implements OnInit {
   form: FormGroup;
   expenseId: number = 0;
-  group: Group = {id:0, name:"",category: {}, expenses: []};
+  group: Group = { id: 0, name: '', category: {}, expenses: [], img: '' };
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private _expenseService: ExpenseService, private _snackBar: MatSnackBar){
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private _expenseService: ExpenseService,
+    private _snackBar: MatSnackBar
+  ) {
     this.form = this.fb.group({
       amountPayed: ['', Validators.required],
       isPayed: ['', Validators.required],
-      user: ['', Validators.required]
+      user: ['', Validators.required],
     });
   }
 
-  ngOnInit(){
-    this.route.params.subscribe(params => {
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
       this.expenseId = params['id'];
     });
     this.getGroup();
   }
 
-  getGroup(){
+  getGroup() {
     this._expenseService.getGroup(this.expenseId).subscribe(
       (res) => {
         this.group = res;
       },
       (error) => console.error(error)
-    )
+    );
   }
 
-  addDebtorUser(){
+  addDebtorUser() {
     const user = this.form.get('user');
-    if(user) this.form.controls['user'].setValue({"id":parseInt(user.value, 10)});
-    this._expenseService.addDebtorUser(this.expenseId, this.form.value).subscribe(
-      (res) =>{
-        this.openSnackBar("Deudor agregado con exito");
-      },
-      (error) => console.error(error)
-    )
+    if (user)
+      this.form.controls['user'].setValue({ id: parseInt(user.value, 10) });
+    this._expenseService
+      .addDebtorUser(this.expenseId, this.form.value)
+      .subscribe(
+        (res) => {
+          this.openSnackBar('Deudor agregado con exito');
+        },
+        (error) => console.error(error)
+      );
   }
 
   openSnackBar(mensaje: string) {
