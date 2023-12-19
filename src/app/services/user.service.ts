@@ -34,8 +34,11 @@ export class UserService {
     return this.http.get<Expense[]>(this.baseURL+username+"/expense")
   }
 
-  getFriendsWithFilter(filter: object){
+  getUsersWithFilter(filter: object){
     return this.http.post<User[]>(apiURL+'users', filter);
+  }
 
+  addFriend(userId: number, friendId: number){
+    return this.http.post<any>(this.baseURL+'friends', {"id": userId, "friendId": friendId});
   }
 }

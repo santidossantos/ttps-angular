@@ -50,4 +50,6 @@ export class MyFriendsComponent implements OnInit{
       (error) => console.error(error)
     )
   }
+
+  
 }
