@@ -3,7 +3,11 @@
   <div
     class="image-container"
     [class]="{ 'box-shadow-avatar': !!file }"
-    [style]="{ backgroundImage: 'url(' + file + ')' }"
+    [style]="{
+      backgroundImage: 'url(' + file + ')',
+      width: width + 'px',
+      height: height + 'px'
+    }"
   ></div>
   } @else {
   <div class="image-container avatar-placeholder"></div>

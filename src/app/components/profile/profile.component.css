@@ -1,9 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css?family=Abel");
-
-html,
-body {
-  font-family: Abel, Arial, Verdana, sans-serif;
-} */
+@import url("https://fonts.googleapis.com/css?family=Abel");
 
 .profile-dialog {
   width: 100%;
@@ -45,7 +40,6 @@ body {
   position: absolute;
   width: 150px;
   height: 100%;
-  background: rgb(34, 36, 195);
   background: linear-gradient(
     0deg,
     rgba(34, 36, 195, 1) 0%,
@@ -54,6 +48,20 @@ body {
   transition: width 0.4s;
   overflow: hidden;
   z-index: 2;
+}
+
+.card .additional .user-card .avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card .additional .user-card .avatar-container app-avatar {
+  width: 80px;
+  height: 80px;
+  margin-right: 22px;
+  margin-bottom: 20px;
 }
 
 .card:hover .additional {
