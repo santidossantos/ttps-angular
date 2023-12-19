@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { jwtDecode } from 'jwt-decode';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-search-friends',
   standalone: true,
@@ -23,7 +25,7 @@ export class SearchFriendsComponent implements OnInit{
   displayedColumns: string[] = ['img', 'username', 'name', 'email', 'actions'];
   userId: number = 0;
 
-  constructor(private _userService: UserService){}
+  constructor(private _userService: UserService, private _snackBar: MatSnackBar){}
 
   ngOnInit(): void {
     this.getUser();
@@ -60,8 +62,17 @@ export class SearchFriendsComponent implements OnInit{
   addFriend(friendId: number): void{
     this._userService.addFriend(this.userId, friendId).subscribe(
       (res) =>{
+        this.dataSource.data = this.dataSource.data.filter(user => user.id !== friendId)
+        this.openSnackBar("Amigo agregado con exito")
       },
       (error) => console.error(error)
     )
+  }
+
+  openSnackBar(mensaje: string) {
+    this._snackBar.open(mensaje, 'Cerrar', {
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
   }
 }
