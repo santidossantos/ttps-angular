@@ -12,8 +12,8 @@ import { decodeJwt } from '../../utils/decode-jwt';
 })
 export class AvatarComponent implements OnInit {
   file: string = '';
-  @Input() width: number = 30;
-  @Input() height: number = 30;
+  @Input() width: number = 28;
+  @Input() height: number = 28;
   @Input() isEditable: boolean = true;
 
   constructor(private _userService: UserService) {}

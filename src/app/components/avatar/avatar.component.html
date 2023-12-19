@@ -10,7 +10,14 @@
     }"
   ></div>
   } @else {
-  <div class="image-container avatar-placeholder"></div>
+  <div
+    class="image-container"
+    [style]="{
+      backgroundImage: 'url(https://image.pngaaa.com/689/2189689-middle.png)',
+      width: width + 'px',
+      height: height + 'px'
+    }"
+  ></div>
   } @if(isEditable) {
   <label for="avatar-input-file">
     <div class="icon-wrapper">

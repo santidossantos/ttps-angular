@@ -3,8 +3,8 @@
     <div class="card">
       <div class="additional">
         <div class="user-card">
-          <div class="level center">Level 13</div>
-          <div class="points center">5,312 Points</div>
+          <div class="level center">{{ user.username }}</div>
+          <div class="points center">{{ user.email }}</div>
           <div class="avatar-container center">
             <app-avatar
               [width]="100"
@@ -15,7 +15,7 @@
         </div>
 
         <div class="more-info">
-          <h1>Jane Doe</h1>
+          <h1>{{ user.name }}</h1>
           <div class="coords">
             <span>Group Name</span>
             <span>Joined January 2019</span>
@@ -49,13 +49,14 @@
         </div>
       </div>
       <div class="general">
-        <h1>Jane Doe</h1>
+        <h1>{{ user.name }}</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a
-          volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut
-          pulvinar.
+          Bienvenido a tu perfil, aquí podrás ver tus datos personales y editar
+          tu información.
         </p>
-        <span class="more">Mouse over the card for more info</span>
+        <div class="profile-image">
+          <img src="../../../assets/img/profile.png" />
+        </div>
       </div>
     </div>
   </div>
