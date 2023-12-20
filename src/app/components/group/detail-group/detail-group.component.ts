@@ -14,7 +14,6 @@ import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GroupService } from '../../../services/group.service';
-import { UserService } from '../../../services/user.service';
 import { jwtDecode } from 'jwt-decode';
 import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
@@ -64,6 +63,7 @@ export class DetailGroupComponent implements OnInit {
   displayedColumns: string[] = ['name', 'amount', 'date', 'actions'];
   dataSource = new MatTableDataSource<Expense>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  errorMessage: string | null = null;
 
   group: Group | null = null;
 
@@ -71,7 +71,7 @@ export class DetailGroupComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private _groupService: GroupService,
-    private _userService: UserService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngAfterViewInit() {
@@ -99,11 +99,25 @@ export class DetailGroupComponent implements OnInit {
             this.dataSource.data = this.group.expenses || [];
           }
         },
-        (err) => console.log(err)
+        (err) => {
+          console.log(err);
+          this.handleError(err);
+        }
       );
   }
 
   formatDate(date: string): string {
     return dateFormatter(date);
+  }
+
+  handleError(error: any): void {
+    if (error.status === 403) {
+      this.errorMessage = 'No tienes permiso para ver este grupo.';
+    } else {
+      this.errorMessage = 'Se produjo un error al cargar el grupo.';
+    }
+    this._snackBar.open(this.errorMessage, 'Cerrar', {
+      duration: 5000,
+    });
   }
 }
