@@ -15,6 +15,7 @@ import { DetailGroupComponent } from './components/group/detail-group/detail-gro
 import { EditGroupComponent } from './components/group/edit-group/edit-group.component';
 import { ListExpensesComponent } from './components/expense/list-expenses/list-expenses.component';
 import { EditExpenseComponent } from './components/expense/edit-expense/edit-expense.component';
+import { ViewInfoFriendsComponent } from './components/user/view-info-friends/view-info-friends.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
@@ -74,6 +75,11 @@ export const routes: Routes = [
         path: 'expense/:id/editar',
         title: 'Editar Gasto',
         component: EditExpenseComponent,
+      },
+      {
+        path: 'me/friends',
+        title: 'Amigos',
+        component: ViewInfoFriendsComponent
       },
     ],
     canActivate: [AuthGuard],

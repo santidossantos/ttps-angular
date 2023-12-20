@@ -1,0 +1,60 @@
+.mat-elevation-z8 {
+    box-shadow: none;
+}
+
+td {
+    padding-right: 8px;
+  }
+  
+.mat-mdc-card {
+    width: 90%;
+    height: 100%;
+    min-height: 100px;
+    min-width: 700px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 20px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-full-width,
+.mat-select,
+button.mat-raised-button {
+    width: 100%;
+}
+
+.card-subtitle {
+    font-size: large;
+}
+
+.button-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.table-container{
+    height: 200px;
+    overflow: auto;
+}
+
+h4{
+    font-size: 18px;
+}
+
+.actions-container {
+    display: flex;
+    color: #444cb3;
+}
+
+.pointer {
+    cursor: pointer;
+}

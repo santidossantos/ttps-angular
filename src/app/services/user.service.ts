@@ -18,7 +18,7 @@ export class UserService {
     return this.http.get<User[]>(this.baseURL);
   }
 
-  getByUserName(userName: string): Observable<User> {
+  getByUserName(userName: string | undefined): Observable<User> {
     return this.http.get<User>(this.baseURL + 'username/' + userName);
   }
 
@@ -45,5 +45,13 @@ export class UserService {
     return this.http.get(`${this.baseURL}${username}/avatar/`, {
       responseType: 'blob',
     });
+  }
+
+  getUsersWithFilter(filter: object){
+    return this.http.post<User[]>(apiURL+'users', filter);
+  }
+
+  addFriend(userId: number, friendId: number){
+    return this.http.post<any>(this.baseURL+'friends', {"id": userId, "friendId": friendId});
   }
 }
