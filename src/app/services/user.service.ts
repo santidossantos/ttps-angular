@@ -30,7 +30,20 @@ export class UserService {
     return this.http.get<Group[]>(this.baseURL + id + '/groups');
   }
 
-  getExpensesWithUsername(username: String | undefined): Observable<Expense[]>{
-    return this.http.get<Expense[]>(this.baseURL+username+"/expense")
+  getExpensesWithUsername(username: String | undefined): Observable<Expense[]> {
+    return this.http.get<Expense[]>(this.baseURL + username + '/expense');
+  }
+
+  uploadAvatar(username: string, avatarFile: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('username', username);
+    formData.append('avatarFile', avatarFile, avatarFile.name);
+    return this.http.post(this.baseURL + 'avatar/upload', formData);
+  }
+
+  getAvatar(username: string): Observable<Blob> {
+    return this.http.get(`${this.baseURL}${username}/avatar/`, {
+      responseType: 'blob',
+    });
   }
 }

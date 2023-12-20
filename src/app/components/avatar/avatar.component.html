@@ -1,0 +1,34 @@
+<div class="avatar-container">
+  @if (file) {
+  <div
+    class="image-container"
+    [class]="{ 'box-shadow-avatar': !!file }"
+    [style]="{
+      backgroundImage: 'url(' + file + ')',
+      width: width + 'px',
+      height: height + 'px'
+    }"
+  ></div>
+  } @else {
+  <div
+    class="image-container"
+    [style]="{
+      backgroundImage: 'url(https://www.clipartkey.com/mpngs/m/309-3090304_male-avatar-icon-transparent.png)',
+      width: width + 'px',
+      height: height + 'px'
+    }"
+  ></div>
+  } @if(isEditable) {
+  <label for="avatar-input-file">
+    <div class="icon-wrapper">
+      <input
+        type="file"
+        id="avatar-input-file"
+        accept="image/*"
+        (change)="onFileChange($event)"
+      />
+      <mat-icon class="icon" fontIcon="edit"></mat-icon>
+    </div>
+  </label>
+  }
+</div>
