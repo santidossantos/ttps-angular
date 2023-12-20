@@ -16,6 +16,7 @@ import { EditGroupComponent } from './components/group/edit-group/edit-group.com
 import { ListExpensesComponent } from './components/expense/list-expenses/list-expenses.component';
 import { EditExpenseComponent } from './components/expense/edit-expense/edit-expense.component';
 import { ViewInfoFriendsComponent } from './components/user/view-info-friends/view-info-friends.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
