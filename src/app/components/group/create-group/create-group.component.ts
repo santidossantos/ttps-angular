@@ -86,7 +86,6 @@ export class CreateGroupComponent implements OnInit {
       img: icon,
     };
 
-    console.log(groupPayload)
 
     this._groupService.create(groupPayload).subscribe(
       (res) => {
