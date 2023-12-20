@@ -3,7 +3,9 @@
     <mat-card>
       <mat-card-header style="margin-bottom: 20px">
         <mat-card-title>Crear grupo</mat-card-title>
-        <mat-card-subtitle>Una vez creado podrás comenzar a agregar gastos</mat-card-subtitle>
+        <mat-card-subtitle
+          >Una vez creado podrás comenzar a agregar gastos</mat-card-subtitle
+        >
       </mat-card-header>
       <mat-card-content>
         <div class="form-container">
@@ -27,15 +29,23 @@
           </div>
 
           <div>
-            <input type="file" #fileInput style="display: none" accept="image/*" />
-            <button mat-raised-button color="primary" class="example-full-width" type="button" (click)="fileInput.click()">
-              <mat-icon>add_photo_alternate</mat-icon> Seleccionar icono
-            </button>
+            <mat-form-field style="width: 100%">
+              <mat-label>Icono</mat-label>
+              <mat-select formControlName="img">
+                @for (icon of icons; track icon) {
+                <mat-option [value]="icon.value">
+                  <mat-icon>{{ icon.value }}</mat-icon> {{ icon.name }}
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
       </mat-card-content>
       <mat-card-footer class="footer-container">
-        <button mat-raised-button color="primary" [disabled]="!form.valid">Crear grupo</button>
+        <button mat-raised-button color="primary" [disabled]="!form.valid">
+          Crear grupo
+        </button>
       </mat-card-footer>
     </mat-card>
   </form>

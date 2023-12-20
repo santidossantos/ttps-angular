@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GroupService } from '../../../services/group.service';
 import { UserService } from '../../../services/user.service';
 import { jwtDecode } from 'jwt-decode';
+import IconGroup from '../icons-group';
 
 @Component({
   selector: 'app-create-group',
@@ -39,6 +40,7 @@ import { jwtDecode } from 'jwt-decode';
 export class CreateGroupComponent implements OnInit {
   form: FormGroup;
   user_id: number = -1;
+  icons = IconGroup.icons;
 
   constructor(
     private fb: FormBuilder,
@@ -50,6 +52,7 @@ export class CreateGroupComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
+      img: ['', Validators.required],
     });
   }
 
@@ -72,6 +75,7 @@ export class CreateGroupComponent implements OnInit {
   createGroup() {
     const group_name = this.form.get('name')?.value;
     const group_category = this.form.get('category')?.value;
+    const icon = this.form.get('img')?.value;
     const id_logged_user = { id: this.user_id };
     this.form.value['creador'] = id_logged_user;
 
@@ -79,7 +83,9 @@ export class CreateGroupComponent implements OnInit {
       name: group_name,
       creator: id_logged_user,
       category: JSON.parse(group_category),
+      img: icon,
     };
+
 
     this._groupService.create(groupPayload).subscribe(
       (res) => {

@@ -44,21 +44,16 @@
             </div>
 
             <div>
-              <input
-                type="file"
-                #fileInput
-                style="display: none"
-                accept="image/*"
-              />
-              <button
-                mat-raised-button
-                color="primary"
-                class="example-full-width"
-                type="button"
-                (click)="fileInput.click()"
-              >
-                <mat-icon>add_photo_alternate</mat-icon> Seleccionar icono
-              </button>
+            <mat-form-field style="width: 100%">
+              <mat-label>Icono</mat-label>
+              <mat-select formControlName="img">
+                @for (icon of icons; track icon) {
+                <mat-option [value]="icon.value">
+                  <mat-icon>{{ icon.value }}</mat-icon> {{ icon.name }}
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
             </div>
             <div>
               <button

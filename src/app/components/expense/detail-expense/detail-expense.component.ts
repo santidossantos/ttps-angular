@@ -30,7 +30,7 @@ export class DetailExpenseComponent implements OnInit {
   expenseId: number = 0;
   panelOpenState = false;
   expense: Expense;
-  group: Group = { id: 0, name: '', category: {}, expenses: [] };
+  group: Group = { id: 0, name: '', category: {}, expenses: [], img: '' };
   displayedColumns: string[] = ['username', 'amountPayed', 'isPayed'];
   dataSource: ExpenseUsersPays[] = [];
 
