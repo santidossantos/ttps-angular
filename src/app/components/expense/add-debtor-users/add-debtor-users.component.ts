@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Form, FormControl } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
@@ -14,7 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Expense } from '../../../models/expense';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { User } from '../../../models/user';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
@@ -30,24 +31,30 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     RouterModule,
     MatGridListModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule
   ],
   templateUrl: './add-debtor-users.component.html',
   styleUrl: './add-debtor-users.component.css',
 })
 export class AddDebtorUsersComponent implements OnInit {
-  forms: FormArray;
+  form!: FormGroup;
   expenseId: number = 0;
   expense: Expense = {};
   group: Group = { id: 0, name: '', category: {}, expenses: [], img: '' };
-  dataSource: User[] = [];
-  displayedColumns = ['position', 'username', 'amount', 'isPayed'];
+  dataSource!: MatTableDataSource<any>;
+  displayedColumns = ['position', 'user', 'amount', 'isPayed', 'actions'];
+  user = new FormControl('');
+  isPayed = new FormControl('');
+  amountPayed = new FormControl('');
+
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private _expenseService: ExpenseService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -56,35 +63,33 @@ export class AddDebtorUsersComponent implements OnInit {
     });
     this.getExpense();
     this.getGroup();
-    for(const user of this.group.users || []){
-      this.forms = this.fb.array({
-        username: [user.username],
-        amountPayed: [],
-        isPayed: []
-      })
-      this.forms.push(form);
-    }
+
+    this.form = this.fb.group({
+      debtorsUsers: this.fb.array([])
+    })
+  }
+  
+  get debtorsUsers(): FormArray{
+    return this.form.get('debtorsUsers') as FormArray;
   }
 
-  getExpense(){
-    this._expenseService.getById(this.expenseId).subscribe(
-      (res) => {
-        this.expense = res;
-      },
-      (error) => console.error(error)
-    )
+  addRow(): void{
+    const debtorForm = this.fb.group({
+      user: [],
+      isPayed: [],
+      amountPayed: []
+    })
+    this.debtorsUsers.push(debtorForm);
+    this.dataSource = new MatTableDataSource(this.debtorsUsers.controls);
+    this.cd.detectChanges();
   }
 
-  getGroup() {
-    this._expenseService.getGroup(this.expenseId).subscribe(
-      (res) => {
-        this.group = res;
-        this.dataSource = res.users || [];
-      },
-      (error) => console.error(error)
-    );
+  deleteRow(rowIndex: number): void{
+    this.debtorsUsers.removeAt(rowIndex);
+    this.dataSource = new MatTableDataSource(this.debtorsUsers.controls);
   }
 
+  
   addDebtorsUsersFixed() {
     // const user = this.form.get('user');
     // if (user)
@@ -92,15 +97,12 @@ export class AddDebtorUsersComponent implements OnInit {
     // this._expenseService
     //   .addDebtorUser(this.expenseId, this.form.value)
     //   .subscribe(
-    //     (res) => {
-    //       this.openSnackBar('Deudor agregado con exito');
-    //     },
-    //     (error) => console.error(error)
-    //   );
-
-    for(const form of this.forms){
-      console.log(form);
-    }
+      //     (res) => {
+        //       this.openSnackBar('Deudor agregado con exito');
+        //     },
+        //     (error) => console.error(error)
+        //   );
+      console.log(this.form.value);
   }
 
   addDebtorsUsersPercent(){
@@ -112,5 +114,23 @@ export class AddDebtorUsersComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
     });
+  }
+  
+  getExpense(){
+    this._expenseService.getById(this.expenseId).subscribe(
+      (res) => {
+        this.expense = res;
+      },
+      (error) => console.error(error)
+    )
+  }
+  
+  getGroup() {
+    this._expenseService.getGroup(this.expenseId).subscribe(
+      (res) => {
+        this.group = res;
+      },
+      (error) => console.error(error)
+    );
   }
 }
