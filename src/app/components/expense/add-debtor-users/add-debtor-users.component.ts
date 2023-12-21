@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray, Form, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
@@ -102,7 +102,30 @@ export class AddDebtorUsersComponent implements OnInit {
   }
 
   addDebtorsUsersPercent(){
-
+    const debtors = this.form.value.debtorsUsers;
+    this.debtorsUsers.clear();
+    for(const debtor of debtors){
+      let amount = ((this.expense.amount! * debtor.amountPayed)/100);
+      console.log(amount);
+      const debtorForm = this.fb.group({
+        user: debtor.user,
+        isPayed: debtor.isPayed,
+        amountPayed: amount
+      })
+      this.debtorsUsers.push(debtorForm);
+    }
+    console.log(this.form.value.debtorsUsers);
+    this._expenseService.addDebtorsUsers(this.expenseId, this.form.value.debtorsUsers).subscribe(
+      (res) => {
+        this.openSnackBar('Deudores agregados con exito');
+      },
+      (error) =>{
+        console.error(error)
+        if(error.status == 406){
+          this.openSnackBar('El total de los montos ingresados son menores al total del gasto');
+        }
+      }
+    );
   }
 
   openSnackBar(mensaje: string) {
