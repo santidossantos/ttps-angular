@@ -44,9 +44,6 @@ export class AddDebtorUsersComponent implements OnInit {
   group: Group = { id: 0, name: '', category: {}, expenses: [], img: '' };
   dataSource!: MatTableDataSource<any>;
   displayedColumns = ['position', 'user', 'amount', 'isPayed', 'actions'];
-  user = new FormControl('');
-  isPayed = new FormControl('');
-  amountPayed = new FormControl('');
 
 
   constructor(
@@ -91,18 +88,17 @@ export class AddDebtorUsersComponent implements OnInit {
 
   
   addDebtorsUsersFixed() {
-    // const user = this.form.get('user');
-    // if (user)
-    //   this.form.controls['user'].setValue({ id: parseInt(user.value, 10) });
-    // this._expenseService
-    //   .addDebtorUser(this.expenseId, this.form.value)
-    //   .subscribe(
-      //     (res) => {
-        //       this.openSnackBar('Deudor agregado con exito');
-        //     },
-        //     (error) => console.error(error)
-        //   );
-      console.log(this.form.value);
+    this._expenseService.addDebtorsUsers(this.expenseId, this.form.value.debtorsUsers).subscribe(
+      (res) => {
+        this.openSnackBar('Deudores agregados con exito');
+      },
+      (error) =>{
+        console.error(error)
+        if(error.status == 406){
+          this.openSnackBar('El total de los montos ingresados son menores al total del gasto');
+        }
+      }
+    );
   }
 
   addDebtorsUsersPercent(){
