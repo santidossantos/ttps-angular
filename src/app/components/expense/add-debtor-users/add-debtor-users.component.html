@@ -1,8 +1,8 @@
 @switch (expense.expenseStrategy?.name) {
     @case ("EqualAmounts") {<p>EQUALS</p>}
     @case ("FixedAmounts") {
+        <button mat-raised-button color="primary" (click)="addRow()">Agregar fila</button>
         <form class="example-form" [formGroup]="form" (ngSubmit)="addDebtorsUsersFixed()">
-            <button mat-raised-button color="primary" (click)="addRow()">Agregar fila</button>
             <div formArrayName="debtorsUsers">
                 <mat-card>
                     <mat-card-header>
