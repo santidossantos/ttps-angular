@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule, Router} from '@angular/router';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
@@ -52,7 +52,8 @@ export class AddDebtorUsersComponent implements OnInit {
     private route: ActivatedRoute,
     private _expenseService: ExpenseService,
     private _snackBar: MatSnackBar,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -96,6 +97,7 @@ export class AddDebtorUsersComponent implements OnInit {
     this._expenseService.addDebtorsUsers(this.expenseId, this.form.value.debtorsUsers).subscribe(
       (res) => {
         this.openSnackBar('Deudores agregados con exito');
+        this.router.navigate(['dashboard/expense/'+this.expenseId]);
       },
       (error) =>{
         console.error(error)
@@ -110,6 +112,7 @@ export class AddDebtorUsersComponent implements OnInit {
     this._expenseService.addDebtorsUsers(this.expenseId, this.form.value.debtorsUsers).subscribe(
       (res) => {
         this.openSnackBar('Deudores agregados con exito');
+        this.router.navigate(['dashboard/expense/'+this.expenseId]);
       },
       (error) =>{
         console.error(error)
@@ -139,6 +142,7 @@ export class AddDebtorUsersComponent implements OnInit {
     this._expenseService.addDebtorsUsers(this.expenseId, this.debtorsUsers.value).subscribe(
       (res) => {
         this.openSnackBar('Deudores agregados con exito');
+        this.router.navigate(['dashboard/expense/'+this.expenseId]);
       },
       (error) =>{
         console.error(error)

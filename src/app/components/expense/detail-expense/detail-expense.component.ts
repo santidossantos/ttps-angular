@@ -11,7 +11,7 @@ import { ExpenseUsersPays } from '../../../models/expense-users-pays';
 import { dateFormatter } from '../../../utils/dateFormatter';
 import { Group } from '../../../models/group';
 import { MatIconModule } from '@angular/material/icon';
-
+import { PutInSpanish } from '../../../utils/putInSpanish';
 @Component({
   selector: 'app-detail-expense',
   standalone: true,
@@ -68,4 +68,14 @@ export class DetailExpenseComponent implements OnInit {
       (error) => console.error(error)
     );
   }
+  
+  hasDebtorsUsers():boolean{
+    return this.expense.debtorsUsers?.length!=0;
+  }
+  
+  changeToSpanish(strategyName: string): string{
+    return PutInSpanish(strategyName);
+  }
 }
+
+
