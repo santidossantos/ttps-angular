@@ -33,4 +33,8 @@ export class ExpenseService{
     editExpense(idExpense: number, expense: Expense): Observable<Expense>{
         return this.http.put<Expense>(this.baseURL+idExpense, expense)
     }
+
+    changeIsPayedStatus(idEup: number): Observable<ExpenseUsersPays>{
+        return this.http.put<any>(apiURL+'eup/'+idEup+'/isPayed', {});
+    }
 }

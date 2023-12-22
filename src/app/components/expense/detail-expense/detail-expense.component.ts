@@ -76,6 +76,17 @@ export class DetailExpenseComponent implements OnInit {
   changeToSpanish(strategyName: string): string{
     return PutInSpanish(strategyName);
   }
+
+  changePayedStatus(eupId: number){
+    this._expenseService.changeIsPayedStatus(eupId).subscribe(
+      (res) => {
+        const toUpdate = this.expense.debtorsUsers?.find(
+          debtorUser => debtorUser.id == eupId
+        );
+        toUpdate!.isPayed = res.isPayed;
+      }
+    )
+  }
 }
 
 
