@@ -17,6 +17,7 @@ import { ListExpensesComponent } from './components/expense/list-expenses/list-e
 import { EditExpenseComponent } from './components/expense/edit-expense/edit-expense.component';
 import { ViewInfoFriendsComponent } from './components/user/view-info-friends/view-info-friends.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { HelpComponent } from './components/help/help.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -80,6 +81,11 @@ export const routes: Routes = [
         path: 'me/friends',
         title: 'Amigos',
         component: ViewInfoFriendsComponent
+      },
+      {
+        path: 'help',
+        title: 'Help',
+        component: HelpComponent
       },
     ],
     canActivate: [AuthGuard],
