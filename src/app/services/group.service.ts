@@ -21,10 +21,22 @@ export class GroupService {
   }
 
   edit(groupPayload: any, group_id: any): Observable<Group> {
-    return this.http.put<Group>(this.baseURL + 'groups/' + group_id,   groupPayload);
+    return this.http.put<Group>(
+      this.baseURL + 'groups/' + group_id,
+      groupPayload
+    );
   }
 
   addMember(groupId: any, userId: any): Observable<Group> {
-    return this.http.post<Group>(this.baseURL + 'groups/members',{ groupId, userId});
+    return this.http.post<Group>(this.baseURL + 'groups/members', {
+      groupId,
+      userId,
+    });
+  }
+
+  getMyGroups(token: String): Observable<Group[]> {
+    return this.http.get<Group[]>(this.baseURL + 'groups/me', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   }
 }

@@ -78,7 +78,7 @@ export class MyGroupsComponent implements OnInit {
         .pipe(
           switchMap((user) => {
             this.user_id = user.id;
-            return this._userService.getGroupsByUserId(this.user_id);
+            return this._groupService.getMyGroups(token);
           })
         )
         .subscribe(
