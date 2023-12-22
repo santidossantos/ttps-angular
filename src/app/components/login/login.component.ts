@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     setTimeout(async () => {
       this.dialogService.triggerCloseDialog();
-      await this.router.navigate(['dashboard']);
+      await this.router.navigate(['dashboard/home']);
     }, 3000);
   }
 
