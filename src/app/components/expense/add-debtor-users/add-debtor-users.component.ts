@@ -93,7 +93,6 @@ export class AddDebtorUsersComponent implements OnInit {
   }
 
   addDebtorsUsersEqualsAmounts(){
-    console.log(this.form.value.debtorsUsers)
     this._expenseService.addDebtorsUsers(this.expenseId, this.form.value.debtorsUsers).subscribe(
       (res) => {
         this.openSnackBar('Deudores agregados con exito');
