@@ -3,7 +3,7 @@
       <mat-card-header>
         <mat-card-title style="font-size: x-large">Editar el gasto: "{{ expense.name }}"</mat-card-title>
         <mat-card-subtitle class="card-subtitle"
-          >Los campos "division del gasto", "categoria" y "pagador" quedaran con el mismo valor al menos que seleccione otro.</mat-card-subtitle>         </mat-card-header>
+          >Los campos "categoria" y "pagador" quedaran con el mismo valor al menos que seleccione otro.</mat-card-subtitle>         </mat-card-header>
       <br />
       <mat-card-content>
         <div class="form-container">
@@ -37,22 +37,6 @@
                   ></mat-datepicker-toggle>
                   <mat-datepicker #picker disabled="false"></mat-datepicker>
                 </mat-form-field>
-              </td>
-            </tr>
-          </table>
-          <table class="example-full-width" cellspacing="0">
-            <tr>
-              <td>
-                <h4>Division del gasto:</h4>
-                <div class="chip-listbox">
-                  <mat-chip-listbox
-                    aria-label="Fish selection"
-                    formControlName="expenseStrategy">
-                    @for(strategy of strategies; track strategy.id){
-                      <mat-chip-option [value]='{"id":strategy.id, "expenseStrategy":strategy.name}'>{{ changeToSpanish(strategy.name) }}</mat-chip-option>
-                    }
-                  </mat-chip-listbox>
-                </div>
               </td>
             </tr>
           </table>

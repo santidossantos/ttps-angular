@@ -1,57 +1,244 @@
-<form class="example-form" [formGroup]="form" (ngSubmit)="addDebtorUser()">
-<mat-card>
-    <mat-card-header>
-        <mat-card-title style="font-size: x-large;">Añadir un deudor</mat-card-title>
-        <mat-card-subtitle class="card-subtitle">Añada un usuario que deba/haya pagado el gasto</mat-card-subtitle>
-    </mat-card-header>
-    <br>
-    <mat-card-content>
-        <div class="form-container">
-                <table class="example-full-width" cellspacing="0">
-                    <tr>
-                        <td>
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Monto</mat-label>
-                                <input matInput type="number" min="0" formControlName="amountPayed">
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                </table>
-                <table class="example-full-width" cellspacing="0">
-                    <tr>
-                        <td>
-                            <h4>Situacion:</h4>
-                            <div class="chip-listbox">
-                                <mat-chip-listbox aria-label="Fish selection" formControlName="isPayed">
-                                    <mat-chip-option value=true>Ya se pago la deuda</mat-chip-option>
-                                    <mat-chip-option value=false>Todavia debe el dinero</mat-chip-option>
-                                </mat-chip-listbox>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <br>
-                <table class="example-full-width" cellspacing="0">
-                    <tr>
-                        <td>
-                            <mat-form-field style="width: 100%">
-                                <mat-label>Pagador</mat-label>
-                                <mat-select formControlName="user">
-                                    @for (user of group.users; track user.username) {
-                                        <mat-option [value]="user.id">{{user.username}}</mat-option>
-                                        }
-                                </mat-select>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                </table>
-        </div>
-    </mat-card-content>
-    <mat-card-footer class="footer-container">
-        <div class="button-container">
-            <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense/'+expenseId]" routerLinkbuttonctive="router-link-active">Atras</button>
-            <button mat-raised-button color="primary" [disabled]="!form.valid">Añadir</button>
-        </div>
-    </mat-card-footer>
-</mat-card>
-</form>
+@switch (expense.expenseStrategy?.name) {
+    @case ("EqualAmounts") {
+        <button mat-raised-button color="primary" (click)="addRow()">Agregar fila</button>
+        <form class="example-form" [formGroup]="form" (ngSubmit)="addDebtorsUsersEqualsAmounts()">
+            <div formArrayName="debtorsUsers">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title style="font-size: x-large;">Todos pagan lo mismo</mat-card-title>
+                        <mat-card-subtitle class="card-subtitle">Como la estrategia es "montos iguales" todos los usuarios pagarán el mismo valor</mat-card-subtitle>
+                    </mat-card-header>
+                    <br>
+                    <mat-card-content>
+                        <section class="example-container mat-elevation-z8" tabindex="0">
+                            <table mat-table [dataSource]="dataSource">
+
+                                <!-- Position Column -->
+                                <ng-container matColumnDef="position">
+                                <th mat-header-cell *matHeaderCellDef>  </th>
+                                <td mat-cell *matCellDef="let algo"> </td>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="user">
+                                    <th mat-header-cell *matHeaderCellDef> Usuario </th>
+                                    <td mat-cell *matCellDef="let element;" [formGroup]="element">
+                                        <mat-label>Pagador</mat-label>
+                                        <mat-select formControlName="user">
+                                            @for(user of group.users; track user.id){
+                                                <mat-option [value]="{ id: user.id }">{{user.username}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Amount Column -->
+                                <ng-container matColumnDef="amount">
+                                    <th mat-header-cell *matHeaderCellDef> Monto </th>
+                                    <td mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                                        <mat-form-field floatLabel="always">
+                                            <input matInput type="number" [(ngModel)]="equalAmount" class="example-right-align" placeholder="0" formControlName="amountPayed" readonly="">
+                                            <span matTextPrefix>$&nbsp;</span>
+                                        </mat-form-field>
+                                    </td>
+                                </ng-container>
+
+                                <!-- isPayed Column -->
+                                <ng-container matColumnDef="isPayed">
+                                    <th mat-header-cell *matHeaderCellDef> Pagó? </th>
+                                    <td mat-cell *matCellDef="let element;" [formGroup]="element">
+                                        <mat-chip-listbox aria-label="Fish selection" formControlName="isPayed">
+                                            <mat-chip-option value=true>Se pagó</mat-chip-option>
+                                            <mat-chip-option value=false>Todavia debe</mat-chip-option>
+                                        </mat-chip-listbox>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Actions Column -->
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef>Acción</th>
+                                    <td mat-cell *matCellDef="let element; index as i" [formGroup]="element">
+                                        <a type="button" (click)="deleteRow(i)">
+                                        <mat-icon class="actionStyle">delete_forever</mat-icon>
+                                        </a>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                        </section>
+                    </mat-card-content>
+                    <mat-card-footer class="footer-container">
+                        <div class="button-container">
+                            <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense/'+expenseId]" routerLinkbuttonctive="router-link-active">Atras</button>
+                            <button mat-raised-button color="primary" [disabled]="!form.valid">Añadir</button>
+                        </div>
+                    </mat-card-footer>
+                </mat-card>
+            </div>          
+        </form>
+    }
+    @case ("FixedAmounts") {
+        <button mat-raised-button color="primary" (click)="addRow()">Agregar fila</button>
+        <form class="example-form" [formGroup]="form" (ngSubmit)="addDebtorsUsersFixed()">
+            <div formArrayName="debtorsUsers">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title style="font-size: x-large;">Definir los montos</mat-card-title>
+                        <mat-card-subtitle class="card-subtitle">Agregue que monto deberá pagarle cada usuario. (Total del gasto: ${{this.expense.amount}})</mat-card-subtitle>
+                    </mat-card-header>
+                    <br>
+                    <mat-card-content>
+                        <section class="example-container mat-elevation-z8" tabindex="0">
+                            <table mat-table [dataSource]="dataSource">
+
+                                <!-- Position Column -->
+                                <ng-container matColumnDef="position">
+                                <th mat-header-cell *matHeaderCellDef>  </th>
+                                <td mat-cell *matCellDef="let algo"> </td>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="user">
+                                    <th mat-header-cell *matHeaderCellDef> Usuario </th>
+                                    <td mat-cell *matCellDef="let element;" [formGroup]="element">
+                                        <mat-label>Pagador</mat-label>
+                                        <mat-select formControlName="user">
+                                            @for(user of group.users; track user.id){
+                                                <mat-option [value]="{ id: user.id }">{{user.username}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Amount Column -->
+                                <ng-container matColumnDef="amount">
+                                    <th mat-header-cell *matHeaderCellDef> Monto </th>
+                                    <td mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                                        <mat-form-field floatLabel="always">
+                                            <input matInput type="number" min="1" class="example-right-align" placeholder="0" formControlName="amountPayed">
+                                            <span matTextPrefix>$&nbsp;</span>
+                                            <span matTextSuffix>.00</span>
+                                        </mat-form-field>
+                                    </td>
+                                </ng-container>
+
+                                <!-- isPayed Column -->
+                                <ng-container matColumnDef="isPayed">
+                                    <th mat-header-cell *matHeaderCellDef> Pagó? </th>
+                                    <td mat-cell *matCellDef="let element;" [formGroup]="element">
+                                        <mat-chip-listbox aria-label="Fish selection" formControlName="isPayed">
+                                            <mat-chip-option value=true>Se pagó</mat-chip-option>
+                                            <mat-chip-option value=false>Todavia debe</mat-chip-option>
+                                        </mat-chip-listbox>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Actions Column -->
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef>Acción</th>
+                                    <td mat-cell *matCellDef="let element; index as i" [formGroup]="element">
+                                        <a type="button" (click)="deleteRow(i)">
+                                        <mat-icon class="actionStyle">delete_forever</mat-icon>
+                                        </a>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                        </section>
+                    </mat-card-content>
+                    <mat-card-footer class="footer-container">
+                        <div class="button-container">
+                            <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense/'+expenseId]" routerLinkbuttonctive="router-link-active">Atras</button>
+                            <button mat-raised-button color="primary" [disabled]="!form.valid">Añadir</button>
+                        </div>
+                    </mat-card-footer>
+                </mat-card>
+            </div>          
+        </form>
+    }
+    @case ("FixedAmountsPercent") {
+        <button mat-raised-button color="primary" (click)="addRow()">Agregar fila</button>
+        <form class="example-form" [formGroup]="form" (ngSubmit)="addDebtorsUsersPercent()">
+            <div formArrayName="debtorsUsers">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title style="font-size: x-large;">Definir los porcentajes</mat-card-title>
+                        <mat-card-subtitle class="card-subtitle">Agregue que porcentaje deberá pagarle cada usuario. (Total del gasto: ${{this.expense.amount}})</mat-card-subtitle>
+                    </mat-card-header>
+                    <br>
+                    <mat-card-content>
+                        <section class="example-container mat-elevation-z8" tabindex="0">
+                            <table mat-table [dataSource]="dataSource">
+
+                                <!-- Position Column -->
+                                <ng-container matColumnDef="position">
+                                <th mat-header-cell *matHeaderCellDef>  </th>
+                                <td mat-cell *matCellDef="let algo"> </td>
+                                </ng-container>
+
+                                <!-- User Column -->
+                                <ng-container matColumnDef="user">
+                                    <th mat-header-cell *matHeaderCellDef> Usuario </th>
+                                    <td mat-cell *matCellDef="let element;" [formGroup]="element">
+                                        <mat-label>Pagador</mat-label>
+                                        <mat-select formControlName="user">
+                                            @for(user of group.users; track user.id){
+                                                <mat-option [value]="{ id: user.id }">{{user.username}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Porcent Column -->
+                                <ng-container matColumnDef="amount">
+                                    <th mat-header-cell *matHeaderCellDef> Porcentaje </th>
+                                    <td mat-cell *matCellDef="let element;" [formGroup]="element"> 
+                                        <mat-form-field floatLabel="always">
+                                            <input matInput type="number" min="1" max="100" class="example-right-align" placeholder="0" formControlName="amountPayed">
+                                            <span matTextPrefix>%&nbsp;</span>
+                                        </mat-form-field>
+                                    </td>
+                                </ng-container>
+
+                                <!-- isPayed Column -->
+                                <ng-container matColumnDef="isPayed">
+                                    <th mat-header-cell *matHeaderCellDef> Pagó? </th>
+                                    <td mat-cell *matCellDef="let element;" [formGroup]="element">
+                                        <mat-chip-listbox aria-label="Fish selection" formControlName="isPayed">
+                                            <mat-chip-option value=true>Se pagó</mat-chip-option>
+                                            <mat-chip-option value=false>Todavia debe</mat-chip-option>
+                                        </mat-chip-listbox>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Actions Column -->
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef>Acción</th>
+                                    <td mat-cell *matCellDef="let element; index as i" [formGroup]="element">
+                                        <a type="button" (click)="deleteRow(i)">
+                                        <mat-icon class="actionStyle">delete_forever</mat-icon>
+                                        </a>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                        </section>
+                    </mat-card-content>
+                    <mat-card-footer class="footer-container">
+                        <div class="button-container">
+                            <button mat-raised-button color="primary" [routerLink]="['/dashboard/expense/'+expenseId]" routerLinkbuttonctive="router-link-active">Atras</button>
+                            <button mat-raised-button color="primary" [disabled]="!form.valid">Añadir</button>
+                        </div>
+                    </mat-card-footer>
+                </mat-card>
+            </div>          
+        </form>
+    }
+}
+

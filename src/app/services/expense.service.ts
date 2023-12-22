@@ -26,11 +26,15 @@ export class ExpenseService{
         return this.http.get<Group>(this.baseURL+idExpense+'/group');
     }
 
-    addDebtorUser(idExpense: number, eup: ExpenseUsersPays): Observable<ExpenseUsersPays>{
-        return this.http.post<ExpenseUsersPays>(this.baseURL+idExpense+'/debtorUser', eup);
+    addDebtorsUsers(idExpense: number, eupList: ExpenseUsersPays[]): Observable<ExpenseUsersPays>{
+        return this.http.post<ExpenseUsersPays>(this.baseURL+idExpense+'/debtorsUsers', eupList);
     }
 
     editExpense(idExpense: number, expense: Expense): Observable<Expense>{
         return this.http.put<Expense>(this.baseURL+idExpense, expense)
+    }
+
+    changeIsPayedStatus(idEup: number): Observable<ExpenseUsersPays>{
+        return this.http.put<any>(apiURL+'eup/'+idEup+'/isPayed', {});
     }
 }

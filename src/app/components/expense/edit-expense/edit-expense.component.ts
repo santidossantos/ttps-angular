@@ -71,7 +71,6 @@ export class EditExpenseComponent implements OnInit{
     this.getGroup();
     this.getExpenseInfo();
     this.getAllCategories();
-    this.getAllExpenseStrategies();
   }
 
 
@@ -126,15 +125,6 @@ export class EditExpenseComponent implements OnInit{
       );
   }
 
-  getAllExpenseStrategies(){
-    this._expenseStrategyService.getAll().subscribe(
-      (res) => {
-        this.strategies = res;
-      },
-      (error) => console.error(error)
-      );
-  }
-
   edit(){
     this._expenseService.editExpense(this.expenseId,this.form.value).subscribe(
       (res) => {
@@ -146,9 +136,5 @@ export class EditExpenseComponent implements OnInit{
         this.openSnackBar(error);
       }
     )
-  }
-
-  changeToSpanish(strategyName: string): string{
-    return PutInSpanish(strategyName);
   }
 }
