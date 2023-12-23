@@ -165,16 +165,14 @@
         </form>
     }
     @case ("FixedAmountsPercent") {
+        <button mat-raised-button color="primary" (click)="addRow()">Agregar fila</button>
         <form class="example-form" [formGroup]="form" (ngSubmit)="addDebtorsUsersPercent()">
             <div formArrayName="debtorsUsers">
                 <mat-card>
-                    <div class="container-title-button">
-                        <mat-card-header>
-                            <mat-card-title style="font-size: x-large;">Definir los porcentajes</mat-card-title>
-                            <mat-card-subtitle class="card-subtitle">Agregue que porcentaje deberá pagarle cada usuario. (Total del gasto: ${{this.expense.amount}})</mat-card-subtitle>
-                        </mat-card-header>
-                        <button class="addRow" mat-mini-fab color="primary" (click)="addRow()"><mat-icon>add</mat-icon></button>
-                    </div>
+                    <mat-card-header>
+                        <mat-card-title style="font-size: x-large;">Definir los porcentajes</mat-card-title>
+                        <mat-card-subtitle class="card-subtitle">Agregue que porcentaje deberá pagarle cada usuario. (Total del gasto: ${{this.expense.amount}})</mat-card-subtitle>
+                    </mat-card-header>
                     <br>
                     <mat-card-content>
                         <section class="example-container mat-elevation-z8" tabindex="0">
