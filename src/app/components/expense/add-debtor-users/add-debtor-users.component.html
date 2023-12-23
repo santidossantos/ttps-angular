@@ -1,13 +1,15 @@
 @switch (expense.expenseStrategy?.name) {
     @case ("EqualAmounts") {
-        <button mat-raised-button color="primary" (click)="addRow()">Agregar fila</button>
         <form class="example-form" [formGroup]="form" (ngSubmit)="addDebtorsUsersEqualsAmounts()">
             <div formArrayName="debtorsUsers">
                 <mat-card>
-                    <mat-card-header>
-                        <mat-card-title style="font-size: x-large;">Todos pagan lo mismo</mat-card-title>
-                        <mat-card-subtitle class="card-subtitle">Como la estrategia es "montos iguales" todos los usuarios pagarán el mismo valor</mat-card-subtitle>
-                    </mat-card-header>
+                    <div class="container-title-button">
+                        <mat-card-header>
+                            <mat-card-title style="font-size: x-large;">Todos pagan lo mismo</mat-card-title>
+                            <mat-card-subtitle class="card-subtitle">Como la estrategia es "montos iguales" todos los usuarios pagarán el mismo valor</mat-card-subtitle>
+                        </mat-card-header>
+                        <button class="addRow" mat-mini-fab color="primary" (click)="addRow()"><mat-icon>add</mat-icon></button>
+                    </div>
                     <br>
                     <mat-card-content>
                         <section class="example-container mat-elevation-z8" tabindex="0">
@@ -80,14 +82,16 @@
         </form>
     }
     @case ("FixedAmounts") {
-        <button mat-raised-button color="primary" (click)="addRow()">Agregar fila</button>
         <form class="example-form" [formGroup]="form" (ngSubmit)="addDebtorsUsersFixed()">
             <div formArrayName="debtorsUsers">
                 <mat-card>
-                    <mat-card-header>
-                        <mat-card-title style="font-size: x-large;">Definir los montos</mat-card-title>
-                        <mat-card-subtitle class="card-subtitle">Agregue que monto deberá pagarle cada usuario. (Total del gasto: ${{this.expense.amount}})</mat-card-subtitle>
-                    </mat-card-header>
+                    <div class="container-title-button">
+                        <mat-card-header>
+                            <mat-card-title style="font-size: x-large;">Definir los montos</mat-card-title>
+                            <mat-card-subtitle class="card-subtitle">Agregue que monto deberá pagarle cada usuario. (Total del gasto: ${{this.expense.amount}})</mat-card-subtitle>
+                        </mat-card-header>
+                        <button class="addRow" mat-mini-fab color="primary" (click)="addRow()"><mat-icon>add</mat-icon></button>
+                    </div>
                     <br>
                     <mat-card-content>
                         <section class="example-container mat-elevation-z8" tabindex="0">
@@ -161,14 +165,16 @@
         </form>
     }
     @case ("FixedAmountsPercent") {
-        <button mat-raised-button color="primary" (click)="addRow()">Agregar fila</button>
         <form class="example-form" [formGroup]="form" (ngSubmit)="addDebtorsUsersPercent()">
             <div formArrayName="debtorsUsers">
                 <mat-card>
-                    <mat-card-header>
-                        <mat-card-title style="font-size: x-large;">Definir los porcentajes</mat-card-title>
-                        <mat-card-subtitle class="card-subtitle">Agregue que porcentaje deberá pagarle cada usuario. (Total del gasto: ${{this.expense.amount}})</mat-card-subtitle>
-                    </mat-card-header>
+                    <div class="container-title-button">
+                        <mat-card-header>
+                            <mat-card-title style="font-size: x-large;">Definir los porcentajes</mat-card-title>
+                            <mat-card-subtitle class="card-subtitle">Agregue que porcentaje deberá pagarle cada usuario. (Total del gasto: ${{this.expense.amount}})</mat-card-subtitle>
+                        </mat-card-header>
+                        <button class="addRow" mat-mini-fab color="primary" (click)="addRow()"><mat-icon>add</mat-icon></button>
+                    </div>
                     <br>
                     <mat-card-content>
                         <section class="example-container mat-elevation-z8" tabindex="0">

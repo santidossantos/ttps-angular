@@ -53,3 +53,14 @@ td {
     color: rgb(184, 40, 40);
     cursor: pointer;
   }
+
+  .container-title-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .addRow{
+    margin-top: 20px;
+    margin-right: 20px;
+  }
